@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:grocery/screen/Home_Screen.dart';
 import 'package:grocery/screen/ShowCategoriesItem.dart';
 import 'package:grocery/screen/ViewAllCategories.dart';
+import 'package:grocery/screen/StoreDetailScreen.dart';
+import 'package:grocery/screen/StoreScreen.dart';
 import 'package:grocery/screen/demo.dart';
 
 Future<void> main() async {

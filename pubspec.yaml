@@ -37,6 +37,7 @@ dependencies:
   getwidget: 
   firebase_core:
   cloud_firestore: ^3.1.14
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:
