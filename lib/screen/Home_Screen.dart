@@ -11,6 +11,7 @@ import 'package:grocery/widget/CategoriesName.dart';
 import 'package:grocery/widget/Newon6amMart.dart';
 import 'package:grocery/widget/PopularItemsNearby.dart';
 import 'package:grocery/widget/PopularStores.dart';
+import 'package:grocery/widget/Store.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -117,7 +118,7 @@ class _HomeState extends State<Home> {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return PopularStores(model().PopularStorImg[index]);
+                    return PopularStores(model().popularStorImg[index]);
                   },
                 ),
               ),
@@ -128,7 +129,7 @@ class _HomeState extends State<Home> {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Campaigns(model().PopularStorImg[index]);
+                    return Campaigns(model().popularStorImg[index]);
                   },
                 ),
               ),
@@ -139,7 +140,7 @@ class _HomeState extends State<Home> {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return PopularItemsNearby(model().PopularStorImg[index]);
+                    return PopularItemsNearby(model().popularStorImg[index]);
                   },
                 ),
               ),
@@ -150,7 +151,7 @@ class _HomeState extends State<Home> {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Newon6amMart(model().PopularStorImg[index]);
+                    return Newon6amMart(model().popularStorImg[index]);
                   },
                 ),
               ),
@@ -161,7 +162,7 @@ class _HomeState extends State<Home> {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return BestRevieweditem(model().PopularStorImg[index]);
+                    return BestRevieweditem(model().popularStorImg[index]);
                   },
                 ),
               ),
@@ -186,67 +187,11 @@ class _HomeState extends State<Home> {
                 ],
               ),
               ListView.builder(
-                itemCount: model().StoresName.length,
+                itemCount: model().store.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ListTile(
-                        leading: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    AssetImage(model().PopularStorImg[index]),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        title: Text(
-                          model().StoresName[index],
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 5),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "House:00,Road:00,city:00,Country",
-                                style: TextStyle(
-                                    color: Colors.black26, fontSize: 12),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              margin: EdgeInsets.only(left: 5),
-                              child: Text(
-                                "★★☆☆☆(0)",
-                                style: TextStyle(
-                                    color: Colors.black26, fontSize: 12),
-                              ),
-                            ),
-                          ],
-                        ),
-                        trailing: Icon(
-                          Icons.favorite_border,
-                          color: Colors.black26,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Divider(),
-                    ],
-                  );
+                  return StoreCard(model().store[index]);
                 },
               ),
               SizedBox(
