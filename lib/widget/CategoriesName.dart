@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:grocery/screen/ViewAllCategories.dart';
 
 class CategoriesName extends StatelessWidget {
   String categoriesname;
   String buttonname;
-
-  CategoriesName(this.categoriesname, this.buttonname, {Key? key})
+  String routes;
+  CategoriesName(this.categoriesname, this.buttonname, this.routes, {Key? key})
       : super(key: key);
 
   @override
@@ -24,7 +25,9 @@ class CategoriesName extends StatelessWidget {
         ),
         Spacer(),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, routes);
+          },
           child: Text(
             buttonname,
             style: TextStyle(

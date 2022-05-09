@@ -11,6 +11,7 @@ import 'package:grocery/widget/CategoriesName.dart';
 import 'package:grocery/widget/Newon6amMart.dart';
 import 'package:grocery/widget/PopularItemsNearby.dart';
 import 'package:grocery/widget/PopularStores.dart';
+import 'package:grocery/widget/ShowButtomSheet.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -99,7 +100,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 10,
               ),
-              CategoriesName("Categories", "View All"),
+              CategoriesName("Categories", "View All", "ViewAllCategories"),
               Container(
                 height: 100,
                 child: ListView.builder(
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ),
-              CategoriesName("Popular Stores", "View All"),
+              CategoriesName("Popular Stores", "View All", ""),
               Container(
                 height: MediaQuery.of(context).size.height / 5.2,
                 child: ListView.builder(
@@ -121,18 +122,35 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ),
-              CategoriesName("Campaigns", "View All"),
+              CategoriesName("Campaigns", "View All", ""),
               Container(
                 height: MediaQuery.of(context).size.height / 4,
                 child: ListView.builder(
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Campaigns(model().PopularStorImg[index]);
+                    return InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(25.0),
+                              ),
+                            ),
+                            builder: (context) {
+                              return Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 2.3,
+                                  child: ShowButtomSheet());
+                            });
+                      },
+                      child: Campaigns(model().PopularStorImg[index]),
+                    );
                   },
                 ),
               ),
-              CategoriesName("Popular Items Nearby", "View All"),
+              CategoriesName("Popular Items Nearby", "View All", ""),
               Container(
                 height: MediaQuery.of(context).size.height / 7.5,
                 child: ListView.builder(
@@ -143,7 +161,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ),
-              CategoriesName("New on 6amMart", "View All"),
+              CategoriesName("New on 6amMart", "View All", ""),
               Container(
                 height: MediaQuery.of(context).size.height / 5.2,
                 child: ListView.builder(
@@ -154,7 +172,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ),
-              CategoriesName("Best Reviewed item", "View All"),
+              CategoriesName("Best Reviewed item", "View All", ""),
               Container(
                 height: MediaQuery.of(context).size.height / 7.5,
                 child: ListView.builder(

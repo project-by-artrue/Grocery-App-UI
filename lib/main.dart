@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery/screen/Home_Screen.dart';
+import 'package:grocery/screen/ShowCategoriesItem.dart';
+import 'package:grocery/screen/ViewAllCategories.dart';
 import 'package:grocery/screen/demo.dart';
 
 Future<void> main() async {
@@ -11,7 +13,11 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Demo(),
+      routes: {
+        'Home': (context) => Home(),
+        'ViewAllCategories': (context) => ViewAllCategories(),
+      },
+      home: Home(),
     ),
   );
 }
