@@ -62,20 +62,7 @@ class model {
     "Fish meat"
   ];
 
-  static void bottomsheet(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(25.0),
-          ),
-        ),
-        builder: (context) {
-          return Container(
-              height: MediaQuery.of(context).size.height / 2.3,
-              child: ShowButtomSheet());
-        });
-  }
+ 
 
   List img = [
     "asset/fish.jpg",
@@ -112,6 +99,24 @@ class model {
     "asset/FreshLocalFish.jpg",
     "asset/Lemon.jpg",
   ];
+
+
+   static void bottomsheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25.0),
+          ),
+        ),
+        builder: (context) {
+          return Container(
+              height: MediaQuery.of(context).size.height / 2.3,
+              child: ShowButtomSheet());
+        });
+  }
+
+  
 }
 
 class StoreDetails {

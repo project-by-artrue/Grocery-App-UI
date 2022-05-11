@@ -1,6 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery/screen/ChangePasword.dart';
+import 'package:grocery/screen/Coupon.dart';
+import 'package:grocery/screen/Help&Support.dart';
 import 'package:grocery/screen/Home_Screen.dart';
+import 'package:grocery/screen/ProductsScreen.dart';
+import 'package:grocery/screen/Profile.dart';
 import 'package:grocery/screen/ShowCategoriesItem.dart';
 import 'package:grocery/screen/ViewAllCategories.dart';
 import 'package:grocery/screen/StoreDetailScreen.dart';
@@ -19,7 +24,7 @@ Future<void> main() async {
         'Home': (context) => Home(),
         'ViewAllCategories': (context) => ViewAllCategories(),
       },
-      home: Home(),
+      home: Homepage(),
     ),
   );
 }

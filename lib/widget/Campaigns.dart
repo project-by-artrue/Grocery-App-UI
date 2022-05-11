@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Campaigns extends StatelessWidget {
   String compaignsimg;
-   Campaigns(this.compaignsimg,{Key? key}) : super(key: key);
+     Campaigns(this.compaignsimg,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

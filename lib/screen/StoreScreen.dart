@@ -29,7 +29,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       body: ListView.builder(
         itemCount: model().store.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, index) {   
           if (model().store[index].isPopular) {
             return StoreCard(model().store[index]);
           } else {
