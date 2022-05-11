@@ -1,97 +1,69 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/material.dart';
-
-// class Demo extends StatefulWidget {
-//   Demo({Key? key}) : super(key: key);
-
-//   @override
-//   State<Demo> createState() => _DemoState();
-// }
-
-// class _DemoState extends State<Demo> {
-//   FirebaseFirestore db = FirebaseFirestore.instance;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SafeArea(
-//           child: Center(
-//         child: ElevatedButton(
-//             onPressed: () {
-//               Map<String, dynamic> user = <String, dynamic>{
-//                 "first": "Alan",
-//                 "middle": "Mathison",
-//                 "last": "Turing",
-//                 "born": 1912
-//               };
-//               db.collection("users").add(user).then((DocumentReference doc) {
-//                 user = <String, dynamic>{
-//                   "first": "Alan",
-//                   "middle": "Mathison",
-//                   "last": "Turing",
-//                   "born": 1912,
-//                   'userID': doc.id
-//                 };
-//                 db.collection("users").doc(doc.id).set(user);
-//               });
-//             },
-//             child: Text("Add data")),
-//       )),
-//     );
-//   }
-// }
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+//import package file
+
+// void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: DefaultTabController(
-          length: 3,
-          child: TabBar(
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicator: CircleTabIndicator(color: Colors.green, radius: 4),
-            isScrollable: true,
-            labelColor: Colors.black,
-            tabs: <Widget>[
-              Tab(text: 'Week 1'),
-              Tab(text: 'Week 2'),
-              Tab(text: 'Week 3'),
-            ],
-          ),
-        ),
-      ),
-    );
+    return MaterialApp(home: Home1() //set the class here
+        );
   }
 }
 
-class CircleTabIndicator extends Decoration {
-  final BoxPainter _painter;
-
-  CircleTabIndicator({@required Color? color, @required double? radius})
-      : _painter = _CirclePainter(
-          color!,
-          radius!,
-        );
-
+class Home1 extends StatelessWidget {
   @override
-  BoxPainter createBoxPainter([void onChanged]) => _painter;
-}
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Phone Country Code"), //appbar title
+        backgroundColor: Colors.redAccent, //appbar color
+      ),
+      body: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: IntlPhoneField(
+                  dropdownIconPosition: IconPosition.trailing,
+                  showCountryFlag: true,
 
-class _CirclePainter extends BoxPainter {
-  final Paint _paint;
-  final double radius;
-
-  _CirclePainter(Color color, this.radius)
-      : _paint = Paint()
-          ..color = color
-          ..isAntiAlias = true;
-
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
-    final Offset circleOffset =
-        offset + Offset(cfg.size!.width / 2, cfg.size!.height - radius);
-    canvas.drawCircle(circleOffset, radius, _paint);
+                  decoration: InputDecoration(
+                      //decoration for Input Field
+                      labelText: 'Phone Number',
+                      border: InputBorder.none),
+                  initialCountryCode: 'India',
+                  //default contry code, NP for Nepal
+                  onChanged: (phone) {
+                    //when phone number country code is changed
+                    print(phone.completeNumber); //get complete number
+                    print(phone.countryCode); // get country code only
+                    print(phone.number); // only phone number
+                  },
+                ),
+              ),
+              // Container(
+              //   margin:
+              //       EdgeInsets.only(top: 20), //make submit button 100% width
+              //   child: SizedBox(
+              //     width: double.infinity,
+              //     child: RaisedButton(
+              //       onPressed: () {
+              //         //action for button
+              //       },
+              //       color: Colors.redAccent,
+              //       child: Text("Submit"),
+              //       colorBrightness: Brightness.dark,
+              //       //backgroud color is darker so its birghtness
+              //     ),
+              //   ),
+              // )
+            ],
+          )),
+    );
   }
 }
