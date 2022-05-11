@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery/screen/ChackOut_Screen.dart';
 import 'package:grocery/screen/ChangePasword.dart';
 import 'package:grocery/screen/Coupon.dart';
 import 'package:grocery/screen/Help&Support.dart';
@@ -28,7 +29,7 @@ Future<void> main() async {
         'ViewAllCategories': (context) => ViewAllCategories(),
         'SetLocation': (context) => SetLocation(),
       },
-      home: Homepage(),
+      home: ChackOut(),
     ),
   );
 }
