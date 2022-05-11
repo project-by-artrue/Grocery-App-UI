@@ -11,6 +11,34 @@ class model {
     "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
   ];
 
+  List icon = [
+    "asset/profile.png",
+    "asset/MyAddress.png",
+    "asset/Language.png",
+    "asset/Coupon.jpg",
+    "asset/Help&Support.png",
+    "asset/PrivacyPolicy.jpg",
+    "asset/AboutUs.png",
+    "asset/Terms.png",
+    "asset/DeliveryBoy.png",
+    "asset/Store.png",
+    "asset/Logout.png",
+  ];
+
+  List iconname = [
+    "profile",
+    "My Address",
+    "Language",
+    "Coupon",
+    "Help & Support",
+    "Privacy Policy",
+    "About Us",
+    "Terms & Conditions",
+    "Join as a DeliveryMan",
+    "Join as a Store",
+    "Sign In"
+  ];
+
   List<StoreDetails> store = [
     StoreDetails("asset/FreshLocalFish.jpg", "Eorange",
         "House:00,Road:00,city:00,Country", "★★☆☆☆(2)", true, false),
@@ -63,6 +91,21 @@ class model {
   ];
 
  
+
+  // static void bottomsheetbar(BuildContext context) {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       shape: const RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.vertical(
+  //           top: Radius.circular(25.0),
+  //         ),
+  //       ),
+  //       builder: (context) {
+  //         return Container(
+  //             height: MediaQuery.of(context).size.height / 2.3,
+  //             child: ShowButtomSheet());
+  //       });
+  // }
 
   List img = [
     "asset/fish.jpg",

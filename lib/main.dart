@@ -6,10 +6,13 @@ import 'package:grocery/screen/Help&Support.dart';
 import 'package:grocery/screen/Home_Screen.dart';
 import 'package:grocery/screen/ProductsScreen.dart';
 import 'package:grocery/screen/Profile.dart';
+import 'package:grocery/screen/SetLocation_Screen.dart';
 import 'package:grocery/screen/ShowCategoriesItem.dart';
-import 'package:grocery/screen/ViewAllCategories.dart';
+import 'package:grocery/screen/SignUp_Screen.dart';
+import 'package:grocery/screen/ViewAllCategories_Screen.dart';
 import 'package:grocery/screen/StoreDetailScreen.dart';
 import 'package:grocery/screen/StoreScreen.dart';
+import 'package:grocery/screen/BottomBar.dart';
 import 'package:grocery/screen/demo.dart';
 
 Future<void> main() async {
@@ -23,6 +26,7 @@ Future<void> main() async {
       routes: {
         'Home': (context) => Home(),
         'ViewAllCategories': (context) => ViewAllCategories(),
+        'SetLocation': (context) => SetLocation(),
       },
       home: Homepage(),
     ),
