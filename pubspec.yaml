@@ -40,7 +40,6 @@ dependencies:
   cached_network_image:
   badges:
   geocoding:
-  geolocator:
   flutter_phone_direct_caller:
   url_launcher:
   geolocator:
