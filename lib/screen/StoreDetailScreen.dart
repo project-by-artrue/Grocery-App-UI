@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/ProductCard.dart';
 
 class StoreDetailsScreen extends StatefulWidget {
@@ -21,8 +22,35 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.all(9),
+                  height: 25,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.green),
+                  child: Icon(Icons.navigate_before_rounded),
+                ),
+              ),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(5),
+                    height: 30,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.green),
+                    child: Icon(Icons.shopping_cart_outlined),
+                  ),
+                ),
+              ],
               pinned: true,
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.yellow,
               elevation: 0,
               expandedHeight: size.height * 0.3,
               flexibleSpace: FlexibleSpaceBar(background: FlutterLogo()),
@@ -103,6 +131,7 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
               ],
             )),
             SliverAppBar(
+              automaticallyImplyLeading: false,
               pinned: true,
               expandedHeight: size.height * 0.05,
               backgroundColor: Colors.transparent,
@@ -144,8 +173,12 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-                return ProductCard();
-              }, childCount: 3),
+                return InkWell(
+                    onTap: () {
+                      model.bottomsheet(context);
+                    },
+                    child: ProductCard());
+              }, childCount: 10),
             )
           ],
         ),
