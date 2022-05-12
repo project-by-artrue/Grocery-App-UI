@@ -42,7 +42,7 @@ dependencies:
   geocoding:
   flutter_phone_direct_caller:
   url_launcher:
-  geolocator:
+  # geolocator:
   location:  
   baseflow_plugin_template:
     git:
