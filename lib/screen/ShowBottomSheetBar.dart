@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:grocery/model/model.dart';
 
 class ShowBottomSheetBar extends StatelessWidget {
-  const ShowBottomSheetBar({Key? key}) : super(key: key);
-
+  List<String> navList = [
+    'Profile',
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
