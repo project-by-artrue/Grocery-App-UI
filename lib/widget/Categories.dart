@@ -4,7 +4,7 @@ import 'package:grocery/model/model.dart';
 class Categories extends StatelessWidget {
   String img;
   String name;
-   Categories(this.img,this.name,{Key? key}) : super(key: key);
+  Categories(this.img, this.name, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,10 @@ class Categories extends StatelessWidget {
             child: Text(
               name,
               textAlign: TextAlign.center,
+              maxLines: 2,
               style: TextStyle(
-                  // overflow: TextOverflow.ellipsis,
-                  ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
         ),

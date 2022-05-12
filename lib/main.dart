@@ -5,6 +5,7 @@ import 'package:grocery/screen/ChangePasword.dart';
 import 'package:grocery/screen/Coupon.dart';
 import 'package:grocery/screen/Help&Support.dart';
 import 'package:grocery/screen/Home_Screen.dart';
+import 'package:grocery/screen/Intro_Screen.dart';
 import 'package:grocery/screen/ProductsScreen.dart';
 import 'package:grocery/screen/Profile.dart';
 import 'package:grocery/screen/SetLocation_Screen.dart';
@@ -28,8 +29,9 @@ Future<void> main() async {
         'Home': (context) => Home(),
         'ViewAllCategories': (context) => ViewAllCategories(),
         'SetLocation': (context) => SetLocation(),
+        'BottomBar': (context) => BottomBar(),
       },
-      home: ChackOut(),
+      home: IntroScreen(),
     ),
   );
 }
