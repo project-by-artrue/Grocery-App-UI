@@ -42,6 +42,7 @@ dependencies:
   geocoding:
   flutter_phone_direct_caller:
   url_launcher:
+  geolocator:
   location:  
   animated_bottom_navigation_bar: 
   # country_picker: 
