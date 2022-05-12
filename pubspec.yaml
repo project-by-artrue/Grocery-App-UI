@@ -43,15 +43,11 @@ dependencies:
   geolocator:
   flutter_phone_direct_caller:
   url_launcher:
-  geolocator:
   location:  
-  baseflow_plugin_template:
-    git:
-      url: https://github.com/Baseflow/baseflow_plugin_template.git
-      ref: v2.1.0
   animated_bottom_navigation_bar: 
   # country_picker: 
   intl_phone_field:
+  flutter_bloc:
 
 dev_dependencies:
   flutter_test:

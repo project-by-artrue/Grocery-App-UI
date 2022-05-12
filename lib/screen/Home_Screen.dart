@@ -1,8 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:grocery/Bloc/location/location_bloc.dart';
+
+
 import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/BestReviewedItem.dart';
 import 'package:grocery/widget/Campaigns.dart';
@@ -26,6 +30,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    LocationBloc l=BlocProvider.of<LocationBloc>(context);
+    l.add(Update());
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -48,10 +54,21 @@ class _HomeState extends State<Home> {
                 Icons.location_on_sharp,
                 color: Colors.black,
               ),
-              Text(
-                "Choos Location",
-                style: TextStyle(color: Colors.black),
-              ),
+              BlocConsumer<LocationBloc, LocationState>(
+                  builder: (context, state) {
+                    if (state is ShowLocation) {
+                      return Text(
+                        "Choos Location",
+                        style: TextStyle(color: Colors.black),
+                      );
+                    } else {
+                      return Container(
+                        height: 10,
+                        color: Colors.black,
+                      );
+                    }
+                  },
+                  listener: (context, state) {}),
               Spacer(),
               Icon(
                 Icons.arrow_drop_down_sharp,
@@ -155,7 +172,7 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            CategoriesName("Popular Stores", "View All", ""),
+            CategoriesName("Popular Stores", "View All", "Store"),
             Container(
               height: MediaQuery.of(context).size.height / 5.2,
               child: ListView.builder(
@@ -166,7 +183,7 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            CategoriesName("Campaigns", "View All", ""),
+            CategoriesName("Campaigns", "View All", "Product"),
             Container(
               height: MediaQuery.of(context).size.height / 4,
               child: ListView.builder(
@@ -182,36 +199,49 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            CategoriesName("Popular Items Nearby", "View All", ""),
+            CategoriesName("Popular Items Nearby", "View All", "Product"),
             Container(
               height: MediaQuery.of(context).size.height / 7.5,
               child: ListView.builder(
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return PopularItemsNearby(model().popularStorImg[index]);
+                  return InkWell(
+                      onTap: () {
+                        model.bottomsheet(context);
+                      },
+                      child: BestRevieweditem(model().popularStorImg[index]));
+                  // return PopularItemsNearby(model().popularStorImg[index]);
                 },
               ),
             ),
-            CategoriesName("New on 6amMart", "View All", ""),
+            CategoriesName("New on 6amMart", "View All", "Store"),
             Container(
               height: MediaQuery.of(context).size.height / 5.2,
               child: ListView.builder(
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return Newon6amMart(model().popularStorImg[index]);
+                  return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'ShwoStoreDetails');
+                      },
+                      child: Newon6amMart(model().popularStorImg[index]));
                 },
               ),
             ),
-            CategoriesName("Best Reviewed item", "View All", ""),
+            CategoriesName("Best Reviewed item", "View All", "Product"),
             Container(
               height: MediaQuery.of(context).size.height / 7.5,
               child: ListView.builder(
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return BestRevieweditem(model().popularStorImg[index]);
+                  return InkWell(
+                      onTap: () {
+                        model.bottomsheet(context);
+                      },
+                      child: BestRevieweditem(model().popularStorImg[index]));
                 },
               ),
             ),
@@ -254,7 +284,11 @@ class _HomeState extends State<Home> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return StoreCard(model().store[index]);
+                return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'ShwoStoreDetails');
+                    },
+                    child: StoreCard(model().store[index]));
               },
             ),
             SizedBox(

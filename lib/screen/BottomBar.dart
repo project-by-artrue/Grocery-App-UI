@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unused_import
+
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:grocery/model/model.dart';
@@ -28,7 +30,7 @@ class _BottomBarState extends State<BottomBar> {
   ];
   int _bottomNavIndex = 0;
 
-  List<Widget> page = [Home(), Favourite(), MyOrder(), Container()];
+  List<Widget> page = [Home(), Favourite(), MyOrder(), Container(), MyCart()];
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +44,37 @@ class _BottomBarState extends State<BottomBar> {
       extendBody: true,
       body: _bottomNavIndex == 3 ? page[getindex] : page[_bottomNavIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if (_bottomNavIndex == 3) {
+            _bottomNavIndex = 4;
+            showModalBottomSheet(
+                context: context,
+                useRootNavigator: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(25.0),
+                  ),
+                ),
+                builder: (context) {
+                  _bottomNavIndex = getindex;
+
+                  // return Container(
+                  //   height: MediaQuery.of(context).size.height / 2.2,
+                  //   child: ShowBottomSheetBar(),
+                  // );
+                  return ShowBottomSheetBar();
+                });
+          } else {
+            _bottomNavIndex = 4;
+            getindex = _bottomNavIndex;
+          }
+          setState(() {});
+        },
         child: Icon(
           Icons.shopping_cart,
-          color: Colors.black26,
+          color: _bottomNavIndex == 4 ? Colors.white : Colors.black26,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: _bottomNavIndex == 4 ? Colors.green : Colors.white,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
@@ -69,6 +96,8 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
                 builder: (context) {
+                  _bottomNavIndex = getindex;
+
                   // return Container(
                   //   height: MediaQuery.of(context).size.height / 2.2,
                   //   child: ShowBottomSheetBar(),

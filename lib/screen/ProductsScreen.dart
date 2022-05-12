@@ -32,14 +32,19 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           )
         ],
-        leading: Icon(
-          Icons.navigate_before_outlined,
-          color: Colors.black,
-          size: 35,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.navigate_before_outlined,
+            color: Colors.black,
+            size: 35,
+          ),
         ),
         backgroundColor: Colors.white,
         title: Text(
-          "Popular Store",
+          "Popular Product",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),
         ),
         elevation: 0,
@@ -48,7 +53,11 @@ class _ProductScreenState extends State<ProductScreen> {
       body: ListView.builder(
         itemCount: model().store.length,
         itemBuilder: (context, index) {
-          return ProductCard();
+          return InkWell(
+              onTap: () {
+                model.bottomsheet(context);
+              },
+              child: ProductCard());
         },
       ),
     );

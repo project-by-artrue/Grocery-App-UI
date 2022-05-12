@@ -14,10 +14,15 @@ class _StoreScreenState extends State<StoreScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.navigate_before_outlined,
-          color: Colors.black,
-          size: 35,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.navigate_before_outlined,
+            color: Colors.black,
+            size: 35,
+          ),
         ),
         backgroundColor: Colors.white,
         title: Text(
@@ -29,7 +34,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       body: ListView.builder(
         itemCount: model().store.length,
-        itemBuilder: (context, index) {   
+        itemBuilder: (context, index) {
           if (model().store[index].isPopular) {
             return StoreCard(model().store[index]);
           } else {
