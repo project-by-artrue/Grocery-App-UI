@@ -14,10 +14,15 @@ class _CouponState extends State<Coupon> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.chevron_left_sharp,
-          size: 40,
-          color: Colors.black,
+       leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.black,
+            size: 40,
+          ),
         ),
         title: Text(
           "Coupon",

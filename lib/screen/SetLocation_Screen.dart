@@ -68,14 +68,14 @@ class _SetLocationState extends State<SetLocation> {
     LocationBloc l = BlocProvider.of<LocationBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
+       leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'Home');
+            Navigator.pop(context);
           },
           icon: Icon(
-            Icons.navigate_before_outlined,
+            Icons.keyboard_arrow_left,
             color: Colors.black,
-            size: 35,
+            size: 40,
           ),
         ),
         title: Text(
@@ -136,7 +136,6 @@ class _SetLocationState extends State<SetLocation> {
             alignment: Alignment.center,
             child: GestureDetector(
               onTap: () async {
-              
                 Position position = await _getGeoLocationPosition();
                 location =
                     'Lat: ${position.latitude} , Long: ${position.longitude}';

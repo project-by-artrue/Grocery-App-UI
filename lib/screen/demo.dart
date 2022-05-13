@@ -1,110 +1,212 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_constructors
+// // ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_constructors
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter/widgets.dart';
+// import 'package:geocoding/geocoding.dart';
+// import 'package:intl_phone_field/intl_phone_field.dart';
+// //import package file
+
+// // void main() => runApp(MyApp());
+
+// import 'package:geolocator/geolocator.dart';
+
+// class Homepage extends StatefulWidget {
+//   const Homepage({Key? key}) : super(key: key);
+//   @override
+//   _HomepageState createState() => _HomepageState();
+// }
+
+// class _HomepageState extends State<Homepage> {
+//   String location = 'Null, Press Button';
+//   String Address = 'search';
+//   Future<Position> _getGeoLocationPosition() async {
+//     bool serviceEnabled;
+//     LocationPermission permission;
+//     // Test if location services are enabled.
+//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//     if (!serviceEnabled) {
+//       // Location services are not enabled don't continue
+//       // accessing the position and request users of the
+//       // App to enable the location services.
+//       await Geolocator.openLocationSettings();
+//       return Future.error('Location services are disabled.');
+//     }
+//     permission = await Geolocator.checkPermission();
+//     if (permission == LocationPermission.denied) {
+//       permission = await Geolocator.requestPermission();
+//       if (permission == LocationPermission.denied) {
+//         // Permissions are denied, next time you could try
+//         // requesting permissions again (this is also where
+//         // Android's shouldShowRequestPermissionRationale
+//         // returned true. According to Android guidelines
+//         // your App should show an explanatory UI now.
+//         return Future.error('Location permissions are denied');
+//       }
+//     }
+//     if (permission == LocationPermission.deniedForever) {
+//       // Permissions are denied forever, handle appropriately.
+//       return Future.error(
+//           'Location permissions are permanently denied, we cannot request permissions.');
+//     }
+//     // When we reach here, permissions are granted and we can
+//     // continue accessing the position of the device.
+//     return await Geolocator.getCurrentPosition(
+//         desiredAccuracy: LocationAccuracy.high);
+//   }
+
+//   Future<void> GetAddressFromLatLong(Position position) async {
+//     List<Placemark> placemarks =
+//         await placemarkFromCoordinates(position.latitude, position.longitude);
+//     print(placemarks);
+//     Placemark place = placemarks[0];
+//     Address =
+//         '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
+//     setState(() {});
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Text(
+//               'Coordinates Points',
+//               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+//             ),
+//             SizedBox(
+//               height: 10,
+//             ),
+//             Text(
+//               location,
+//               style: TextStyle(color: Colors.black, fontSize: 16),
+//             ),
+//             SizedBox(
+//               height: 10,
+//             ),
+//             Text(
+//               'ADDRESS',
+//               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+//             ),
+//             SizedBox(
+//               height: 10,
+//             ),
+//             Text('${Address}'),
+//             ElevatedButton(
+//               onPressed: () async {
+//                 Position position = await _getGeoLocationPosition();
+//                 location =
+//                     'Lat: ${position.latitude} , Long: ${position.longitude}';
+//                 GetAddressFromLatLong(position);
+//               },
+//               child: Text('Get Location'),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-//import package file
 
-// void main() => runApp(MyApp());
+class Demo extends StatefulWidget {
+  const Demo({Key? key}) : super(key: key);
 
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-
-class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
   @override
-  _HomepageState createState() => _HomepageState();
+  State<Demo> createState() => _DemoState();
 }
 
-class _HomepageState extends State<Homepage> {
-  String location = 'Null, Press Button';
-  String Address = 'search';
-  Future<Position> _getGeoLocationPosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-  }
-
-  Future<void> GetAddressFromLatLong(Position position) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    print(placemarks);
-    Placemark place = placemarks[0];
-    Address =
-        '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
-    setState(() {});
-  }
-
+class _DemoState extends State<Demo> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            'My Order',
+            style: TextStyle(color: Colors.black),
+          ),
+          bottom: TabBar(
+            physics: NeverScrollableScrollPhysics(),
+            onTap: (value) {},
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: CircleTabIndicator(color: Colors.green, radius: 4),
+            isScrollable: true,
+            labelColor: Colors.black,
+            tabs: <Widget>[
+              Tab(
+                text: 'All',
+              ),
+              Tab(
+                text: 'Organizers',
+              ),
+              Tab(
+                text: 'Writing & printing',
+              ),
+              Tab(
+                text: 'Arts & Crafts',
+              )
+            ],
+          ),
+        ),
+        body: Column(
           children: [
-            Text(
-              'Coordinates Points',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              location,
-              style: TextStyle(color: Colors.black, fontSize: 16),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'ADDRESS',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text('${Address}'),
-            ElevatedButton(
-              onPressed: () async {
-                Position position = await _getGeoLocationPosition();
-                location =
-                    'Lat: ${position.latitude} , Long: ${position.longitude}';
-                GetAddressFromLatLong(position);
-              },
-              child: Text('Get Location'),
-            )
+            DefaultTabController(
+                length: 2,
+                child: SafeArea(
+                  child: TabBar(
+                    indicatorColor: Colors.green,
+                    labelColor: Colors.green,
+                    tabs: [
+                      Tab(text: "Running"),
+                      Tab(text: "History"),
+                    ],
+                  ),
+                ))
           ],
         ),
       ),
     );
   }
 }
+
+class CircleTabIndicator extends Decoration {
+  final BoxPainter _painter;
+
+  CircleTabIndicator({@required Color? color, @required double? radius})
+      : _painter = _CirclePainter(
+          color!,
+          radius!,
+        );
+
+  @override
+  BoxPainter createBoxPainter([void onChanged]) => _painter;
+}
+
+class _CirclePainter extends BoxPainter {
+  final Paint _paint;
+  final double radius;
+
+  _CirclePainter(Color color, this.radius)
+      : _paint = Paint()
+          ..color = color
+          ..isAntiAlias = true;
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
+    final Offset circleOffset =
+        offset + Offset(cfg.size!.width / 2, cfg.size!.height - radius);
+    canvas.drawCircle(circleOffset, radius, _paint);
+  }
+}
+
+
+

@@ -18,7 +18,12 @@ class _ChackOutState extends State<ChackOut> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       leading: IconButton(
+        // leading: Icon(
+        //   Icons.navigate_before_outlined,
+        //   color: Colors.black,
+        //   size: 35,
+        // ),
+        leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
@@ -11,6 +10,7 @@ import 'package:grocery/screen/Coupon.dart';
 import 'package:grocery/screen/Favourite_Screen.dart';
 import 'package:grocery/screen/Help&Support.dart';
 import 'package:grocery/screen/Home_Screen.dart';
+import 'package:grocery/screen/Intro_Screen.dart';
 import 'package:grocery/screen/MyCart_Screen.dart';
 import 'package:grocery/screen/MyOrder_Screen.dart';
 import 'package:grocery/screen/ProductsScreen.dart';
@@ -25,6 +25,7 @@ import 'package:grocery/screen/StoreDetailScreen.dart';
 import 'package:grocery/screen/StoreScreen.dart';
 import 'package:grocery/screen/BottomBar.dart';
 import 'package:grocery/screen/demo.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp();
@@ -65,7 +66,7 @@ Future<void> main() async {
           'Sign_In': (context) => Sign_In(),
           'SignUP': (context) => SignUP()
         },
-        home: Sign_In(),
+        home: ShowCategoriesItem(),
       ),
     ),
   );
