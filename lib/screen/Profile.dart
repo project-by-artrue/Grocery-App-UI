@@ -155,7 +155,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Card(
                             shadowColor: Colors.black,
                             child: ListTile(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, 'Change Password');
+                              },
                               leading: Icon(
                                 Icons.lock,
                                 color: Colors.black,

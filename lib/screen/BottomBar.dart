@@ -41,6 +41,7 @@ class _BottomBarState extends State<BottomBar> {
     //   },
     // ));
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       body: _bottomNavIndex == 3 ? page[getindex] : page[_bottomNavIndex],
       floatingActionButton: FloatingActionButton(

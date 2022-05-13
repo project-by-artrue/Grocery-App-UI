@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
-
 import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/BestReviewedItem.dart';
 import 'package:grocery/widget/Campaigns.dart';
@@ -30,7 +29,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    LocationBloc l=BlocProvider.of<LocationBloc>(context);
+    LocationBloc l = BlocProvider.of<LocationBloc>(context);
     l.add(Update());
     return Scaffold(
       appBar: AppBar(
@@ -88,6 +87,7 @@ class _HomeState extends State<Home> {
         elevation: 0,
         centerTitle: true,
       ),
+      // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -168,7 +168,12 @@ class _HomeState extends State<Home> {
                 itemCount: 15,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return Categories(model().img[index], model().name[index]);
+                  return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'ShowCategoriesItem');
+                      },
+                      child:
+                          Categories(model().img[index], model().name[index]));
                 },
               ),
             ),

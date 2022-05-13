@@ -4,8 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:grocery/model/model.dart';
 
 class ShowBottomSheetBar extends StatelessWidget {
-  List<String> navList = [
+  List navList = [
     'Profile',
+    'Address',
+    'Language',
+    'Offer Coupan',
+    'Help&support',
+    'documentation',
+    'documentation',
+    'documentation',
+    "",
+    "",
+    'Sign_In'
   ];
   @override
   Widget build(BuildContext context) {
@@ -15,42 +25,47 @@ class ShowBottomSheetBar extends StatelessWidget {
         itemCount: model().icon.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 70,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      model().icon[index],
-                      height: 40,
-                      width: 40,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-                width: double.infinity,
-                child: Text(
-                  model().iconname[index],
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, navList[index]);
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: 70,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        model().icon[index],
+                        height: 40,
+                        width: 40,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 30,
+                  width: double.infinity,
+                  child: Text(
+                    model().iconname[index],
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -4,13 +4,16 @@ import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
 import 'package:grocery/screen/AboutUs_Screen.dart';
+import 'package:grocery/screen/Address.dart';
 import 'package:grocery/screen/ChangePasword.dart';
 import 'package:grocery/screen/ConfirmOrder.dart';
 import 'package:grocery/screen/Coupon.dart';
 import 'package:grocery/screen/Favourite_Screen.dart';
+import 'package:grocery/screen/ForgotPassword.dart';
 import 'package:grocery/screen/Help&Support.dart';
 import 'package:grocery/screen/Home_Screen.dart';
 import 'package:grocery/screen/Intro_Screen.dart';
+import 'package:grocery/screen/Language.dart';
 import 'package:grocery/screen/MyCart_Screen.dart';
 import 'package:grocery/screen/MyOrder_Screen.dart';
 import 'package:grocery/screen/ProductsScreen.dart';
@@ -64,7 +67,11 @@ Future<void> main() async {
           'ProductScreen': (context) => ProductScreen(),
           'ShowCategoriesItem': (context) => ShowCategoriesItem(),
           'Sign_In': (context) => Sign_In(),
-          'SignUP': (context) => SignUP()
+          'SignUP': (context) => SignUP(),
+          'IntroScreen': (context) => IntroScreen(),
+          'Address': (context) => Address(),
+          'Language': (context) => Language(),
+          'ForgotPassword': (context) => ForgotPassword(),
         },
         home: Sign_In(),
       ),

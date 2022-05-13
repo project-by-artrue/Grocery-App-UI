@@ -14,7 +14,7 @@ class TextFildCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       cursorColor: Colors.green,
-      obscureText: isPassword!,
+      obscureText: isPassword ?? false,
       cursorHeight: 22,
       controller: controll,
       decoration: InputDecoration(
