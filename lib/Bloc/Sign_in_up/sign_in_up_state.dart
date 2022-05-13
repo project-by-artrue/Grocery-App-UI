@@ -5,7 +5,13 @@ abstract class SignInUpState {}
 
 class SignInUpInitial extends SignInUpState {}
 
-class ShowSignUp extends SignInUpState {}
+class ShowSignUp extends SignInUpState {
+  bool pass1;
+  bool pass2;
+
+  bool temConditionSignup;
+  ShowSignUp(this.pass1, this.pass2, this.temConditionSignup);
+}
 
 class ShowSignIn extends SignInUpState {
   bool pass;

@@ -46,32 +46,37 @@ class _ViewAllCategoriesState extends State<ViewAllCategories> {
           itemCount: model().img.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.all(5),
-              child: Column(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    child: Image.asset(model().img[index]),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(model().name[index])
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 1.0,
-                    spreadRadius: 1.0,
-                  ),
-                ],
+            return InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, 'ShowCategoriesItem');
+              },
+              child: Container(
+                margin: EdgeInsets.all(5),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 50,
+                      child: Image.asset(model().img[index]),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(model().name[index])
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 1.0,
+                      spreadRadius: 1.0,
+                    ),
+                  ],
+                ),
               ),
             );
           },

@@ -4,30 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:grocery/model/model.dart';
 
 class ShowBottomSheetBar extends StatelessWidget {
-  List<String> navList = [
+  List navList = [
     'Profile',
+    'Address',
+    'Language',
+    'Offer Coupan',
+    'Help&support',
+    'documentation',
+    'documentation',
+    'documentation',
+    "",
+    "",
+    'Sign_In'
   ];
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).size.height * .5,
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
       child: GridView.builder(
         itemCount: model().icon.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {},
-            child: GridTile(
-                child: Container(
-                  margin: EdgeInsets.all(5),
-                  height: 50,
-                  width: 100,
+            onTap: () {
+              Navigator.pushNamed(context, navList[index]);
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: 70,
+                  width: double.infinity,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 10,
-                      ),
                       Image.asset(
                         model().icon[index],
                         height: 40,
@@ -38,31 +48,32 @@ class ShowBottomSheetBar extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: Colors.green,
-                    // image: DecorationImage(
-                    //   image: AssetImage(model().icon[index]),
-                    // ),
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
-                footer: GridTileBar(
-                  title: Container(
-                    width: 1,
-                    alignment: Alignment.center,
-                    child: Text(
-                      model().iconname[index],
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                SizedBox(
+                  height: 30,
+                  width: double.infinity,
+                  child: Text(
+                    model().iconname[index],
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                )),
+                ),
+              ],
+            ),
           );
         },
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4, mainAxisSpacing: 10),
+          mainAxisExtent: 100,
+          crossAxisSpacing: 10,
+          crossAxisCount: 4,
+          mainAxisSpacing: 5,
+        ),
       ),
     );
   }
