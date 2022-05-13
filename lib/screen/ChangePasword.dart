@@ -12,9 +12,15 @@ class ChangePassword extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Icon(
-          Icons.navigate_before_rounded,
-          color: Colors.black,
+       leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.black,
+            size: 40,
+          ),
         ),
         title: Text("Change Password"),
         centerTitle: true,

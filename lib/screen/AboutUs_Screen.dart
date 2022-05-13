@@ -18,7 +18,7 @@ class _AboutUsState extends State<AboutUs> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            // Navigator.pushNamed(context, 'Home');
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.keyboard_arrow_left,

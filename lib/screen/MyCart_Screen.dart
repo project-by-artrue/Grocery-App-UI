@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:grocery/widget/ListTileMyCart.dart';
 
 class MyCart extends StatefulWidget {
   const MyCart({Key? key}) : super(key: key);
@@ -19,6 +22,9 @@ class _MyCartState extends State<MyCart> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: MyCartListtile(),
       ),
     );
   }
