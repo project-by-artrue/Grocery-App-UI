@@ -66,7 +66,7 @@ Future<void> main() async {
           'Sign_In': (context) => Sign_In(),
           'SignUP': (context) => SignUP()
         },
-        home: Sign_In(),
+        home: ShowCategoriesItem(),
       ),
     ),
   );

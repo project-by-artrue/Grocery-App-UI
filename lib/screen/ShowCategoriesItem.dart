@@ -12,72 +12,84 @@ class ShowCategoriesItem extends StatefulWidget {
 class _ShowCategoriesItemState extends State<ShowCategoriesItem> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Office Stationery',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white12,
-        elevation: 0,
-        centerTitle: true,
-        leading: Icon(
-          Icons.keyboard_arrow_left,
-          color: Colors.black,
-          size: 40,
-        ),
-        actions: [
-          Icon(
-            Icons.search,
-            color: Colors.black,
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            'office Stationery',
+            style: TextStyle(color: Colors.black),
           ),
-          SizedBox(
-            width: 20,
-          ),
-          Icon(
-            Icons.shopping_cart_rounded,
-            color: Colors.black,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 40,
-            padding: EdgeInsets.all(3),
-            child: DefaultTabController(
-              length: 4,
-              child: TabBar(
-                physics: NeverScrollableScrollPhysics(),
-                onTap: (value) {},
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicator: CircleTabIndicator(color: Colors.green, radius: 4),
-                isScrollable: true,
-                labelColor: Colors.black,
-                tabs: <Widget>[
-                  Tab(
-                    text: 'All',
-                  ),
-                  Tab(
-                    text: 'Organizers',
-                  ),
-                  Tab(
-                    text: 'Writing & printing',
-                  ),
-                  Tab(
-                    text: 'Arts & Crafts',
-                  )
-                ],
-              ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.keyboard_arrow_left,
+              color: Colors.black,
+              size: 40,
             ),
-            decoration: BoxDecoration(
-                color: Colors.green[100],
-                borderRadius: BorderRadius.circular(30)),
           ),
-        ],
+          actions: [
+            Icon(
+              Icons.search,
+              color: Colors.black,
+              size: 30,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
+              size: 30,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+          bottom: TabBar(
+            physics: NeverScrollableScrollPhysics(),
+            onTap: (value) {},
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: CircleTabIndicator(color: Colors.green, radius: 4),
+            isScrollable: true,
+            labelColor: Colors.black,
+            tabs: <Widget>[
+              Tab(
+                text: 'All',
+              ),
+              Tab(
+                text: 'Organizers',
+              ),
+              Tab(
+                text: 'Writing & printing',
+              ),
+              Tab(
+                text: 'Arts & Crafts',
+              )
+            ],
+          ),
+        ),
+        body: Column(
+          children: [
+            DefaultTabController(
+                length: 2,
+                child: SafeArea(
+                  child: TabBar(
+                    indicatorColor: Colors.green,
+                    labelColor: Colors.green,
+                    tabs: [
+                      Tab(text: "Running"),
+                      Tab(text: "History"),
+                    ],
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }

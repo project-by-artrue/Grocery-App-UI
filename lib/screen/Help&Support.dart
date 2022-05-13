@@ -20,9 +20,15 @@ class _HelpSupportState extends State<HelpSupport> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          leading: Icon(
-            Icons.navigate_before_rounded,
-            color: Colors.black,
+         leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.keyboard_arrow_left,
+              color: Colors.black,
+              size: 40,
+            ),
           ),
           title: Text(
             "Help & Support",
