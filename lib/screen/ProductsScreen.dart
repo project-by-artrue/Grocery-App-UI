@@ -32,14 +32,14 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           )
         ],
-        leading: InkWell(
-          onTap: () {
+       leading: IconButton(
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: Icon(
-            Icons.navigate_before_outlined,
+          icon: Icon(
+            Icons.keyboard_arrow_left,
             color: Colors.black,
-            size: 35,
+            size: 40,
           ),
         ),
         backgroundColor: Colors.white,

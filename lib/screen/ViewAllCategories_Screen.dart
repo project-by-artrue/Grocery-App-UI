@@ -16,14 +16,15 @@ class _ViewAllCategoriesState extends State<ViewAllCategories> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              color: Colors.black,
-              size: 40,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.black,
+            size: 40,
+          ),
+        ),
         // Icon(
         //   Icons.keyboard_arrow_left,
         //   color: Colors.black,
