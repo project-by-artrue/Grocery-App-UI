@@ -1,0 +1,17 @@
+{
+    "slider":[
+        {
+            "index":"",
+            "image":"https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Crozal%2Fcrozal%20-%201.jpg?alt=media&token=85eae542-1393-4610-a7d7-9ad617cc09eb"
+        },
+        {
+            "index": "",
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Crozal%2Fcrozal%20-%202.jpg?alt=media&token=f9038924-0c92-414a-985f-943d7cc86508"
+        },
+        {
+            "index": "",
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Crozal%2Fcrozal%20-%203.jpg?alt=media&token=fb38e9c4-5ac6-4dc0-9d43-dbb10312fb70"
+        }
+        
+    ]
+}

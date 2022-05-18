@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:progress_state_button/progress_button.dart';
 
 part 'sign_in_up_event.dart';
 part 'sign_in_up_state.dart';
@@ -10,7 +11,7 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
   bool termCondition = false;
   bool pass1 = false;
   bool pass2 = false;
-  bool temConditionSignup = false;
+  bool temConditionSignup = true;
   SignInUpBloc() : super(SignInUpInitial()) {
     on<Get_SignUp>((event, emit) {
       // TODO: implement event handler
@@ -23,9 +24,11 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
       if (event.temConditionSignup == 'true') {
         temConditionSignup = !temConditionSignup;
       }
-      print("llllllllllllllllllllll${remember}");
 
-      emit(ShowSignUp(pass1, pass2, temConditionSignup));
+      print("llllllllllllllllllllll${temConditionSignup}");
+
+      emit(ShowSignUp(pass1, pass2, temConditionSignup,
+          event.stateText1 ?? ButtonState.idle,event.stateText2 ??ButtonState.idle));
     });
     on<Get_SignIn>((event, emit) {
       // TODO: implement event handler

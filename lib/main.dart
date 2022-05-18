@@ -1,7 +1,13 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:grocery/Bloc/Authontication/authontication_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
+import 'package:grocery/model/product.dart';
 
 import 'package:grocery/screen/AboutUs_Screen.dart';
 import 'package:grocery/screen/Address.dart';
@@ -29,12 +35,35 @@ import 'package:grocery/screen/StoreScreen.dart';
 import 'package:grocery/screen/BottomBar.dart';
 import 'package:grocery/screen/demo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery/widget/BestReviewedItem.dart';
+import 'package:grocery/widget/Campaigns.dart';
+import 'package:grocery/widget/PopularStores.dart';
+import 'package:grocery/widget/Store.dart';
+import 'package:provider/provider.dart';
+import 'package:grocery/globals.dart' as globals;
+
+import 'Bloc/Slider/slider_bloc.dart';
+import 'helper/deviceHelpper.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp();
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await DeviceHellper().initPlatformState();
+
+  // String productdata = await rootBundle.loadString("asset/slider.json");
+  // final data = await json.decode(productdata);
+  // print(data["slider"].length.toString());
+
+  // final collection = FirebaseFirestore.instance.collection("slider");
+
+  // for (int i = 0; i < data['slider'].length; i++) {
+  //   collection.add(data['slider'][i]).then((value) {
+  //     // collection.doc(value.id).update({'productId': value.id});
+  //   });
+  // }
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -43,7 +72,13 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (context) => SignInUpBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => AuthonticationBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SliderBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -73,7 +108,7 @@ Future<void> main() async {
           'Language': (context) => Language(),
           'ForgotPassword': (context) => ForgotPassword(),
         },
-        home: ShowCategoriesItem(),
+        home: BottomBar(),
       ),
     ),
   );

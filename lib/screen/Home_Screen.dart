@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
 import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/BestReviewedItem.dart';
 import 'package:grocery/widget/Campaigns.dart';
+import 'package:grocery/widget/Carousel.dart';
 import 'package:grocery/widget/Categories.dart';
 import 'package:grocery/widget/CategoriesName.dart';
 import 'package:grocery/widget/Newon6amMart.dart';
@@ -16,6 +16,8 @@ import 'package:grocery/widget/PopularItemsNearby.dart';
 import 'package:grocery/widget/PopularStores.dart';
 import 'package:grocery/widget/ShowButtomSheet.dart';
 import 'package:grocery/widget/Store.dart';
+
+import '../Bloc/Slider/slider_bloc.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,6 +32,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     LocationBloc l = BlocProvider.of<LocationBloc>(context);
+    SliderBloc s = BlocProvider.of<SliderBloc>(context);
+    s.add(ShowSider());
     l.add(Update());
     return Scaffold(
       appBar: AppBar(
@@ -130,34 +134,17 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 15,
             ),
-            GFCarousel(
-              height: 150,
-              autoPlay: true,
-              autoPlayCurve: Curves.linearToEaseOut,
-              autoPlayAnimationDuration: Duration(seconds: 1),
-              autoPlayInterval: Duration(seconds: 4),
-              hasPagination: true,
-              items: model().imageList.map(
-                (asset) {
-                  return Container(
-                    margin: EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      child: Image.network(
-                        asset,
-                        fit: BoxFit.cover,
-                        width: 1000.0,
-                      ),
-                    ),
-                  );
+            BlocConsumer<SliderBloc, SliderState>(
+                builder: (context, state) {
+                  print(state);
+                  if (state is DisplaySliderData) {
+                    print(state.carousel.length);
+                    return Carousel(state.carousel);
+                  } else {
+                    return Crousel_Shimmer();
+                  }
                 },
-              ).toList(),
-              onPageChanged: (index) {
-                setState(() {
-                  index;
-                });
-              },
-            ),
+                listener: (context, state) {}),
             SizedBox(
               height: 10,
             ),

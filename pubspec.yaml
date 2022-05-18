@@ -53,6 +53,12 @@ dependencies:
   flutter_bloc:
   sms_autofill:
   flutter_spinkit: 
+  firebase_auth:
+  provider:
+  device_info_plus:
+  progress_state_button:
+  loading_gifs: ^0.3.0
+  shimmer: 
   
 dev_dependencies:
   flutter_test:
