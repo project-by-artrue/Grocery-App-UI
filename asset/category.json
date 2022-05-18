@@ -1,0 +1,124 @@
+{
+    "category": [
+        {
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%201.jpg?alt=media&token=23051a21-08d8-4a24-a217-b60a6e181e8a",
+            "categoryName": "Office Stationery",
+            "subCategory": [
+                {
+                    "subCategoryName": "All",
+                    "subCategoryProductId": [
+                        "FGnmOrI98G8YjoTuKVTA",
+                        "JBtf9L3NjeCayoAQlegL",
+                        "J2gUbyjGQ416GBcZ0aPF"
+                    ]
+                },
+                {
+                    "subCategoryName": "Organizers",
+                    "subCategoryProductId": [
+                        "JBtf9L3NjeCayoAQlegL"
+                    ]
+                },
+                {
+                    "subCategoryName": "Writing & Printing",
+                    "subCategoryProductId": [
+                        "J2gUbyjGQ416GBcZ0aPF"
+                    ]
+                },
+                {
+                    "subCategoryName": "Arts & Crafts",
+                    "subCategoryProductId": [
+                        "FGnmOrI98G8YjoTuKVTA"
+                    ]
+                }
+            ]
+        },
+        {
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%202.jpg?alt=media&token=6fb38781-4ae4-46cd-aa09-315f1b916dda",
+            "categoryName": "Skin Care",
+            "subCategory": [
+                {
+                    "subCategoryName": "All",
+                    "subCategoryProductId": [
+                        "Ke4bcQH7EQEXWfM6pRvd"
+                    ]
+                }
+            ]
+        },
+        {
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Ffish.jpg?alt=media&token=cb386990-e681-4d03-9008-a0037ac40017",
+            "categoryName": "Fish Meat",
+            "subCategory": [
+                {
+                    "subCategoryName": "All",
+                    "subCategoryProductId": [
+                        "LBb9aZ1Jo1zfRSNQjohh",
+                        "cMV1e1SCMRw9NbIfAn4P",
+                        "ijOBZqoLFenaPykWcreT"
+                    ]
+                },
+                {
+                    "subCategoryName": "Meat",
+                    "subCategoryProductId": [
+                        "cMV1e1SCMRw9NbIfAn4P"
+                    ]
+                },
+                {
+                    "subCategoryName": "Frozen Fish",
+                    "subCategoryProductId": [
+                        "LBb9aZ1Jo1zfRSNQjohh"
+                    ]
+                },
+                {
+                    "subCategoryName": "Dried Fish",
+                    "subCategoryProductId": [
+                        "ijOBZqoLFenaPykWcreT"
+                    ]
+                }
+            ]
+        },
+        {
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%203.jpg?alt=media&token=529568d6-039c-4afb-b932-691249e543d4",
+            "categoryName": "Presonal Care",
+            "subCategory": [
+                {
+                    "subCategoryName": "All",
+                    "subCategoryProductId": [
+                        "mUCSxUaH5O2DbnnfvduE"
+                    ]
+                }
+            ]
+        },
+        {
+            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%204.jpg?alt=media&token=c0f15c64-5f9a-4ac9-93b6-f7fa3246f508",
+            "categoryName": "Cokking Essentials",
+            "subCategory": [
+                {
+                    "subCategoryName": "All",
+                    "subCategoryProductId": [
+                        "pxVS1P5SRC0h6Er5v5Td",
+                        "FGnmOrI98G8YjoTuKVTA",
+                        "J2gUbyjGQ416GBcZ0aPF"
+                    ]
+                },
+                {
+                    "subCategoryName": "Rice",
+                    "subCategoryProductId": [
+                        "FGnmOrI98G8YjoTuKVTA"
+                    ]
+                },
+                {
+                    "subCategoryName": "Colors & Flavours",
+                    "subCategoryProductId": [
+                        "pxVS1P5SRC0h6Er5v5Td"
+                    ]
+                },
+                {
+                    "subCategoryName": "Oil",
+                    "subCategoryProductId": [
+                        "J2gUbyjGQ416GBcZ0aPF"
+                    ]
+                }
+            ]
+        }
+    ]
+}

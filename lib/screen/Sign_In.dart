@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
@@ -20,7 +22,7 @@ class _Sign_InState extends State<Sign_In> {
   Widget build(BuildContext context) {
     SignInUpBloc s = BlocProvider.of<SignInUpBloc>(context);
     Size size = MediaQuery.of(context).size;
-    s.add(Get_SignIn(pass: "false", remember: 'false', temCondition: 'false'));
+    s.add(Get_SignIn(pass: "false", remember: 'false', temCondition: 'true'));
     return Scaffold(
       body: Center(
           child: SingleChildScrollView(
@@ -122,13 +124,21 @@ class _Sign_InState extends State<Sign_In> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
-                                child: Text("Forgot password"),
+                                child: InkWell(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, 'ForgotPassword'),
+                                  child: Text(
+                                    "Forgot password",
+                                    style: TextStyle(color: Colors.green),
+                                  ),
+                                ),
                               )
                             ],
                           ),
                           Row(
                             children: [
                               Checkbox(
+                                  activeColor: Colors.green,
                                   value: state.tarnCondition,
                                   onChanged: (value) {
                                     s.add(Get_SignIn(temCondition: 'true'));
@@ -147,16 +157,22 @@ class _Sign_InState extends State<Sign_In> {
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: Container(
-                                  height: 50,
-                                  margin: EdgeInsets.only(left: 8),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Sign Up",
-                                    style: TextStyle(
-                                      color: Colors.green,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, 'SignUP');
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    margin: EdgeInsets.only(left: 8),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),

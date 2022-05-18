@@ -29,7 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-        
+  flutter_localizations: # Add this line
+    sdk: flutter
+    
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -49,11 +51,17 @@ dependencies:
   intl_phone_field:
   introduction_screen:
   flutter_bloc:
-
+  sms_autofill:
+  flutter_spinkit: 
+  firebase_auth:
+  provider:
+  device_info_plus:
+  progress_state_button:
+  loading_gifs: ^0.3.0
+  shimmer: 
   
 dev_dependencies:
   flutter_test:
-  
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -69,10 +77,12 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
 
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   assets:
     - asset/
