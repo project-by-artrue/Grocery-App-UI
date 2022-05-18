@@ -1,0 +1,28 @@
+{
+    "userfilld": [
+        {
+            "firstName": "Jayraj",
+            "lastName": "Dobariya",
+            "mobileName": "Radmi Note 9",
+            "lastSignedIn": "11:25",
+            "mobileNumber": "9574019028",
+            "addToCart": [
+                {
+                    "productId": "",
+                    "quantity": "1"
+                }
+            ],
+            "deviceHardware": "",
+            "favourite ": [],
+            "order": [
+                {
+                    "id": "",
+                    "status": "Pending",
+                    "date": "17-05-2022",
+                    "rating": "",
+                    "Trak": ""
+                }
+            ]
+        }
+    ]
+}
