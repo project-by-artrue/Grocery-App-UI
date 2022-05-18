@@ -5,7 +5,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 
 class Phone_TextFilld extends StatelessWidget {
   TextEditingController mobilno;
-  Phone_TextFilld(this.mobilno);
+  Widget? suflix;
+  Phone_TextFilld( this.mobilno,{this.suflix});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +26,14 @@ class Phone_TextFilld extends StatelessWidget {
         cursorColor: Colors.green,
         cursorHeight: 22,
         controller: mobilno,
+
         decoration: InputDecoration(
             // isDense: true,
             enabled: true,
             // isCollapsed: true,
             //decoration for Input Field
             hintText: "Phone",
+            suffixIcon: suflix,
             border: InputBorder.none),
         initialCountryCode: 'India',
         //default contry code, NP for Nepal

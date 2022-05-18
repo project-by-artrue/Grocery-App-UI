@@ -1,0 +1,139 @@
+{
+    "product": [
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FFreshLocalFish.jpg?alt=media&token=83fccf80-d6b4-4568-b714-c5d4ccd23716",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FLemon.jpg?alt=media&token=28f0ddf9-056e-4b87-8e5e-d211e452a566",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FLemon.jpg?alt=media&token=28f0ddf9-056e-4b87-8e5e-d211e452a566"
+            ],
+            "title": "Avocado",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription":""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FLemon.jpg?alt=media&token=28f0ddf9-056e-4b87-8e5e-d211e452a566",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FLemon.jpg?alt=media&token=28f0ddf9-056e-4b87-8e5e-d211e452a566",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FLemon.jpg?alt=media&token=28f0ddf9-056e-4b87-8e5e-d211e452a566"
+            ],
+            "title": "Lamon",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%201.jpg?alt=media&token=2708b709-fc40-4684-81af-9033fec6d150",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%201.jpg?alt=media&token=2708b709-fc40-4684-81af-9033fec6d150",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%201.jpg?alt=media&token=2708b709-fc40-4684-81af-9033fec6d150"
+            ],
+            "title": "Mint",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%202.jpg?alt=media&token=03b7193f-4f20-4ac1-a81a-9500bf2f1040",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%202.jpg?alt=media&token=03b7193f-4f20-4ac1-a81a-9500bf2f1040",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%202.jpg?alt=media&token=03b7193f-4f20-4ac1-a81a-9500bf2f1040"
+            ],
+            "title": "Flour",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%203.jpg?alt=media&token=7144871e-1168-4a97-8f6f-483c75b4cc44",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%203.jpg?alt=media&token=7144871e-1168-4a97-8f6f-483c75b4cc44",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%203.jpg?alt=media&token=7144871e-1168-4a97-8f6f-483c75b4cc44"
+            ],
+            "title": "Tomato Ketchup",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%204.jpg?alt=media&token=65f78020-e124-4bf0-9646-812d62555097",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%204.jpg?alt=media&token=65f78020-e124-4bf0-9646-812d62555097",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%204.jpg?alt=media&token=65f78020-e124-4bf0-9646-812d62555097"
+            ],
+            "title": "Brown Bread",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%205.jpg?alt=media&token=228c44c8-c9e5-4257-8f96-69fe2d2a3aa9",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%205.jpg?alt=media&token=228c44c8-c9e5-4257-8f96-69fe2d2a3aa9",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2FProduct%20-%205.jpg?alt=media&token=228c44c8-c9e5-4257-8f96-69fe2d2a3aa9"
+            ],
+            "title": "Praise Daily Style",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2Ffish.jpg?alt=media&token=c61b5578-9716-43c1-b985-6e84bf7d40d2",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2Ffish.jpg?alt=media&token=c61b5578-9716-43c1-b985-6e84bf7d40d2",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2Ffish.jpg?alt=media&token=c61b5578-9716-43c1-b985-6e84bf7d40d2"
+            ],
+            "title": "Fish Mit",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        },
+        {
+            "displayImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2Fstationary.jpg?alt=media&token=32015235-dd63-453f-a1ad-7d765af08487",
+            "image": [
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2Fstationary.jpg?alt=media&token=32015235-dd63-453f-a1ad-7d765af08487",
+                "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Product%2Fstationary.jpg?alt=media&token=32015235-dd63-453f-a1ad-7d765af08487"
+            ],
+            "title": "Pen",
+            "review": [],
+            "price": "240.00",
+            "marketValue": "300.00",
+            "storeId": "",
+            "categoryId": "",
+            "productId": "",
+            "discription": ""
+        }
+    ]
+}

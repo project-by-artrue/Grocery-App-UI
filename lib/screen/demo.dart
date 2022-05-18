@@ -112,65 +112,142 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class Demo extends StatefulWidget {
-  const Demo({Key? key}) : super(key: key);
-
-  @override
-  State<Demo> createState() => _DemoState();
-}
-
-class _DemoState extends State<Demo> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            'My Order',
-            style: TextStyle(color: Colors.black),
+    return MaterialApp(
+      title: 'Shimmer',
+      routes: <String, WidgetBuilder>{
+        'loading': (_) => LoadingListPage(),
+        'slide': (_) => SlideToUnlockPage(),
+      },
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Shimmer'),
+      ),
+      body: Column(
+        children: <Widget>[
+          ListTile(
+            title: const Text('Loading List'),
+            onTap: () => Navigator.of(context).pushNamed('loading'),
           ),
-          bottom: TabBar(
-            physics: NeverScrollableScrollPhysics(),
-            onTap: (value) {},
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicator: CircleTabIndicator(color: Colors.green, radius: 4),
-            isScrollable: true,
-            labelColor: Colors.black,
-            tabs: <Widget>[
-              Tab(
-                text: 'All',
-              ),
-              Tab(
-                text: 'Organizers',
-              ),
-              Tab(
-                text: 'Writing & printing',
-              ),
-              Tab(
-                text: 'Arts & Crafts',
-              )
-            ],
-          ),
-        ),
-        body: Column(
-          children: [
-            DefaultTabController(
-                length: 2,
-                child: SafeArea(
-                  child: TabBar(
-                    indicatorColor: Colors.green,
-                    labelColor: Colors.green,
-                    tabs: [
-                      Tab(text: "Running"),
-                      Tab(text: "History"),
-                    ],
+          ListTile(
+            title: const Text('Slide To Unlock'),
+            onTap: () => Navigator.of(context).pushNamed('slide'),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingListPage extends StatefulWidget {
+  @override
+  _LoadingListPageState createState() => _LoadingListPageState();
+}
+
+class _LoadingListPageState extends State<LoadingListPage> {
+  bool _enabled = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Loading List'),
+      ),
+      body: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Expanded(
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey,
+                highlightColor: Colors.grey,
+                enabled: _enabled,
+                child: ListView.builder(
+                  itemBuilder: (_, __) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          width: 48.0,
+                          height: 48.0,
+                          color: Colors.white,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                width: double.infinity,
+                                height: 8.0,
+                                color: Colors.white,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 2.0),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 8.0,
+                                color: Colors.white,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 2.0),
+                              ),
+                              Container(
+                                width: 40.0,
+                                height: 8.0,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ))
+                  itemCount: 6,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      _enabled = !_enabled;
+                    });
+                  },
+                  child: Text(
+                    _enabled ? 'Stop' : 'Play',
+                    style: Theme.of(context).textTheme.button!.copyWith(
+                        fontSize: 18.0,
+                        color: _enabled ? Colors.redAccent : Colors.green),
+                  )),
+            )
           ],
         ),
       ),
@@ -178,35 +255,109 @@ class _DemoState extends State<Demo> {
   }
 }
 
-class CircleTabIndicator extends Decoration {
-  final BoxPainter _painter;
-
-  CircleTabIndicator({@required Color? color, @required double? radius})
-      : _painter = _CirclePainter(
-          color!,
-          radius!,
-        );
+class SlideToUnlockPage extends StatelessWidget {
+  final List<String> days = <String>[
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  final List<String> months = <String>[
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   @override
-  BoxPainter createBoxPainter([void onChanged]) => _painter;
-}
-
-class _CirclePainter extends BoxPainter {
-  final Paint _paint;
-  final double radius;
-
-  _CirclePainter(Color color, this.radius)
-      : _paint = Paint()
-          ..color = color
-          ..isAntiAlias = true;
-
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
-    final Offset circleOffset =
-        offset + Offset(cfg.size!.width / 2, cfg.size!.height - radius);
-    canvas.drawCircle(circleOffset, radius, _paint);
+  Widget build(BuildContext context) {
+    final DateTime time = DateTime.now();
+    final int hour = time.hour;
+    final int minute = time.minute;
+    final int day = time.weekday;
+    final int month = time.month;
+    final int dayInMonth = time.day;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Slide To Unlock'),
+      ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Image.asset(
+            'assets/images/background.jpg',
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            top: 48.0,
+            right: 0.0,
+            left: 0.0,
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    '${hour < 10 ? '0$hour' : '$hour'}:${minute < 10 ? '0$minute' : '$minute'}',
+                    style: const TextStyle(
+                      fontSize: 60.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.0),
+                  ),
+                  Text(
+                    '${days[day - 1]}, ${months[month - 1]} $dayInMonth',
+                    style: const TextStyle(fontSize: 24.0, color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+              bottom: 24.0,
+              left: 0.0,
+              right: 0.0,
+              child: Center(
+                child: Opacity(
+                  opacity: 0.8,
+                  child: Shimmer.fromColors(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/chevron_right.png',
+                          height: 20.0,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        ),
+                        const Text(
+                          'Slide to unlock',
+                          style: TextStyle(
+                            fontSize: 28.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    baseColor: Colors.black12,
+                    highlightColor: Colors.white,
+                    loop: 3,
+                  ),
+                ),
+              ))
+        ],
+      ),
+    );
   }
 }
-
-
-
