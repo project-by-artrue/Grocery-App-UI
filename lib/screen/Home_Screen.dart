@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
 import 'package:grocery/model/model.dart';
@@ -26,15 +27,17 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with WidgetsBindingObserver {
   TextEditingController search = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     LocationBloc l = BlocProvider.of<LocationBloc>(context);
     SliderBloc s = BlocProvider.of<SliderBloc>(context);
+    CategoryBloc g = BlocProvider.of<CategoryBloc>(context);
     s.add(ShowSider());
     l.add(Update());
+    g.add(GetCategory());
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -151,23 +154,37 @@ class _HomeState extends State<Home> {
             CategoriesName("Categories", "View All", "ViewAllCategories"),
             Container(
               height: 100,
-              child: ListView.builder(
-                itemCount: 15,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'ShowCategoriesItem');
+              child: BlocConsumer<CategoryBloc, CategoryState>(
+                builder: (context, state) {
+                  // g.add(GetCategory());
+                  if (state is ShowCategory) {
+                    return ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: state.catedgoryList.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                            onTap: () {
+                              print(state.catedgoryList[index].categoryId);
+                              Navigator.pushReplacementNamed(
+                                  context, 'ShowCategoriesItem',
+                                  arguments: state.catedgoryList[index].categoryId);
+                            },
+                            child: Categories(state.catedgoryList[index].image,
+                                state.catedgoryList[index].categoryName));
                       },
-                      child:
-                          Categories(model().img[index], model().name[index]));
+                    );
+                  }
+                  return Categories_Shimmer();
                 },
+                listener: (context, state) {},
               ),
             ),
             CategoriesName("Popular Stores", "View All", "Store"),
             Container(
               height: MediaQuery.of(context).size.height / 5.2,
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -179,6 +196,7 @@ class _HomeState extends State<Home> {
             Container(
               height: MediaQuery.of(context).size.height / 4,
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -195,6 +213,8 @@ class _HomeState extends State<Home> {
             Container(
               height: MediaQuery.of(context).size.height / 7.5,
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                // shrinkWrap: true,R
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -212,6 +232,7 @@ class _HomeState extends State<Home> {
               height: MediaQuery.of(context).size.height / 5.2,
               child: ListView.builder(
                 itemCount: 10,
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return InkWell(
@@ -226,6 +247,7 @@ class _HomeState extends State<Home> {
             Container(
               height: MediaQuery.of(context).size.height / 7.5,
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {

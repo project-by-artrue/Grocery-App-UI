@@ -4,24 +4,28 @@
 
 import 'dart:convert';
 
-Categoris categorisFromJson(String str) => Categoris.fromJson(json.decode(str));
+MainCategories categorisFromJson(String str) =>
+    MainCategories.fromJson(json.decode(str));
 
-String categorisToJson(Categoris data) => json.encode(data.toJson());
+String categorisToJson(MainCategories data) => json.encode(data.toJson());
 
-class Categoris {
-  Categoris({
+class MainCategories {
+  MainCategories({
     required this.image,
     required this.categoryName,
+    required this.categoryId,
     required this.subCategory,
   });
 
   String image;
   String categoryName;
+  String categoryId;
   List<SubCategory> subCategory;
 
-  factory Categoris.fromJson(Map<String, dynamic> json) => Categoris(
+  factory MainCategories.fromJson(Map<String, dynamic> json) => MainCategories(
         image: json["image"],
         categoryName: json["categoryName"],
+        categoryId: json['categoryId'],
         subCategory: List<SubCategory>.from(
             json["subCategory"].map((x) => SubCategory.fromJson(x))),
       );
@@ -29,6 +33,7 @@ class Categoris {
   Map<String, dynamic> toJson() => {
         "image": image,
         "categoryName": categoryName,
+        "categoryId": categoryId,
         "subCategory": List<dynamic>.from(subCategory.map((x) => x.toJson())),
       };
 }

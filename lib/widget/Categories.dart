@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery/model/model.dart';
 import 'package:shimmer/shimmer.dart';
@@ -9,41 +12,37 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, 'ShowCategoriesItem');
-      },
+    return SizedBox(
+      height: 100,
+      width: 65,
       child: Column(
         children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              // height: 120,
-              width: 50,
-              // margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(img),
-                  fit: BoxFit.cover,
+          Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              // ignore: prefer_const_literals_to_create_immutables
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  offset: const Offset(2.0, 2.0),
+                  blurRadius: 1.0,
+                  spreadRadius: 1.0,
                 ),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 1.0,
-                    spreadRadius: 1.0,
-                  ),
-                ],
-              ),
+              ],
+            ),
+            child: CachedNetworkImage(
+              imageUrl: img,
+              fit: BoxFit.fill,
+              placeholder: (context, url) => placeHolder(),
             ),
           ),
           SizedBox(
             height: 10,
           ),
           Flexible(
-            child: Container(
+            child: SizedBox(
               width: 65,
               child: Text(
                 name,
@@ -57,6 +56,37 @@ class Categories extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget placeHolder() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 3,
+          child: Shimmer.fromColors(
+            baseColor: Colors.white,
+            highlightColor: Color.fromARGB(137, 220, 218, 218),
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+                // ignore: prefer_const_literals_to_create_immutables
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: const Offset(2.0, 2.0),
+                    blurRadius: 1.0,
+                    spreadRadius: 1.0,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -74,8 +104,8 @@ class Categories_Shimmer extends StatelessWidget {
           Container(
             height: 100,
             child: Shimmer.fromColors(
-              baseColor: Colors.grey,
-              highlightColor: Colors.black54,
+              baseColor: Color.fromARGB(137, 220, 218, 218),
+              highlightColor: Colors.white,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, __) => Padding(
@@ -113,6 +143,7 @@ class Categories_Shimmer extends StatelessWidget {
                         // ),
                         Flexible(
                           child: Container(
+                            height: 14,
                             width: 65,
                             margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
