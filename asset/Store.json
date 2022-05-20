@@ -1,0 +1,163 @@
+{
+    "store": [
+        {
+            "storeName": "Eorange",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FShopingCart.jpg?alt=media&token=c345d4b0-75cc-4dc2-818c-52c8b09ad230",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FShopingCart.jpg?alt=media&token=c345d4b0-75cc-4dc2-818c-52c8b09ad230",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": "4AjS5nizxNCb9VbuV3s9",
+                    "categoryName": [
+                        "All",
+                        "Office Stationery",
+                        "Skin Care",
+                        "Personal Care",
+                        "Cooking Essentials",
+                        "BreckFast",
+                        "Fruits & Vegetables",
+                        "Dairy Needs"
+                    ]
+                }
+            ]
+        },
+        {
+            "storeName": "Family supermarket",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%202.jpg?alt=media&token=0ed21bb8-80b2-4655-a36e-b62577b1a44c",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%202.jpg?alt=media&token=0ed21bb8-80b2-4655-a36e-b62577b1a44c",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": "WZLUi53LJVRLTqhpyOMN",
+                    "categoryName": [
+                        "All",
+                        "Personal Care",
+                        "Cleaning Supplies",
+                        "BreckFast",
+                        "Dairy Needs"
+                    ]
+                }
+            ]
+        },
+        {
+            "storeName": "Fresh Local",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%203.jpeg?alt=media&token=7ad85dbb-46f3-406a-b01d-bc2da6dbb195",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%203.jpeg?alt=media&token=7ad85dbb-46f3-406a-b01d-bc2da6dbb195",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": "ZpHckg7i7pVdJpyo9Ij4",
+                    "categoryName": [
+                        "All",
+                        "Fish & Meat",
+                        "Dairy Needs"
+                    ]
+                }
+            ]
+        },
+        {
+            "storeName": "Fresh Supermarket",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%204.jpg?alt=media&token=177bb936-2e59-4f47-a39e-e83907325397",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%204.jpg?alt=media&token=177bb936-2e59-4f47-a39e-e83907325397",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": " n4DHUGepLQWDByefKNsd",
+                    "categoryName": [
+                        "All",
+                        "BreckFast"
+                    ]
+                }
+            ]
+        },
+        {
+            "storeName": "Online market",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%205.jpg?alt=media&token=f6a2c235-e615-4700-8589-2095816ee67a",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%205.jpg?alt=media&token=f6a2c235-e615-4700-8589-2095816ee67a",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": " uey064RAplssM77km6am",
+                    "categoryName": [
+                        "All",
+                        "Cooking Essentials",
+                        "Cleaning Supplies",
+                        "Fruits & Vegetables",
+                        "Dairy Needs",
+                        "Home and Kitchen Appliance"
+                    ]
+                }
+            ]
+        },
+        {
+            "storeName": "Sk General Store",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%206.webp?alt=media&token=dc4870eb-6efe-4f6f-b155-a5f5c8db0aee",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%206.webp?alt=media&token=dc4870eb-6efe-4f6f-b155-a5f5c8db0aee",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": " 4AjS5nizxNCb9VbuV3s9",
+                    "categoryName": [
+                        "All",
+                        "Cooking Essentials",
+                        "Fruits & Vegetables",
+                        "Home and Kitchen Appliance"
+                    ]
+                }
+            ]
+        },
+        {
+            "storeName": "Smart Shopping",
+            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FShopingCart.jpg?alt=media&token=c345d4b0-75cc-4dc2-818c-52c8b09ad230",
+            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FShopingCart.jpg?alt=media&token=c345d4b0-75cc-4dc2-818c-52c8b09ad230",
+            "storeTime": "9 AM",
+            "storeCloseTime": "9 PM",
+            "location": "House:00,Road:00,City-000,Country",
+            "deliveryTime": "2-3 hours Delivery Time",
+            "reating": [],
+            "category": [
+                {
+                    "product": [],
+                    "categoryId": " WZLUi53LJVRLTqhpyOMN",
+                    "categoryName": [
+                        "All",
+                        "Personal Care",
+                        "Fruits & Vegetables",
+                        "Dairy Needs",
+                        "Home and Kitchen Appliance"
+                    ]
+                }
+            ]
+        }
+    ]
+}
