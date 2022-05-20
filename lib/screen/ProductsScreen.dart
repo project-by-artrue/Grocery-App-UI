@@ -57,7 +57,8 @@ class _ProductScreenState extends State<ProductScreen> {
               onTap: () {
                 model.bottomsheet(context);
               },
-              child: ProductCard());
+              // child: ProductCard(""),
+              );
         },
       ),
     );

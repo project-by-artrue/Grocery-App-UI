@@ -35,7 +35,7 @@ class MyCartListtile extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 'Pack',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(fontSize: 10, color: Colors.white),
               ),
               decoration: BoxDecoration(
                   color: Colors.green, borderRadius: BorderRadius.circular(5)),

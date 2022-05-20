@@ -41,7 +41,7 @@ class Product {
         price: json["price"],
         marketValue: json["marketValue"],
         storeId: json["storeId"],
-        categoryId: json["categoryID"],
+        categoryId: json["categoryId"],
         productId: json["productId"],
         discription: json["discription"],
       );
@@ -54,7 +54,7 @@ class Product {
         "price": price,
         "marketValue": marketValue,
         "storeId": storeId,
-        "categoryID": categoryId,
+        "categoryId": categoryId,
         "productId": productId,
         "discription": discription,
       };

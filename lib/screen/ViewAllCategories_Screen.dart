@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/model/model.dart';
+import 'package:grocery/widget/CategoryCard.dart';
 
 class ViewAllCategories extends StatefulWidget {
   const ViewAllCategories({Key? key}) : super(key: key);
@@ -41,51 +44,32 @@ class _ViewAllCategoriesState extends State<ViewAllCategories> {
         elevation: 0,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: GridView.builder(
-          itemCount: model().img.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'ShowCategoriesItem');
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: BlocConsumer<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                if (state is ShowCategory) {
+                  return GridView.builder(
+                    itemCount: state.catedgoryList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'ShowCategoriesItem',
+                              arguments:  index);
+                        },
+                        child: CategoryCard(state.catedgoryList[index].image,
+                            state.catedgoryList[index].categoryName),
+                      );
+                    },
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                  );
+                }
+                return CircularProgressIndicator();
               },
-              child: Container(
-                margin: EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      child: Image.asset(model().img[index]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(model().name[index])
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: const Offset(2.0, 2.0),
-                      blurRadius: 1.0,
-                      spreadRadius: 1.0,
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-          ),
-        ),
-      ),
+              listener: (context, state) {})),
     );
   }
 }
