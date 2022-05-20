@@ -36,4 +36,8 @@ class SliderBloc extends Bloc<SliderEvent, SliderState> {
   emitSliderData() {
     emit(DisplaySliderData(carousel));
   }
+
+  xyz(String x) {
+    print(x);
+  }
 }

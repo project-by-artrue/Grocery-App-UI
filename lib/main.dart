@@ -5,9 +5,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grocery/Bloc/Authontication/authontication_bloc.dart';
+import 'package:grocery/Bloc/Category/category_bloc.dart';
+import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 import 'package:grocery/model/product.dart';
+import 'package:grocery/model/routHellper.dart';
 
 import 'package:grocery/screen/AboutUs_Screen.dart';
 import 'package:grocery/screen/Address.dart';
@@ -79,6 +82,13 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => SliderBloc(),
         ),
+        BlocProvider(
+          create: (context) => ProductsBloc(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              CategoryBloc(BlocProvider.of<ProductsBloc>(context)),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -100,7 +110,6 @@ Future<void> main() async {
           'MyCart': (context) => MyCart(),
           'MyOrder': (context) => MyOrder(),
           'ProductScreen': (context) => ProductScreen(),
-          'ShowCategoriesItem': (context) => ShowCategoriesItem(),
           'Sign_In': (context) => Sign_In(),
           'SignUP': (context) => SignUP(),
           'IntroScreen': (context) => IntroScreen(),
@@ -108,6 +117,9 @@ Future<void> main() async {
           'Language': (context) => Language(),
           'ForgotPassword': (context) => ForgotPassword(),
         },
+        onGenerateRoute: (settings) => routHellper.hellper(
+          settings,
+        ),
         home: BottomBar(),
       ),
     ),

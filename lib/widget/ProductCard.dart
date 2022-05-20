@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/rating/gf_rating.dart';
+import 'package:grocery/model/product.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+  Product p;
+
+  ProductCard(this.p, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +25,9 @@ class ProductCard extends StatelessWidget {
                     height: 70,
                     width: 70,
                     decoration: BoxDecoration(
-                      color: Colors.yellow,
-                      image: DecorationImage(
-                        image: AssetImage(
-                          "asset/Lemon.jpg",
+                        // color: Colors.yellow,
                         ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                    child: CachedNetworkImage(imageUrl: p.displayImage),
                   ),
                   Positioned(
                     top: 5,
@@ -57,11 +56,11 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "avocado",
+                  p.title,
                   style: TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "Shop Name ",
+                  p.storeId,
                   style: TextStyle(color: Colors.grey[109]),
                 ),
                 GFRating(
@@ -75,11 +74,11 @@ class ProductCard extends StatelessWidget {
                 RichText(
                     text: TextSpan(children: [
                   TextSpan(
-                    text: "\$200 ",
+                    text: "\$${p.price} ",
                     style: TextStyle(color: Color.fromARGB(255, 86, 86, 86)),
                   ),
                   TextSpan(
-                      text: "\$300",
+                      text: "\$${p.marketValue}",
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Color.fromARGB(255, 86, 86, 86)))
