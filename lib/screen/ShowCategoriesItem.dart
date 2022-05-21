@@ -35,12 +35,9 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
 
     return BlocConsumer<SubcategoryBloc, SubcategoryState>(
         builder: (context, state) {
-      print("--------------${state}");
       if (state is ExploarCategory) {
-        print("88888888888888888888888888${state.subCategoryMap[widget.id]}");
-
         return DefaultTabController(
-          length: state.subCategoryMap[widget.id]?.length ??0,
+          length: state.subCategoryMap[widget.id]?.length ?? 0,
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -52,7 +49,6 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
               ),
               leading: IconButton(
                 onPressed: () {
-                  
                   Navigator.pop(context);
                 },
                 icon: Icon(
