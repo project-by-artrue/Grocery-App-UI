@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
+import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
 import 'package:grocery/model/model.dart';
@@ -35,9 +36,11 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     LocationBloc l = BlocProvider.of<LocationBloc>(context);
     SliderBloc s = BlocProvider.of<SliderBloc>(context);
     CategoryBloc g = BlocProvider.of<CategoryBloc>(context);
+    ProductsBloc p = BlocProvider.of<ProductsBloc>(context);
     s.add(ShowSider());
     l.add(Update());
     g.add(GetCategory());
+    p.add(FectchProduct());
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -216,22 +219,36 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
             ),
             CategoriesName("Popular Items Nearby", "View All", "Product"),
             Container(
-              height: MediaQuery.of(context).size.height / 7.5,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                // shrinkWrap: true,R
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        model.bottomsheet(context);
-                      },
-                      child: BestRevieweditem(model().popularStorImg[index]));
-                  // return PopularItemsNearby(model().popularStorImg[index]);
-                },
-              ),
-            ),
+                height: MediaQuery.of(context).size.height / 7.5,
+                child: BlocConsumer<ProductsBloc, ProductsState>(
+                    builder: (context, state) {
+                      if (state is ShowProduct) {
+                        print("*****************");
+                        return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          // shrinkWrap: true,R
+                          itemCount: state.product.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            String key = state.product.keys.elementAt(index);
+                            return InkWell(
+                              onTap: () {
+                                model.bottomsheet(context);
+                              },
+                              child: BestRevieweditem(
+                                state.product[key],
+                              ),
+                            );
+                            // return PopularItemsNearby(model().popularStorImg[index]);
+                          },
+                        );
+                      }
+                      return Container(
+                        height: 10,
+                        color: Colors.red,
+                      );
+                    },
+                    listener: (context, state) {})),
             CategoriesName("New on 6amMart", "View All", "Store"),
             Container(
               height: MediaQuery.of(context).size.height / 5.2,
@@ -249,21 +266,21 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               ),
             ),
             CategoriesName("Best Reviewed item", "View All", "Product"),
-            Container(
-              height: MediaQuery.of(context).size.height / 7.5,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        model.bottomsheet(context);
-                      },
-                      child: BestRevieweditem(model().popularStorImg[index]));
-                },
-              ),
-            ),
+            // Container(
+            //   height: MediaQuery.of(context).size.height / 7.5,
+            //   child: ListView.builder(
+            //     physics: BouncingScrollPhysics(),
+            //     itemCount: 10,
+            //     scrollDirection: Axis.horizontal,
+            //     itemBuilder: (context, index) {
+            //       return InkWell(
+            //           onTap: () {
+            //             model.bottomsheet(context);
+            //           },
+            //           child: BestRevieweditem(model().popularStorImg[index]));
+            //     },
+            //   ),
+            // ),
             Row(
               children: [
                 SizedBox(

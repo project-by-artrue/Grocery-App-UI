@@ -33,6 +33,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       Product p = Product.fromJson(snapshot.data()!);
       print("ddddddddddddddddddddddddddd" + p.productId);
       product[p.productId] = p;
+      emit(ShowProduct(product));
     });
   }
 
