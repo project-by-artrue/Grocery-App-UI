@@ -25,12 +25,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         emit(FectchCategory());
         final snapshot = dbReferance.snapshots();
         await snapshot.forEach((data) {
-          print(data.docs.length.toString() +
-              "  ffffffffffffffffffffffffffffffffffffffffffffff");
           data.docs.forEach(
             (element) {
               MainCategories category = MainCategories.fromJson(element.data());
-              print("lllllllllllllllllll${category.toJson()}");
               catedgoryList.add(category);
               categoriesMap[category.categoryId] = category;
             },

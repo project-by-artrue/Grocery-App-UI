@@ -38,20 +38,16 @@ class AuthonticationBloc
             "Device Name": globals.deviceName
           };
           db.collection('user').doc(value.user!.uid).set(user);
-          print('pppppppppppppllllllllllllll${value.user!.uid}');
         });
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
           emit(SignUpFaill('The password provided is too weak.'));
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
           emit(SignUpFaill('The account already exists for that email.'));
         } else {
           emit(SignUpFaill(e.code));
         }
       } catch (e) {
-        print(e);
         emit(SignUpFaill(e.toString()));
       }
       // TODO: implement event handler

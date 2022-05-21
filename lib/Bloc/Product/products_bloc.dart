@@ -28,10 +28,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       emit(ShowProduct(product));
     });
     on<GetProductId>((event, emit) async {
-      print("eeeeeeeeeeeeeeeeeeeeeeeeee" + event.productId);
       final snapshot = await dbReferance.doc(event.productId).get();
       Product p = Product.fromJson(snapshot.data()!);
-      print("ddddddddddddddddddddddddddd" + p.productId);
       product[p.productId] = p;
     });
   }
