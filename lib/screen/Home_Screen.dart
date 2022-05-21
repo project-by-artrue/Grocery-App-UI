@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/Bloc/Product/products_bloc.dart';
+import 'package:grocery/Bloc/SubCategory/subcategory_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
 import 'package:grocery/model/model.dart';
@@ -37,6 +38,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     SliderBloc s = BlocProvider.of<SliderBloc>(context);
     CategoryBloc g = BlocProvider.of<CategoryBloc>(context);
     ProductsBloc p = BlocProvider.of<ProductsBloc>(context);
+    SubcategoryBloc b = BlocProvider.of<SubcategoryBloc>(context);
     s.add(ShowSider());
     l.add(Update());
     g.add(GetCategory());
@@ -142,9 +144,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
             ),
             BlocConsumer<SliderBloc, SliderState>(
                 builder: (context, state) {
-                  print(state);
                   if (state is DisplaySliderData) {
-                    print(state.carousel.length);
                     return Carousel(state.carousel);
                   } else {
                     return Crousel_Shimmer();
@@ -159,7 +159,6 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               height: 100,
               child: BlocConsumer<CategoryBloc, CategoryState>(
                 builder: (context, state) {
-                  print("////////////////////////////${state}");
                   // g.add(GetCategory());
                   if (state is ShowCategory) {
                     return ListView.builder(
@@ -169,7 +168,8 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                       itemBuilder: (context, index) {
                         return InkWell(
                             onTap: () {
-                              print(state.catedgoryList[index].categoryId);
+                              b.add(ExploreSelectedCategory(
+                                  state.catedgoryList[index].categoryId));
                               Navigator.pushNamed(context, 'ShowCategoriesItem',
                                   arguments:
                                       state.catedgoryList[index].categoryId);

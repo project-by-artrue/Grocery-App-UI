@@ -16,16 +16,13 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
   Map<String, Map<String, List<Product>>> subCategoryMap = {};
   SubcategoryBloc(this.productBloc) : super(SubcategoryInitial()) {
     on<ExploreSelectedCategory>((event, emit) async {
-      print("sssssssssssssssssssssss${event.categoryId}");
 
-      print(">>>>>>>>>>>>>>${subCategoryMap.keys}");
       if (!subCategoryMap.containsKey(event.categoryId)) {
         emit(FectchCategory());
         final snapshot = await dbReferance.doc(event.categoryId).get();
         MainCategories category =
             MainCategories.fromJson(snapshot.data() ?? {});
         String catId = event.categoryId;
-        print(category.categoryName);
         subCategoryMap[catId] = {};
         for (int i = 0; i < category.subCategory.length; i++) {
           List<String> list = category.subCategory[i].subCategoryProductId;

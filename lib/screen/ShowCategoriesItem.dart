@@ -29,8 +29,8 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
 
   @override
   Widget build(BuildContext context) {
-    SubcategoryBloc c = BlocProvider.of<SubcategoryBloc>(context);
-    c.add(ExploreSelectedCategory(widget.id));
+    // SubcategoryBloc c = BlocProvider.of<SubcategoryBloc>(context);
+    // c.add(ExploreSelectedCategory(widget.id));
     Size size = MediaQuery.of(context).size;
 
     return BlocConsumer<SubcategoryBloc, SubcategoryState>(
