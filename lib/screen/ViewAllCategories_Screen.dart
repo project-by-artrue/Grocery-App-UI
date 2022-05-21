@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
+import 'package:grocery/Bloc/SubCategory/subcategory_bloc.dart';
 import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/CategoryCard.dart';
 
@@ -16,6 +17,7 @@ class ViewAllCategories extends StatefulWidget {
 class _ViewAllCategoriesState extends State<ViewAllCategories> {
   @override
   Widget build(BuildContext context) {
+    SubcategoryBloc b = BlocProvider.of<SubcategoryBloc>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -55,8 +57,10 @@ class _ViewAllCategoriesState extends State<ViewAllCategories> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
+                          b.add(ExploreSelectedCategory(
+                              state.catedgoryList[index].categoryId));
                           Navigator.pushNamed(context, 'ShowCategoriesItem',
-                              arguments:  index);
+                              arguments: state.catedgoryList[index].categoryId);
                         },
                         child: CategoryCard(state.catedgoryList[index].image,
                             state.catedgoryList[index].categoryName),

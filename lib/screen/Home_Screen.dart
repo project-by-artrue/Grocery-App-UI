@@ -210,7 +210,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      model.bottomsheet(context);
+                      // model.bottomsheet(context,p);
                     },
                     child: Campaigns(model().popularStorImg[index]),
                   );
@@ -222,8 +222,8 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                 height: MediaQuery.of(context).size.height / 7.5,
                 child: BlocConsumer<ProductsBloc, ProductsState>(
                     builder: (context, state) {
+                      print("*****************${state}");
                       if (state is ShowProduct) {
-                        print("*****************");
                         return ListView.builder(
                           physics: BouncingScrollPhysics(),
                           // shrinkWrap: true,R
@@ -233,7 +233,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                             String key = state.product.keys.elementAt(index);
                             return InkWell(
                               onTap: () {
-                                model.bottomsheet(context);
+                                model.bottomsheet(context,state.product[key]);
                               },
                               child: BestRevieweditem(
                                 state.product[key],

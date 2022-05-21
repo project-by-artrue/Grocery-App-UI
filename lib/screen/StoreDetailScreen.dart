@@ -175,7 +175,7 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
               delegate: SliverChildBuilderDelegate((context, index) {
                 return InkWell(
                   onTap: () {
-                    model.bottomsheet(context);
+                    // model.bottomsheet(context);
                   },
                   // child: ProductCard(),
                 );

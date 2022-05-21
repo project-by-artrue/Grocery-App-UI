@@ -55,7 +55,7 @@ class _ProductScreenState extends State<ProductScreen> {
         itemBuilder: (context, index) {
           return InkWell(
               onTap: () {
-                model.bottomsheet(context);
+                // model.bottomsheet(context);
               },
               // child: ProductCard(""),
               );

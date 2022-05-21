@@ -6,5 +6,7 @@ abstract class ProductsState {}
 class ProductsInitial extends ProductsState {}
 class ShowProduct extends ProductsState{
    Map<String, Product> product;
-   ShowProduct(this.product);
+   Map<String, int> count;
+   ShowProduct(this.product,this.count);
 }
+class FectchPopularProduct extends ProductsState{}
