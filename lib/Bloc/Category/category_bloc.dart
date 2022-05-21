@@ -5,13 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/Slider/slider_bloc.dart';
-import 'package:grocery/model/Categories.dart';
+import 'package:grocery/model/categories.dart';
 import 'package:grocery/model/product.dart';
 import 'package:meta/meta.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
-
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   List<MainCategories> catedgoryList = [];
   final dbReferance = FirebaseFirestore.instance.collection("category");
@@ -26,9 +25,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         emit(FectchCategory());
         final snapshot = dbReferance.snapshots();
         await snapshot.forEach((data) {
+          print(data.docs.length.toString() +
+              "  ffffffffffffffffffffffffffffffffffffffffffffff");
           data.docs.forEach(
             (element) {
               MainCategories category = MainCategories.fromJson(element.data());
+              print("lllllllllllllllllll${category.toJson()}");
               catedgoryList.add(category);
               categoriesMap[category.categoryId] = category;
             },
@@ -40,37 +42,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       }
     });
 
-    on<ExploreSelectedCategory>((event, emit) async {
-      if (!subCategoryMap.containsKey(event.categoryId)) {
-        emit(FectchCategory());
-        print("sssssssssssssssssssssss${event.categoryId}");
-        final snapshot = await dbReferance.doc(event.categoryId).get();
-        MainCategories category =
-            MainCategories.fromJson(snapshot.data() ?? {});
-        String catId = event.categoryId;
-        print(category.categoryName);
-        subCategoryMap[catId] = {};
-        for (int i = 0; i < category.subCategory.length; i++) {
-          List<String> list = category.subCategory[i].subCategoryProductId;
-          String subId = category.subCategory[i].subCategoryName;
-          subCategoryMap[catId]![subId] = [];
-          for (int j = 0; j < list.length; j++) {
-            if (productBloc.isProductAvailable(list[j])) {
-              subCategoryMap[catId]![subId]!
-                  .add(productBloc.getProduct(list[j])!);
-            } else {
-              await productBloc.fetchProduct(list[j]);
-              subCategoryMap[catId]![subId]!
-                  .add(productBloc.getProduct(list[j])!);
-            }
-          }
-          emit(ExploarCategory(category.categoryName, subCategoryMap));
-        }
-      } else {
-        emit(ExploarCategory(
-            categoriesMap[event.categoryId]!.categoryName, subCategoryMap));
-      }
-    });
+  
   }
 
   void addProductToMap(String cName, String sName, Product p) {
@@ -82,8 +54,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         cName: {sName: []}
       };
     }
-    // subCategoryMap.addAll({cName:sName})
     subCategoryMap[cName]![sName]!.add(p);
-    // print("777777777777${subCategoryMap}777777777${p.productId}");
   }
 }

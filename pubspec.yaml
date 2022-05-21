@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   getwidget: 
   firebase_core:
-  cloud_firestore: ^3.1.14
+  cloud_firestore:
   cached_network_image:
   badges:
   geocoding:
@@ -57,7 +57,7 @@ dependencies:
   provider:
   device_info_plus:
   progress_state_button:
-  loading_gifs: ^0.3.0
+  loading_gifs:
   shimmer: 
   
 dev_dependencies:

@@ -156,6 +156,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               height: 100,
               child: BlocConsumer<CategoryBloc, CategoryState>(
                 builder: (context, state) {
+                  print("////////////////////////////${state}");
                   // g.add(GetCategory());
                   if (state is ShowCategory) {
                     return ListView.builder(
@@ -166,9 +167,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                         return InkWell(
                             onTap: () {
                               print(state.catedgoryList[index].categoryId);
-                              Navigator.pushReplacementNamed(
-                                  context, 'ShowCategoriesItem',
-                                  arguments: state.catedgoryList[index].categoryId);
+                              Navigator.pushNamed(context, 'ShowCategoriesItem',
+                                  arguments:
+                                      state.catedgoryList[index].categoryId);
                             },
                             child: Categories(state.catedgoryList[index].image,
                                 state.catedgoryList[index].categoryName));
@@ -177,7 +178,11 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   }
                   return Categories_Shimmer();
                 },
-                listener: (context, state) {},
+                listener: (context, state) {
+                  // if (state is ExploarCategory) {
+                  //   g.add(GetCategory());
+                  // }
+                },
               ),
             ),
             CategoriesName("Popular Stores", "View All", "Store"),

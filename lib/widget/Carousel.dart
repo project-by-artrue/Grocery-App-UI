@@ -44,7 +44,7 @@ class Carousel extends StatelessWidget {
       baseColor: Colors.white,
       highlightColor: Color.fromARGB(137, 220, 218, 218),
       child: Container(
-        margin: EdgeInsets.all(8.0),
+        // margin: EdgeInsets.all(8.0),
         height: 150,
         width: tWidth * .8,
         color: Colors.white,

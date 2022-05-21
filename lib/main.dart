@@ -8,6 +8,7 @@ import 'package:grocery/Bloc/Authontication/authontication_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
+import 'package:grocery/Bloc/SubCategory/subcategory_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 import 'package:grocery/model/product.dart';
 import 'package:grocery/model/routHellper.dart';
@@ -55,15 +56,15 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await DeviceHellper().initPlatformState();
 
-  // String productdata = await rootBundle.loadString("asset/slider.json");
+  // String productdata = await rootBundle.loadString("asset/category.json");
   // final data = await json.decode(productdata);
-  // print(data["slider"].length.toString());
+  // // print(data["slider"].length.toString());
 
-  // final collection = FirebaseFirestore.instance.collection("slider");
+  // final collection = FirebaseFirestore.instance.collection("category");
 
-  // for (int i = 0; i < data['slider'].length; i++) {
-  //   collection.add(data['slider'][i]).then((value) {
-  //     // collection.doc(value.id).update({'productId': value.id});
+  // for (int i = 0; i < data['category'].length; i++) {
+  //   collection.add(data['category'][i]).then((value) {
+  //     collection.doc(value.id).update({'categoryId': value.id});
   //   });
   // }
 
@@ -88,6 +89,10 @@ Future<void> main() async {
         BlocProvider(
           create: (context) =>
               CategoryBloc(BlocProvider.of<ProductsBloc>(context)),
+        ),
+        BlocProvider(
+          create: (context) =>
+              SubcategoryBloc(BlocProvider.of<ProductsBloc>(context)),
         )
       ],
       child: MaterialApp(

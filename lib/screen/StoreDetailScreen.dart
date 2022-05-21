@@ -177,7 +177,7 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                   onTap: () {
                     model.bottomsheet(context);
                   },
-                  // child: ProductCard(""),
+                  // child: ProductCard(),
                 );
               }, childCount: 10),
             )

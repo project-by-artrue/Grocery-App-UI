@@ -7,7 +7,3 @@ class GetCategory extends CategoryEvent {
   GetCategory();
 }
 
-class ExploreSelectedCategory extends CategoryEvent {
-  String categoryId;
-  ExploreSelectedCategory(this.categoryId);
-}

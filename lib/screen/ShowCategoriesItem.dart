@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/widget/ProductCard.dart';
 
+import '../Bloc/SubCategory/subcategory_bloc.dart';
+
 class ShowCategoriesItem extends StatefulWidget {
   final String id;
   ShowCategoriesItem(this.id);
@@ -27,157 +29,189 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
 
   @override
   Widget build(BuildContext context) {
-    CategoryBloc c = BlocProvider.of<CategoryBloc>(context);
+    SubcategoryBloc c = BlocProvider.of<SubcategoryBloc>(context);
     c.add(ExploreSelectedCategory(widget.id));
     Size size = MediaQuery.of(context).size;
-    // print(widget.value);
-    // @override
-    // void dispose() {
-    //   // TODO: implement dispose
 
-    //   super.dispose();
-    // }
+    return BlocConsumer<SubcategoryBloc, SubcategoryState>(
+        builder: (context, state) {
+      print("--------------${state}");
+      if (state is ExploarCategory) {
+        print("88888888888888888888888888${state.subCategoryMap[widget.id]}");
 
-    return WillPopScope(
-      onWillPop: () async {
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        Navigator.pushReplacementNamed(context, "Dashbord");
-        return false;
-      },
-      child: BlocConsumer<CategoryBloc, CategoryState>(
-          builder: (context, state) {
-            if (state is ExploarCategory) {
-              // print(
-              //     "................................${state.subCategoryMap['4AjS5nizxNCb9VbuV3s9']}");
-              // print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb${state.subCategoryMap}");
-
-              // print(state.subCategoryMap['4AjS5nizxNCb9VbuV3s9']!.keys);
-              return DefaultTabController(
-                length: state.subCategoryMap[widget.id]!.length,
-                child: Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: Colors.white,
-                    elevation: 0,
-                    centerTitle: true,
-                    title: Text(
-                      state.catedgoryName,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, "Dashbord");
+        return DefaultTabController(
+          length: state.subCategoryMap[widget.id]?.length ??0,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                state.catedgoryName,
+                style: TextStyle(color: Colors.black),
+              ),
+              leading: IconButton(
+                onPressed: () {
+                  
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.keyboard_arrow_left,
+                  color: Colors.black,
+                  size: 40,
+                ),
+              ),
+              actions: [
+                Icon(
+                  Icons.search,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+              ],
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(size.height * 0.05),
+                child: Container(
+                  // width: double.infinity,
+                  height: 40,
+                  padding: EdgeInsets.all(3),
+                  child: DefaultTabController(
+                    length: state.subCategoryMap[widget.id]!.keys.length,
+                    child: TabBar(
+                      // physics: NeverScrollableScrollPhysics(),
+                      onTap: (value) {
+                        tabValue = state.subCategoryMap[widget.id]!.keys
+                            .toList()[value];
+                        setState(() {});
+                        print("object" + value.toString());
                       },
-                      icon: Icon(
-                        Icons.keyboard_arrow_left,
-                        color: Colors.black,
-                        size: 40,
-                      ),
-                    ),
-                    actions: [
-                      Icon(
-                        Icons.search,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Icon(
-                        Icons.shopping_cart,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                    bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(size.height * 0.05),
-                      child: Container(
-                        // width: double.infinity,
-                        height: 40,
-                        padding: EdgeInsets.all(3),
-                        child: DefaultTabController(
-                          length: state.subCategoryMap[widget.id]!.keys.length,
-                          child: TabBar(
-                            // physics: NeverScrollableScrollPhysics(),
-                            onTap: (value) {
-                              tabValue = state.subCategoryMap[widget.id]!.keys
-                                  .toList()[value];
-                              setState(() {});
-                              print("object" + value.toString());
-                            },
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            indicator: CircleTabIndicator(
-                                color: Colors.green, radius: 4),
-                            isScrollable: true,
-                            labelColor: Colors.black,
-                            tabs: <Widget>[
-                              for (int i = 0;
-                                  i <
-                                      state.subCategoryMap[widget.id]!.keys
-                                          .length;
-                                  i++)
-                                Tab(
-                                    text: state.subCategoryMap[widget.id]!.keys
-                                        .toList()[i])
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 205, 236, 206),
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                    ),
-                  ),
-                  body: SafeArea(
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            child: TabBar(
-                              controller: controller,
-                              indicatorColor: Colors.green,
-                              labelColor: Colors.green,
-                              tabs: [
-                                Tab(text: "Products"),
-                                Tab(text: "Store"),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: TabBarView(
-                            controller: controller,
-                            children: [
-                              ListView.builder(
-                                itemCount: state
-                                    .subCategoryMap[widget.id]![tabValue]!
-                                    .length,
-                                itemBuilder: (context, index) {
-                                  return ProductCard(state.subCategoryMap[
-                                      widget.id]![tabValue]![0]);
-                                },
-                              ),
-                              Center(
-                                child: Text("bye"),
-                              ),
-                            ],
-                          ),
-                        )
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicator:
+                          CircleTabIndicator(color: Colors.green, radius: 4),
+                      isScrollable: true,
+                      labelColor: Colors.black,
+                      tabs: <Widget>[
+                        for (int i = 0;
+                            i < state.subCategoryMap[widget.id]!.keys.length;
+                            i++)
+                          Tab(
+                              text: state.subCategoryMap[widget.id]!.keys
+                                  .toList()[i])
                       ],
                     ),
                   ),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 205, 236, 206),
+                      borderRadius: BorderRadius.circular(30)),
                 ),
-              );
-            }
-            return CircularProgressIndicator();
+              ),
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: Colors.white,
+                      child: TabBar(
+                        controller: controller,
+                        indicatorColor: Colors.green,
+                        labelColor: Colors.green,
+                        tabs: [
+                          Tab(text: "Products"),
+                          Tab(text: "Store"),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: TabBarView(
+                      controller: controller,
+                      children: [
+                        ListView.builder(
+                          itemCount: state
+                              .subCategoryMap[widget.id]![tabValue]!.length,
+                          itemBuilder: (context, index) {
+                            // return ProductSimer();
+                            return ProductCard(
+                                state.subCategoryMap[widget.id]![tabValue]![0]);
+                          },
+                        ),
+                        Center(
+                          child: Text("bye"),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            "",
+            style: TextStyle(color: Colors.black),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              // c.add(GetCategory());
+              // Navigator.pushReplacementNamed(context, "Dashbord");
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.keyboard_arrow_left,
+              color: Colors.black,
+              size: 40,
+            ),
+          ),
+          actions: [
+            Icon(
+              Icons.search,
+              color: Colors.black,
+              size: 30,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
+              size: 30,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+        body: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return ProductSimer();
           },
-          listener: (context, state) {}),
-    );
+        ),
+      );
+    }, listener: (context, state) {
+      // if (state is ShowCategory) {
+      //   c.add(ExploreSelectedCategory(widget.id));
+      // }
+    });
   }
 
   // Future<bool> getBack() {
