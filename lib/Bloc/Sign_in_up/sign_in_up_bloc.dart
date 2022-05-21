@@ -25,7 +25,6 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
         temConditionSignup = !temConditionSignup;
       }
 
-      print("llllllllllllllllllllll${temConditionSignup}");
 
       emit(ShowSignUp(pass1, pass2, temConditionSignup,
           event.stateText1 ?? ButtonState.idle,event.stateText2 ??ButtonState.idle));
@@ -42,7 +41,6 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
       if (event.temCondition == 'true') {
         termCondition = !termCondition;
       }
-      print("llllllllllllllllllllll${remember}");
 
       emit(ShowSignIn(pass, remember, termCondition));
     });

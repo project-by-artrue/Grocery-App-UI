@@ -11,7 +11,6 @@ class SliderBloc extends Bloc<SliderEvent, SliderState> {
   final dbReferance = FirebaseFirestore.instance.collection("slider");
   SliderBloc() : super(SliderInitial()) {
     on<ShowSider>((event, emit) async {
-      print(carousel.length.toString() + "==================================");
       if (carousel.isEmpty) {
         emit(SliderDataFetching());
         carousel = [];
@@ -25,8 +24,6 @@ class SliderBloc extends Bloc<SliderEvent, SliderState> {
           });
           emitSliderData();
         });
-        print(
-            "==================================" + carousel.length.toString());
       } else {
         emit(DisplaySliderData(carousel));
       }
@@ -37,7 +34,4 @@ class SliderBloc extends Bloc<SliderEvent, SliderState> {
     emit(DisplaySliderData(carousel));
   }
 
-  xyz(String x) {
-    print(x);
-  }
 }
