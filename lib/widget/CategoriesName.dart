@@ -6,8 +6,8 @@ class CategoriesName extends StatelessWidget {
   String categoriesname;
   String buttonname;
   String routes;
-  CategoriesName(this.categoriesname, this.buttonname, this.routes, {Key? key})
-      : super(key: key);
+  String?argumen;
+  CategoriesName(this.categoriesname, this.buttonname, this.routes, {this.argumen});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,8 @@ class CategoriesName extends StatelessWidget {
         Spacer(),
         TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, routes);
+            String a="";
+            Navigator.pushNamed(context, routes,arguments: argumen!=null ? argumen:null);
           },
           child: Text(
             buttonname,

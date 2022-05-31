@@ -5,8 +5,8 @@ part 'location_event.dart';
 part 'location_state.dart';
 
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
+  String address = "";
   LocationBloc() : super(LocationInitial()) {
-    String address = "";
     on<GetLocation>((event, emit) {
       // TODO: implement event handler
       address = event.address;

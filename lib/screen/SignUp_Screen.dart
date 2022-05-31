@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:grocery/helper/hellper.dart';
 import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +34,17 @@ class _SignUPState extends State<SignUP> {
 
   bool chack = true;
   final _key = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.initDynamicLinks(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    double theight = MediaQuery.of(context).size.height;
     print(",,,,,,,,,,,,,,,,,${globals.manufacturer}");
     AuthonticationBloc a = BlocProvider.of<AuthonticationBloc>(context);
     SignInUpBloc u = BlocProvider.of<SignInUpBloc>(context);
@@ -120,7 +131,11 @@ class _SignUPState extends State<SignUP> {
                                     Phone_TextFilld(
                                       mobilno,
                                       suflix: buildTextWithIcon(
-                                          u, state.stateText, "phone"),
+                                          u,
+                                          state.stateText,
+                                          "phone",
+                                          mobilno,
+                                          theight),
                                     ),
                                     Divider(),
                                     TextFildCard(
@@ -131,7 +146,11 @@ class _SignUPState extends State<SignUP> {
                                       "E-mail",
                                       email,
                                       sufix: buildTextWithIcon(
-                                          u, state.buttonState2, "email"),
+                                          u,
+                                          state.buttonState2,
+                                          "email",
+                                          email,
+                                          theight),
                                       callback: emailValidator,
                                     ),
                                     Divider(),
@@ -316,7 +335,8 @@ class _SignUPState extends State<SignUP> {
     );
   }
 
-  Widget buildTextWithIcon(SignInUpBloc u, ButtonState stateText, String name) {
+  Widget buildTextWithIcon(SignInUpBloc u, ButtonState stateText, String name,
+      TextEditingController controller, double theight) {
     // print("//////////////////////${stateText}");
     // u.add(Get_SignUp(stateText: ButtonState.loading));
     return ProgressButton(
@@ -349,10 +369,20 @@ class _SignUPState extends State<SignUP> {
       },
       onPressed: () {
         print("/111111111111111111111111111111111111");
-        if (name == "phone") u.add(Get_SignUp(stateText1: ButtonState.loading));
+        if (name == "phone") {
+          String otp = "";
+          Helpper().showOtpDilog(
+            theight,
+            context,
+            otp,
+          );
+          u.add(Get_SignUp(stateText1: ButtonState.loading));
+          u.add(PhoneAuth(controller.text, "phone"));
+        }
 
         if (name == "email") {
           u.add(Get_SignUp(stateText2: ButtonState.loading));
+          u.add(EmailAuth(controller.text));
         }
 
         // stateText = state.stateText;
@@ -436,5 +466,26 @@ class _SignUPState extends State<SignUP> {
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  initDynamicLinks(BuildContext context) async {
+    await Future.delayed(Duration(seconds: 3));
+    var data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final deepLink = data?.link;
+    final queryParams = deepLink!.queryParameters;
+    if (queryParams.length > 0) {
+      var userName = queryParams['userId'];
+    }
+    FirebaseDynamicLinks.instance.onLink.listen((event) {
+      print(
+          "llllllllllllllllllllll99999999999999999999999${data?.link}99${data?.utmParameters}");
+    });
+    // (onSuccess: (dynamicLink)
+    // async {
+    //   var deepLink = dynamicLink?.link;
+    //   debugPrint('DynamicLinks onLink $deepLink');
+    // }, onError: (e) async {
+    //   debugPrint('DynamicLinks onError $e');
+    // });
   }
 }

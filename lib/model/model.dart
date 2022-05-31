@@ -91,8 +91,6 @@ class model {
     "Fish meat"
   ];
 
- 
-
   // static void bottomsheetbar(BuildContext context) {
   //   showModalBottomSheet(
   //       context: context,
@@ -144,8 +142,11 @@ class model {
     "asset/Lemon.jpg",
   ];
 
-
-   static void bottomsheet(BuildContext context, Product? product) {
+  static void bottomsheet(
+    BuildContext context,
+    Product? product,
+    ShowButtomSheet showButtomSheet,
+  ) {
     showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
@@ -156,11 +157,9 @@ class model {
         builder: (context) {
           return Container(
               height: MediaQuery.of(context).size.height / 2.3,
-              child: ShowButtomSheet(product));
+              child: showButtomSheet);
         });
   }
-
-  
 }
 
 class StoreDetails {

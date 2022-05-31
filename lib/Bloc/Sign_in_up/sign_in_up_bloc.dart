@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:meta/meta.dart';
 import 'package:progress_state_button/progress_button.dart';
 
@@ -6,6 +9,8 @@ part 'sign_in_up_event.dart';
 part 'sign_in_up_state.dart';
 
 class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String _verificationId = "";
   bool remember = false;
   bool pass = false;
   bool termCondition = false;
@@ -25,9 +30,12 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
         temConditionSignup = !temConditionSignup;
       }
 
-
-      emit(ShowSignUp(pass1, pass2, temConditionSignup,
-          event.stateText1 ?? ButtonState.idle,event.stateText2 ??ButtonState.idle));
+      emit(ShowSignUp(
+          pass1,
+          pass2,
+          temConditionSignup,
+          event.stateText1 ?? ButtonState.idle,
+          event.stateText2 ?? ButtonState.idle));
     });
     on<Get_SignIn>((event, emit) {
       // TODO: implement event handler
@@ -43,6 +51,53 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
       }
 
       emit(ShowSignIn(pass, remember, termCondition));
+    });
+    on<PhoneAuth>((event, emit) async {
+      print("wwwwwwwwwwwwwwwwwwwww${event.controller}");
+      if (event.name == "phone") {
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        await auth.verifyPhoneNumber(
+            phoneNumber: "+91" + event.controller,
+            timeout: const Duration(seconds: 60),
+            verificationCompleted: (PhoneAuthCredential credential) {
+              print("complete complete");
+            },
+            verificationFailed: (FirebaseAuthException e) {
+              print("mmmmmmmmmmmmmmmmmmmmmmmmmmm${e}");
+            },
+            codeSent: (String verificationId, int? resendToken) {
+              _verificationId = verificationId;
+            },
+            codeAutoRetrievalTimeout: (String verificationId) {});
+      }
+      if (event.name == "otp") {
+        try {
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: _verificationId, smsCode: event.controller);
+          // ignore: unnecessary_null_comparison
+          if (credential == null) {
+            print("nulllllllllllllllllllllllllllll");
+          }
+          print("qwqwqwqwqwwqqwwq${credential}");
+        } catch (e) {
+          print("sssssssssssssssssssss");
+        }
+      }
+    });
+    on<EmailAuth>((event, emit) async {
+      try {
+        // print("<<<<<<<<<<<<<<<<<<<<<<${FirebaseAuth.instance.currentUser!}");
+        HttpsCallable callable =
+            FirebaseFunctions.instance.httpsCallable('sendMail');
+        final HttpsCallableResult result =
+            await callable.call(<String, dynamic>{
+          'email': "kevinshingala73462@gmail.com",
+          'otpCode': "https://grocery11.page.link/users"
+        });
+        print("?????????????????????????${result.data}");
+      } catch (e) {
+        print("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu${e.toString()}");
+      }
     });
   }
 }

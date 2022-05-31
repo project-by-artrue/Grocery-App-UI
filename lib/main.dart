@@ -1,13 +1,16 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grocery/Bloc/Authontication/authontication_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
+import 'package:grocery/Bloc/Store/store_bloc.dart';
 import 'package:grocery/Bloc/SubCategory/subcategory_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 import 'package:grocery/model/product.dart';
@@ -45,7 +48,6 @@ import 'package:grocery/widget/PopularStores.dart';
 import 'package:grocery/widget/Store.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery/globals.dart' as globals;
-
 import 'Bloc/Slider/slider_bloc.dart';
 import 'helper/deviceHelpper.dart';
 
@@ -55,16 +57,18 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await DeviceHellper().initPlatformState();
-
-  // String productdata = await rootBundle.loadString("asset/category.json");
+  // FirebaseAuth.instance.signInWithEmailAndPassword(
+  //     email: "kevinshingala73462@gmail.com", password: "123456");
+  // await FirebaseAuth.instance.;
+  // String productdata = await rootBundle.loadString("asset/Store.json");
   // final data = await json.decode(productdata);
-  // // print(data["slider"].length.toString());
+  // // // print(data["slider"].length.toString());
 
-  // final collection = FirebaseFirestore.instance.collection("category");
+  // final collection = FirebaseFirestore.instance.collection("Store");
 
-  // for (int i = 0; i < data['category'].length; i++) {
-  //   collection.add(data['category'][i]).then((value) {
-  //     collection.doc(value.id).update({'categoryId': value.id});
+  // for (int i = 0; i < data['store'].length; i++) {
+  //   collection.add(data['store'][i]).then((value) {
+  //     collection.doc(value.id).update({'store': value.id});
   //   });
   // }
 
@@ -93,6 +97,11 @@ Future<void> main() async {
         BlocProvider(
           create: (context) =>
               SubcategoryBloc(BlocProvider.of<ProductsBloc>(context)),
+        ),
+        BlocProvider(
+          create: (context) => StoreBloc(
+            BlocProvider.of<ProductsBloc>(context),
+          ),
         )
       ],
       child: MaterialApp(
@@ -101,9 +110,7 @@ Future<void> main() async {
           'Home': (context) => Home(),
           'ViewAllCategories': (context) => ViewAllCategories(),
           'SetLocation': (context) => SetLocation(),
-          'ShwoStoreDetails': (context) => StoreDetailsScreen(),
           'Store': (context) => StoreScreen(),
-          'Product': (context) => ProductScreen(),
           'documentation': (context) => AboutUs(),
           'Profile': (context) => ProfileScreen(""),
           'Confirm Order': (context) => ChackOut(),
@@ -114,7 +121,6 @@ Future<void> main() async {
           'Favourite': (context) => Favourite(),
           'MyCart': (context) => MyCart(),
           'MyOrder': (context) => MyOrder(),
-          'ProductScreen': (context) => ProductScreen(),
           'Sign_In': (context) => Sign_In(),
           'SignUP': (context) => SignUP(),
           'IntroScreen': (context) => IntroScreen(),
@@ -125,7 +131,7 @@ Future<void> main() async {
         onGenerateRoute: (settings) => routHellper.hellper(
           settings,
         ),
-        home: BottomBar(),
+        home: SignUP(),
       ),
     ),
   );

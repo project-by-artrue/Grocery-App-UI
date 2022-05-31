@@ -38,7 +38,7 @@ class BestRevieweditem extends StatelessWidget {
               margin: EdgeInsets.only(left: 5),
               alignment: Alignment.topLeft,
               child: Text(
-                product!.storeId,
+                product!.storeName,
                 style: TextStyle(color: Colors.black26, fontSize: 12),
               ),
             ),

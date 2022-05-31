@@ -23,3 +23,14 @@ class Get_SignIn extends SignInUpEvent {
   String? temCondition;
   Get_SignIn({this.pass, this.remember, this.temCondition});
 }
+
+class PhoneAuth extends SignInUpEvent {
+  String controller;
+  String name;
+  PhoneAuth(this.controller, this.name);
+}
+
+class EmailAuth extends SignInUpEvent {
+  String email;
+  EmailAuth(this.email);
+}

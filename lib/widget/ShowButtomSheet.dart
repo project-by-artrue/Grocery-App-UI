@@ -1,13 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/model/product.dart';
 
 class ShowButtomSheet extends StatelessWidget {
   Product? product;
-  ShowButtomSheet(this.product, {Key? key}) : super(key: key);
+
+  String? navigtorName;
+  String? argumentsName;
+  ShowButtomSheet(this.product, {this.navigtorName, this.argumentsName});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,7 @@ class ShowButtomSheet extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            product!.storeId, // Store Name
+                            product!.storeName, // Store Name
                             style: TextStyle(color: Colors.green),
                           ),
                           Text(
@@ -140,21 +144,34 @@ class ShowButtomSheet extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.store_sharp,
-                          size: 40,
-                          color: Colors.green,
+                      GestureDetector(
+                        onTap: () {
+                          // print(
+                          //     "llllllllllllllllllllllllllllllllllllllllllllllllll");
+                          // pop;
+                          if (navigtorName != null) {
+                            Navigator.pushNamed(context, navigtorName!,
+                                arguments: argumentsName);
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.store_sharp,
+                            size: 40,
+                            color: Colors.green,
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: Colors.green,
+                                  width: 2,
+                                  style: BorderStyle.solid)),
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Colors.green,
-                                width: 2,
-                                style: BorderStyle.solid)),
                       ),
                       Container(
                         height: 50,

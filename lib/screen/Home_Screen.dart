@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, sized_box_for_whitespace, void_checks
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
 import 'package:grocery/Bloc/Product/products_bloc.dart';
+import 'package:grocery/Bloc/Store/store_bloc.dart';
 import 'package:grocery/Bloc/SubCategory/subcategory_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 
@@ -39,10 +40,12 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     CategoryBloc g = BlocProvider.of<CategoryBloc>(context);
     ProductsBloc p = BlocProvider.of<ProductsBloc>(context);
     SubcategoryBloc b = BlocProvider.of<SubcategoryBloc>(context);
+    StoreBloc store = BlocProvider.of<StoreBloc>(context);
     s.add(ShowSider());
     l.add(Update());
     g.add(GetCategory());
     p.add(FectchProduct());
+    store.add(GetStore());
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -181,26 +184,41 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   }
                   return Categories_Shimmer();
                 },
-                listener: (context, state) {
-                  // if (state is ExploarCategory) {
-                  //   g.add(GetCategory());
-                  // }
-                },
+                listener: (context, state) {},
               ),
             ),
             CategoriesName("Popular Stores", "View All", "Store"),
             Container(
-              height: MediaQuery.of(context).size.height / 5.2,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return PopularStores(model().popularStorImg[index]);
-                },
-              ),
+                height: MediaQuery.of(context).size.height / 5.2,
+                child: BlocConsumer<StoreBloc, StoreState>(
+                    builder: (context, state) {
+                      if (state is ShowStore) {
+                        return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: state.showStore.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            String key = state.showStore.keys.elementAt(index);
+                            return PopularStores(state.showStore[key]);
+                            // return StoreShimmer();
+                          },
+                        );
+                      }
+                      return ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: 5,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return StoreShimmer();
+                        },
+                      );
+                    },
+                    listener: (context, state) {})),
+            CategoriesName(
+              "Campaigns",
+              "View All",
+              "Product",
             ),
-            CategoriesName("Campaigns", "View All", "Product"),
             Container(
               height: MediaQuery.of(context).size.height / 4,
               child: ListView.builder(
@@ -217,119 +235,157 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                 },
               ),
             ),
-            CategoriesName("Popular Items Nearby", "View All", "Product"),
+            CategoriesName("Popular Items Nearby", "View All", "Product",
+                argumen: "Popular Items Nearby"),
             Container(
                 height: MediaQuery.of(context).size.height / 7.5,
                 child: BlocConsumer<ProductsBloc, ProductsState>(
                     builder: (context, state) {
-                      print("*****************${state}");
                       if (state is ShowProduct) {
                         return ListView.builder(
                           physics: BouncingScrollPhysics(),
                           // shrinkWrap: true,R
-                          itemCount: state.product.length,
+                          itemCount: state.popularProduct.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            String key = state.product.keys.elementAt(index);
+                            // String key = state.product.keys.elementAt(index);
                             return InkWell(
                               onTap: () {
-                                model.bottomsheet(context,state.product[key]);
+                                model.bottomsheet(
+                                  context,
+                                  state.popularProduct[index],
+                                  ShowButtomSheet(
+                                    state.popularProduct[index],
+                                    navigtorName: "ShwoStoreDetails",
+                                    argumentsName:
+                                        state.popularProduct[index].storeName,
+                                  ),
+                                );
                               },
                               child: BestRevieweditem(
-                                state.product[key],
+                                state.popularProduct[index],
                               ),
                             );
                             // return PopularItemsNearby(model().popularStorImg[index]);
                           },
                         );
                       }
-                      return Container(
-                        height: 10,
-                        color: Colors.red,
-                      );
+                      return BestRevieweditem_Shimmer();
                     },
                     listener: (context, state) {})),
             CategoriesName("New on 6amMart", "View All", "Store"),
             Container(
-              height: MediaQuery.of(context).size.height / 5.2,
-              child: ListView.builder(
-                itemCount: 10,
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'ShwoStoreDetails');
-                      },
-                      child: Newon6amMart(model().popularStorImg[index]));
-                },
-              ),
-            ),
-            CategoriesName("Best Reviewed item", "View All", "Product"),
-            // Container(
-            //   height: MediaQuery.of(context).size.height / 7.5,
-            //   child: ListView.builder(
-            //     physics: BouncingScrollPhysics(),
-            //     itemCount: 10,
-            //     scrollDirection: Axis.horizontal,
-            //     itemBuilder: (context, index) {
-            //       return InkWell(
-            //           onTap: () {
-            //             model.bottomsheet(context);
-            //           },
-            //           child: BestRevieweditem(model().popularStorImg[index]));
-            //     },
-            //   ),
-            // ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "All Stores",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                Spacer(),
-                // Icon(Icons.filter_list),
-                PopupMenuButton(
-                  icon: Icon(Icons.filter_list),
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: Text("All"),
-                    ),
-                    PopupMenuItem(
-                      child: Text("Take Away"),
-                    ),
-                    PopupMenuItem(
-                      child: Text("Delivery"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-            ListView.builder(
-              itemCount: model().store.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, 'ShwoStoreDetails');
+                height: MediaQuery.of(context).size.height / 5.2,
+                child: BlocConsumer<StoreBloc, StoreState>(
+                    builder: (context, state) {
+                      if (state is ShowStore) {
+                        return ListView.builder(
+                          itemCount: state.showStore.length,
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            String key = state.showStore.keys.elementAt(index);
+                            return InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, 'ShwoStoreDetails');
+                                },
+                                child: PopularStores(state.showStore[key]));
+                          },
+                        );
+                      }
+                      return Container();
                     },
-                    child: StoreCard(model().store[index]));
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
+                    listener: (context, state) {})),
+            CategoriesName("Best Reviewed item", "View All", "Product",
+                argumen: "Best Reviewed item"),
+            Container(
+                height: MediaQuery.of(context).size.height / 7.5,
+                child: BlocConsumer<ProductsBloc, ProductsState>(
+                    builder: (context, state) {
+                      if (state is ShowProduct) {
+                        return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: state.product.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            String key = state.product.keys.elementAt(index);
+                            return InkWell(
+                                onTap: () {
+                                  model.bottomsheet(
+                                      context,
+                                      state.product[key],
+                                      ShowButtomSheet(state.product[key],
+                                          navigtorName: "ShwoStoreDetails",
+                                          argumentsName:
+                                              state.product[key]!.storeName));
+                                },
+                                child: BestRevieweditem(state.product[key]));
+                          },
+                        );
+                      }
+                      return Container();
+                    },
+                    listener: (context, state) {})),
+            BlocConsumer<StoreBloc, StoreState>(
+                builder: (context, state) {
+                  if (state is ShowStore) {
+                    return Column(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "All Stores",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
+                            Spacer(),
+                            // Icon(Icons.filter_list),
+                            PopupMenuButton(
+                              icon: Icon(Icons.filter_list),
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  child: Text("All"),
+                                ),
+                                PopupMenuItem(
+                                  child: Text("Take Away"),
+                                ),
+                                PopupMenuItem(
+                                  child: Text("Delivery"),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                        ListView.builder(
+                          itemCount: state.showStore.length,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            String key = state.showStore.keys.elementAt(index);
+                            return StoreCard(state.showStore[key]);
+                          },
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    );
+                  }
+                  return Container(
+                    color: Colors.red,
+                  );
+                },
+                listener: (context, state) {})
           ],
         ),
       ),

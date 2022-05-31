@@ -1,18 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery/model/model.dart';
+import 'package:grocery/model/store.dart';
 import 'package:shimmer/shimmer.dart';
 
 class StoreCard extends StatelessWidget {
-  StoreDetails store;
-  StoreCard(this.store, {Key? key}) : super(key: key);
+  Store? showStore;
+  StoreCard(this.showStore, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, 'ShwoStoreDetails');
+        Navigator.pushNamed(context, 'ShwoStoreDetails',
+            arguments: showStore!.storeName);
       },
       child: Column(
         children: [
@@ -24,13 +27,14 @@ class StoreCard extends StatelessWidget {
               height: 60,
               width: 60,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(store.storeImage), fit: BoxFit.cover),
+                // image: DecorationImage(
+                //     image: AssetImage(store.storeImage), fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(5),
               ),
+              child: CachedNetworkImage(imageUrl: showStore!.storeLogo),
             ),
             title: Text(
-              store.storeName,
+              showStore!.storeName,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -42,7 +46,7 @@ class StoreCard extends StatelessWidget {
                   margin: EdgeInsets.only(left: 5),
                   alignment: Alignment.topLeft,
                   child: Text(
-                    store.address,
+                    showStore!.location,
                     style: TextStyle(color: Colors.black26, fontSize: 12),
                   ),
                 ),
@@ -50,7 +54,7 @@ class StoreCard extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   margin: EdgeInsets.only(left: 5),
                   child: Text(
-                    store.review,
+                    "store.review",
                     style: TextStyle(color: Colors.black26, fontSize: 12),
                   ),
                 ),

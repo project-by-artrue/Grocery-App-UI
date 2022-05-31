@@ -11,7 +11,7 @@ part 'products_state.dart';
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final dbReferance = FirebaseFirestore.instance.collection("product");
   Map<String, Product> product = {};
-
+  List<Product> PopularProduct = [];
   Map<String, int> count = {};
   ProductsBloc() : super(ProductsInitial()) {
     on<FectchProduct>((event, emit) async {
@@ -28,19 +28,25 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           product[p.productId] = p;
           print("0000000000000000000000000${p.productId}");
         });
-        emit(ShowProduct(product, count));
+        product.forEach((key, value) {
+          if (value.isPopular) {
+            PopularProduct.add(value);
+          }
+        });
+        emit(ShowProduct(product, count, PopularProduct));
       });
     });
+
     on<GetProductId>((event, emit) async {
       final snapshot = await dbReferance.doc(event.productId).get();
       Product p = Product.fromJson(snapshot.data()!);
       product[p.productId] = p;
-      emit(ShowProduct(product, count));
+      emit(ShowProduct(product, count, PopularProduct));
     });
     on<ProductCount>((event, emit) {
       // count[event.id] = 1;
-      if (count[event.id] != null) {
-        int counts = count[event.id] ?? 1;
+      int counts = count[event.id] ?? 1;
+      if (event.isincrement != null) {
         if (event.isincrement ?? false) {
           counts++;
           count[event.id] = counts;
@@ -49,11 +55,16 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           count[event.id] = counts;
         }
       } else {
-        count[event.id] = 1;
+        count[event.id] = counts;
       }
       print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa${count[event.id]}");
-      emit(ShowProduct(product, count));
+      emit(ShowProduct(product, count, PopularProduct));
     });
+    on<GetProductToId>(
+      (event, emit) {
+        emit(ShowProduct(product, count, PopularProduct));
+      },
+    );
   }
 
   bool isProductAvailable(String id) {

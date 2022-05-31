@@ -11,61 +11,53 @@
             "reating": [],
             "category": [
                 {
-                    "product": [],
                     "categoryId": "4AjS5nizxNCb9VbuV3s9",
                     "categoryName": [
-                        "All",
-                        "Office Stationery",
-                        "Skin Care",
-                        "Personal Care",
-                        "Cooking Essentials",
-                        "BreckFast",
-                        "Fruits & Vegetables",
-                        "Dairy Needs"
-                    ]
-                }
-            ]
-        },
-        {
-            "storeName": "Family supermarket",
-            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%202.jpg?alt=media&token=0ed21bb8-80b2-4655-a36e-b62577b1a44c",
-            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%202.jpg?alt=media&token=0ed21bb8-80b2-4655-a36e-b62577b1a44c",
-            "storeTime": "9 AM",
-            "storeCloseTime": "9 PM",
-            "location": "House:00,Road:00,City-000,Country",
-            "deliveryTime": "2-3 hours Delivery Time",
-            "reating": [],
-            "category": [
-                {
-                    "product": [],
-                    "categoryId": "WZLUi53LJVRLTqhpyOMN",
-                    "categoryName": [
-                        "All",
-                        "Personal Care",
-                        "Cleaning Supplies",
-                        "BreckFast",
-                        "Dairy Needs"
-                    ]
-                }
-            ]
-        },
-        {
-            "storeName": "Fresh Local",
-            "storeLogo": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%203.jpeg?alt=media&token=7ad85dbb-46f3-406a-b01d-bc2da6dbb195",
-            "storeImage": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Store%2FStoreImg%20-%203.jpeg?alt=media&token=7ad85dbb-46f3-406a-b01d-bc2da6dbb195",
-            "storeTime": "9 AM",
-            "storeCloseTime": "9 PM",
-            "location": "House:00,Road:00,City-000,Country",
-            "deliveryTime": "2-3 hours Delivery Time",
-            "reating": [],
-            "category": [
-                {
-                    "product": [],
-                    "categoryId": "ZpHckg7i7pVdJpyo9Ij4",
-                    "categoryName": [
-                        "All",
-                        "Fish & Meat",
-                        "Dairy Needs"
+                        {
+                            "subName": "All",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA",
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "JBtf9L3NjeCayoAQlegL",
+                                "Ke4bcQH7EQEXWfM6pRvd",
+                                "LBb9aZ1Jo1zfRSNQjohh",
+                                "cMV1e1SCMRw9NbIfAn4P",
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Office Stationery",
+                            "subId": [
+                                "JBtf9L3NjeCayoAQlegL",
+                                "J2gUbyjGQ416GBcZ0aPF"
+                            ]
+                        },
+                        {
+                            "subName": "Skin Care",
+                            "subId": [
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Personal Care",
+                            "subId": [
+                                "cMV1e1SCMRw9NbIfAn4P",
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Cooking Essentials",
+                            "subId": [
+                                "LBb9aZ1Jo1zfRSNQjohh"
+                            ]
+                        },
+                        {
+                            "subName": "BreckFast",
+                            "subId": [
+                                "pxVS1P5SRC0h6Er5v5Td",
+                                "mUCSxUaH5O2DbnnfvduE"
+                            ]
+                        }
                     ]
                 }
             ]
@@ -81,11 +73,26 @@
             "reating": [],
             "category": [
                 {
-                    "product": [],
                     "categoryId": " n4DHUGepLQWDByefKNsd",
                     "categoryName": [
-                        "All",
-                        "BreckFast"
+                        {
+                            "subName": "All",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA",
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "mUCSxUaH5O2DbnnfvduE",
+                                "pxVS1P5SRC0h6Er5v5Td"
+                            ]
+                        },
+                        {
+                            "subName": "BreckFast",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA",
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "mUCSxUaH5O2DbnnfvduE",
+                                "pxVS1P5SRC0h6Er5v5Td"
+                            ]
+                        }
                     ]
                 }
             ]
@@ -101,15 +108,48 @@
             "reating": [],
             "category": [
                 {
-                    "product": [],
                     "categoryId": " uey064RAplssM77km6am",
                     "categoryName": [
-                        "All",
-                        "Cooking Essentials",
-                        "Cleaning Supplies",
-                        "Fruits & Vegetables",
-                        "Dairy Needs",
-                        "Home and Kitchen Appliance"
+                        {
+                            "subName": "All",
+                            "subId": [
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "mUCSxUaH5O2DbnnfvduE",
+                                "cMV1e1SCMRw9NbIfAn4P",
+                                "ijOBZqoLFenaPykWcreT",
+                                "FGnmOrI98G8YjoTuKVTA"
+                            ]
+                        },
+                        {
+                            "subName": "Cooking Essentials",
+                            "subId": [
+                                "cMV1e1SCMRw9NbIfAn4P"
+                            ]
+                        },
+                        {
+                            "subName": "Cleaning Supplies",
+                            "subId": [
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Fruits & Vegetables",
+                            "subId": [
+                                "mUCSxUaH5O2DbnnfvduE"
+                            ]
+                        },
+                        {
+                            "subName": "Dairy Needs",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA"
+                            ]
+                        },
+                        {
+                            "subName": "Home and Kitchen Appliance",
+                            "subId": [
+                                "J2gUbyjGQ416GBcZ0aPF"
+                            ]
+                        }
                     ]
                 }
             ]
@@ -125,13 +165,26 @@
             "reating": [],
             "category": [
                 {
-                    "product": [],
                     "categoryId": " 4AjS5nizxNCb9VbuV3s9",
                     "categoryName": [
-                        "All",
-                        "Cooking Essentials",
-                        "Fruits & Vegetables",
-                        "Home and Kitchen Appliance"
+                        {
+                            "subName": "All",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA",
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "mUCSxUaH5O2DbnnfvduE",
+                                "pxVS1P5SRC0h6Er5v5Td"
+                            ]
+                        },
+                        {
+                            "subName": "BreckFast",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA",
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "mUCSxUaH5O2DbnnfvduE",
+                                "pxVS1P5SRC0h6Er5v5Td"
+                            ]
+                        }
                     ]
                 }
             ]
@@ -147,14 +200,68 @@
             "reating": [],
             "category": [
                 {
-                    "product": [],
                     "categoryId": " WZLUi53LJVRLTqhpyOMN",
                     "categoryName": [
-                        "All",
-                        "Personal Care",
-                        "Fruits & Vegetables",
-                        "Dairy Needs",
-                        "Home and Kitchen Appliance"
+                        {
+                            "subName": "All",
+                            "subId": [
+                                "FGnmOrI98G8YjoTuKVTA",
+                                "J2gUbyjGQ416GBcZ0aPF",
+                                "JBtf9L3NjeCayoAQlegL",
+                                "Ke4bcQH7EQEXWfM6pRvd",
+                                "LBb9aZ1Jo1zfRSNQjohh",
+                                "cMV1e1SCMRw9NbIfAn4P",
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Office Stationery",
+                            "subId": [
+                                "JBtf9L3NjeCayoAQlegL",
+                                "J2gUbyjGQ416GBcZ0aPF"
+                            ]
+                        },
+                        {
+                            "subName": "Skin Care",
+                            "subId": [
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Personal Care",
+                            "subId": [
+                                "cMV1e1SCMRw9NbIfAn4P",
+                                "ijOBZqoLFenaPykWcreT"
+                            ]
+                        },
+                        {
+                            "subName": "Cooking Essentials",
+                            "subId": [
+                                "LBb9aZ1Jo1zfRSNQjohh"
+                            ]
+                        },
+                        {
+                            "subName": "BreckFast",
+                            "subId": [
+                                "pxVS1P5SRC0h6Er5v5Td",
+                                "mUCSxUaH5O2DbnnfvduE"
+                            ]
+                        },
+                        {
+                            "subName": "BreckFast",
+                            "subId": [
+                                "pxVS1P5SRC0h6Er5v5Td",
+                                "mUCSxUaH5O2DbnnfvduE"
+                            ]
+                        },
+                        {
+                            "subName": "BreckFast",
+                            "subId": [
+                                "pxVS1P5SRC0h6Er5v5Td",
+                                "mUCSxUaH5O2DbnnfvduE"
+                            ]
+                        }
+                        
                     ]
                 }
             ]

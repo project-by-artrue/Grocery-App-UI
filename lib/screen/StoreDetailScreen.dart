@@ -1,190 +1,243 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, void_checks
 
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery/Bloc/Store/store_bloc.dart';
 import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/ProductCard.dart';
+import 'package:grocery/widget/ShowButtomSheet.dart';
 
 class StoreDetailsScreen extends StatefulWidget {
-  StoreDetailsScreen({Key? key}) : super(key: key);
+  String storeName;
+  StoreDetailsScreen(this.storeName, {Key? key}) : super(key: key);
 
   @override
   State<StoreDetailsScreen> createState() => _StoreDetailsScreenState();
 }
 
 class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
+  String tabvalue = "All";
   @override
   Widget build(BuildContext context) {
+    StoreBloc s = BlocProvider.of<StoreBloc>(context);
+    s.add(GetStore());
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.all(9),
-                  height: 25,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.green),
-                  child: Icon(Icons.navigate_before_rounded),
-                ),
-              ),
-              actions: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    margin: EdgeInsets.all(5),
-                    height: 30,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.green),
-                    child: Icon(Icons.shopping_cart_outlined),
-                  ),
-                ),
-              ],
-              pinned: true,
-              backgroundColor: Colors.yellow,
-              elevation: 0,
-              expandedHeight: size.height * 0.3,
-              flexibleSpace: FlexibleSpaceBar(background: FlutterLogo()),
-            ),
-            SliverToBoxAdapter(
-                child: Column(
-              children: [
-                ListTile(
-                  leading: Image.network(
-                      "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg"),
-                  title: Text("Eorange"),
-                  subtitle: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: "Address ",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 152, 152, 152))),
-                        TextSpan(
-                            text: "\$0.0",
-                            style: TextStyle(color: Colors.green))
-                      ],
-                    ),
-                  ),
-                  trailing: Icon(Icons.favorite_border_outlined),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.star_sharp,
-                              color: Colors.green,
-                            ),
-                            Text("0.0")
-                          ],
+    return BlocConsumer<StoreBloc, StoreState>(
+        builder: (context, state) {
+          print("aaaaaaaaaaaaaaaaaaaaaaaaa${state}");
+          if (state is ShowStore) {
+            // print(
+            //     "qqqqqqqqqqqqqqqqqqqqqqqqqqqq  ${state.storeProduct}7777${state.showStore}");
+            return Scaffold(
+              body: SafeArea(
+                child: CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      leading: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(9),
+                          height: 25,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.green),
+                          child: Icon(Icons.navigate_before_rounded),
                         ),
-                        Text("0.0 review")
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.location_on_outlined,
-                              color: Colors.green,
-                            ),
-                            // Text("0.0")
-                          ],
+                      ),
+                      actions: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            margin: EdgeInsets.all(5),
+                            height: 30,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.green),
+                            child: Icon(Icons.shopping_cart_outlined),
+                          ),
                         ),
-                        Text("0.0 review")
                       ],
+                      pinned: true,
+                      backgroundColor: Colors.green,
+                      elevation: 0,
+                      expandedHeight: size.height * 0.3,
+                      flexibleSpace: FlexibleSpaceBar(
+                          background: CachedNetworkImage(
+                        imageUrl: state.showStore[widget.storeName]!.storeImage,
+                        fit: BoxFit.fill,
+                      )),
                     ),
-                    Column(
+                    SliverToBoxAdapter(
+                        child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.alarm,
-                              color: Colors.green,
-                            ),
-                            Text("2-3 Hours")
-                          ],
+                        SizedBox(
+                          height: 10,
                         ),
-                        Text("Delivary Time")
+                        ListTile(
+                          leading: Image.network(
+                              state.showStore[widget.storeName]!.storeLogo),
+                          title: Text(
+                              state.showStore[widget.storeName]!.storeName),
+                          subtitle: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: state
+                                        .showStore[widget.storeName]!.location,
+                                    style: TextStyle(
+                                        color: Color.fromARGB(
+                                            255, 152, 152, 152))),
+                                TextSpan(
+                                    text: "min order \$0.0",
+                                    style: TextStyle(color: Colors.green))
+                              ],
+                            ),
+                          ),
+                          trailing: Icon(Icons.favorite_border_outlined),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.star_sharp,
+                                      color: Colors.green,
+                                    ),
+                                    Text("0.0")
+                                  ],
+                                ),
+                                Text("0.0 review")
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        color: Colors.green,
+                                      ),
+                                      // Text("0.0")
+                                    ],
+                                  ),
+                                  Text("Location")
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.alarm,
+                                      color: Colors.green,
+                                    ),
+                                    Text(state.showStore[widget.storeName]!
+                                        .deliveryTime)
+                                  ],
+                                ),
+                                Text("Delivary Time")
+                              ],
+                            )
+                          ],
+                        )
                       ],
+                    )),
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      pinned: true,
+                      expandedHeight: size.height * 0.05,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      title: Container(
+                        // width: double.infinity,
+                        height: 40,
+                        padding: EdgeInsets.all(3),
+                        alignment: Alignment.center,
+                        child: DefaultTabController(
+                          length:
+                              state.storeProduct[widget.storeName]?.length ?? 0,
+                          child: TabBar(
+                            // physics: NeverScrollableScrollPhysics(),
+                            onTap: (value) {
+                              tabvalue = state
+                                  .storeProduct[widget.storeName]!.keys
+                                  .toList()[value];
+                              setState(() {});
+                            },
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            indicator: CircleTabIndicator(
+                                color: Colors.green, radius: 4),
+                            isScrollable: true,
+                            labelColor: Colors.black,
+                            tabs: <Widget>[
+                              for (int i = 0;
+                                  i <
+                                      (state.storeProduct[widget.storeName]
+                                              ?.keys.length ??
+                                          0);
+                                  i++)
+                                Tab(
+                                  text: state
+                                      .storeProduct[widget.storeName]?.keys
+                                      .toList()[i],
+                                )
+                            ],
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 205, 236, 206),
+                            borderRadius: BorderRadius.circular(30)),
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        return InkWell(
+                          onTap: () {
+                            model.bottomsheet(
+                                context,
+                                state.storeProduct[widget.storeName]![
+                                    tabvalue]![index],
+                                ShowButtomSheet(
+                                  state.storeProduct[widget.storeName]![
+                                      tabvalue]![index],
+                                ));
+                          },
+                          child: ProductCard(state.storeProduct[
+                              widget.storeName]![tabvalue]![index]),
+                        );
+                      },
+                          childCount: state
+                              .storeProduct[widget.storeName]![tabvalue]!
+                              .length),
                     )
                   ],
-                )
-              ],
-            )),
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              pinned: true,
-              expandedHeight: size.height * 0.05,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              title: Container(
-                width: double.infinity,
-                height: 40,
-                padding: EdgeInsets.all(3),
-                child: DefaultTabController(
-                  length: 4,
-                  child: TabBar(
-                    // physics: NeverScrollableScrollPhysics(),
-                    onTap: (value) {},
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator:
-                        CircleTabIndicator(color: Colors.green, radius: 4),
-                    isScrollable: true,
-                    labelColor: Colors.black,
-                    tabs: <Widget>[
-                      Tab(
-                        text: 'All',
-                      ),
-                      Tab(
-                        text: 'Organizers',
-                      ),
-                      Tab(
-                        text: 'Writing & printing',
-                      ),
-                      Tab(
-                        text: 'Arts & Crafts',
-                      )
-                    ],
-                  ),
                 ),
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 205, 236, 206),
-                    borderRadius: BorderRadius.circular(30)),
               ),
+            );
+          }
+          return Scaffold(
+            body: Container(
+              color: Colors.red,
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return InkWell(
-                  onTap: () {
-                    // model.bottomsheet(context);
-                  },
-                  // child: ProductCard(),
-                );
-              }, childCount: 10),
-            )
-          ],
-        ),
-      ),
-    );
+          );
+        },
+        listener: (context, state) {});
   }
 }
 

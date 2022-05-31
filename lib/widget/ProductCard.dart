@@ -61,7 +61,7 @@ class ProductCard extends StatelessWidget {
                   style: TextStyle(color: Colors.black),
                 ),
                 Text(
-                  p.storeId,
+                  p.storeName,
                   style: TextStyle(color: Colors.grey[109]),
                 ),
                 GFRating(
@@ -70,7 +70,7 @@ class ProductCard extends StatelessWidget {
                     color: Colors.grey,
                     showTextForm: false,
                     size: 19,
-                    onChanged: (rating) {},
+                    onChanged: (Raiting) => null,
                     value: 4.5),
                 RichText(
                     text: TextSpan(children: [

@@ -4,7 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery/Bloc/Category/category_bloc.dart';
+import 'package:grocery/model/model.dart';
+import 'package:grocery/widget/CategorYSimmer.dart';
 import 'package:grocery/widget/ProductCard.dart';
+import 'package:grocery/widget/ShowButtomSheet.dart';
 
 import '../Bloc/SubCategory/subcategory_bloc.dart';
 
@@ -29,8 +32,6 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
 
   @override
   Widget build(BuildContext context) {
-    // SubcategoryBloc c = BlocProvider.of<SubcategoryBloc>(context);
-    // c.add(ExploreSelectedCategory(widget.id));
     Size size = MediaQuery.of(context).size;
 
     return BlocConsumer<SubcategoryBloc, SubcategoryState>(
@@ -140,8 +141,26 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
                               .subCategoryMap[widget.id]![tabValue]!.length,
                           itemBuilder: (context, index) {
                             // return ProductSimer();
-                            return ProductCard(
-                                state.subCategoryMap[widget.id]![tabValue]![0]);
+                            return InkWell(
+                              onTap: () {
+                                model.bottomsheet(
+                                  context,
+                                  state.subCategoryMap[widget.id]![tabValue]![
+                                      index],
+                                  ShowButtomSheet(
+                                    state.subCategoryMap[widget.id]![tabValue]![
+                                        index],
+                                    navigtorName: "ShwoStoreDetails",
+                                    argumentsName: state
+                                        .subCategoryMap[widget.id]![tabValue]![
+                                            index]
+                                        .storeName,
+                                  ),
+                                );
+                              },
+                              child: ProductCard(state.subCategoryMap[
+                                  widget.id]![tabValue]![index]),
+                            );
                           },
                         ),
                         Center(
@@ -156,53 +175,7 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
           ),
         );
       }
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            "",
-            style: TextStyle(color: Colors.black),
-          ),
-          leading: IconButton(
-            onPressed: () {
-              // c.add(GetCategory());
-              // Navigator.pushReplacementNamed(context, "Dashbord");
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              color: Colors.black,
-              size: 40,
-            ),
-          ),
-          actions: [
-            Icon(
-              Icons.search,
-              color: Colors.black,
-              size: 30,
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Icon(
-              Icons.shopping_cart,
-              color: Colors.black,
-              size: 30,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-          ],
-        ),
-        body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return ProductSimer();
-          },
-        ),
-      );
+      return CategoruSimmer();
     }, listener: (context, state) {
       // if (state is ShowCategory) {
       //   c.add(ExploreSelectedCategory(widget.id));
@@ -216,6 +189,10 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
   //  },));
   //   return Future.value();
   // }
+
+  void pop(String name) {
+    Navigator.pushNamed(context, "ShwoStoreDetails", arguments: name);
+  }
 }
 
 class CircleTabIndicator extends Decoration {

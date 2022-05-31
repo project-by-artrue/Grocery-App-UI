@@ -70,7 +70,11 @@ class _ForgotPasswordState extends State<ForgotPassword>
               ),
               InkWell(
                 onTap: () {
-                  Helpper().showOtpDilog(size.height, context, otp, buttonController!);
+                  Helpper().showOtpDilog(
+                    size.height,
+                    context,
+                    otp,
+                  );
                 },
                 child: Container(
                   height: 50,
@@ -95,9 +99,6 @@ class _ForgotPasswordState extends State<ForgotPassword>
       )),
     );
   }
-
-  
- 
 
   Future<void> showSnackBar(BuildContext contex, String otp) async {
     // contex = NavigationService.navigatorKey.currentContext!;

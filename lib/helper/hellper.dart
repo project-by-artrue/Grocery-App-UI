@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class Helpper {
@@ -33,7 +37,14 @@ class Helpper {
       ),
     );
   }
-   Future<void> showOtpDilog(double theight, BuildContext context, String otp, AnimationController buttonController) {
+
+  Future<void> showOtpDilog(
+    double theight,
+    BuildContext context,
+    String otp,
+  ) {
+    SignInUpBloc s = BlocProvider.of(context);
+
     return showDialog(
       context: context,
       builder: (context) {
@@ -70,7 +81,7 @@ class Helpper {
                   ),
                   InkWell(
                     onTap: () async {
-                      await buttonController.reverse();
+                      // await buttonController.reverse();
                       // checkNetworkOtp();
                       // a.add(Getlogin(mobile.text, false));
                     },
@@ -92,8 +103,9 @@ class Helpper {
               child: GestureDetector(
                 onTap: () {
                   // if (otp == state.otp) {
-                  otp = "";
-                  Navigator.pop(context);
+                  // otp = "";
+                  s.add(PhoneAuth(otp, "otp"));
+                  // Navigator.pop(context);
                   // } else {
                   //   showSnackBar(context, "Enter Valid OTP");
                   // }
@@ -121,7 +133,8 @@ class Helpper {
       },
     );
   }
-otpLayout(String otp) {
+
+  otpLayout(String otp) {
     return Padding(
       padding: EdgeInsets.only(
           // left: 50.0,
@@ -149,5 +162,4 @@ otpLayout(String otp) {
       ),
     );
   }
-
 }
