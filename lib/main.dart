@@ -71,7 +71,8 @@ Future<void> main() async {
   //     collection.doc(value.id).update({'store': value.id});
   //   });
   // }
-
+  final user = FirebaseAuth.instance.currentUser;
+  print("object--------------------------${user}");
   runApp(
     MultiBlocProvider(
       providers: [

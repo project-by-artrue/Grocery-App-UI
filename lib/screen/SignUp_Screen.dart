@@ -132,7 +132,7 @@ class _SignUPState extends State<SignUP> {
                                       mobilno,
                                       suflix: buildTextWithIcon(
                                           u,
-                                          state.stateText,
+                                          state.stateText!,
                                           "phone",
                                           mobilno,
                                           theight),
@@ -147,7 +147,7 @@ class _SignUPState extends State<SignUP> {
                                       email,
                                       sufix: buildTextWithIcon(
                                           u,
-                                          state.buttonState2,
+                                          state.buttonState2!,
                                           "email",
                                           email,
                                           theight),
@@ -374,10 +374,9 @@ class _SignUPState extends State<SignUP> {
           Helpper().showOtpDilog(
             theight,
             context,
-            otp,
           );
           u.add(Get_SignUp(stateText1: ButtonState.loading));
-          u.add(PhoneAuth(controller.text, "phone"));
+          u.add(PhoneAuth(phone: controller.text, name: name));
         }
 
         if (name == "email") {
@@ -472,14 +471,16 @@ class _SignUPState extends State<SignUP> {
     await Future.delayed(Duration(seconds: 3));
     var data = await FirebaseDynamicLinks.instance.getInitialLink();
     final deepLink = data?.link;
-    final queryParams = deepLink!.queryParameters;
+    final queryParams = deepLink?.queryParameters ?? {};
+    print("+====================${queryParams}");
     if (queryParams.length > 0) {
-      var userName = queryParams['userId'];
-    }
-    FirebaseDynamicLinks.instance.onLink.listen((event) {
+      Navigator.pushNamed(context, "Dashbord");
       print(
           "llllllllllllllllllllll99999999999999999999999${data?.link}99${data?.utmParameters}");
-    });
+      var userName = queryParams['userId'];
+    }
+    FirebaseDynamicLinks.instance.onLink.listen((event) {});
+
     // (onSuccess: (dynamicLink)
     // async {
     //   var deepLink = dynamicLink?.link;

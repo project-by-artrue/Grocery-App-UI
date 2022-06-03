@@ -25,9 +25,14 @@ class Get_SignIn extends SignInUpEvent {
 }
 
 class PhoneAuth extends SignInUpEvent {
-  String controller;
-  String name;
-  PhoneAuth(this.controller, this.name);
+  String? phone;
+  String? name;
+  String? otp;
+  PhoneAuth({
+    this.otp,
+    this.phone,
+    this.name,
+  });
 }
 
 class EmailAuth extends SignInUpEvent {

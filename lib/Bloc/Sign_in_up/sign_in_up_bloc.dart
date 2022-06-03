@@ -30,12 +30,8 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
         temConditionSignup = !temConditionSignup;
       }
 
-      emit(ShowSignUp(
-          pass1,
-          pass2,
-          temConditionSignup,
-          event.stateText1 ?? ButtonState.idle,
-          event.stateText2 ?? ButtonState.idle));
+      emit(ShowSignUp(pass1, pass2, temConditionSignup,
+          stateText: ButtonState.idle, buttonState2: ButtonState.idle));
     });
     on<Get_SignIn>((event, emit) {
       // TODO: implement event handler
@@ -53,11 +49,11 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
       emit(ShowSignIn(pass, remember, termCondition));
     });
     on<PhoneAuth>((event, emit) async {
-      print("wwwwwwwwwwwwwwwwwwwww${event.controller}");
+      print("wwwwwwwwwwwwwwwwwwwww${event.phone}");
       if (event.name == "phone") {
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         await auth.verifyPhoneNumber(
-            phoneNumber: "+91" + event.controller,
+            phoneNumber: "+91" + event.phone.toString(),
             timeout: const Duration(seconds: 60),
             verificationCompleted: (PhoneAuthCredential credential) {
               print("complete complete");
@@ -67,20 +63,43 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
             },
             codeSent: (String verificationId, int? resendToken) {
               _verificationId = verificationId;
+              PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                  verificationId: verificationId, smsCode: event.otp ?? "s");
+              print(
+                  "//////////////////////////////////////////${_verificationId}");
             },
             codeAutoRetrievalTimeout: (String verificationId) {});
       }
       if (event.name == "otp") {
         try {
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-              verificationId: _verificationId, smsCode: event.controller);
+          //code is reqvird
+          AuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: _verificationId, smsCode: event.otp ?? "");
+          print("5555555555555555${_verificationId.toString()}");
+          print("```````````````````````````${event.otp.toString()}");
           // ignore: unnecessary_null_comparison
           if (credential == null) {
             print("nulllllllllllllllllllllllllllll");
+          } else {
+            print("qwqwqwqwqwwqqwwq${credential}");
+            final emailcreditional = auth
+                .createUserWithEmailAndPassword(
+                    email: "adf@gmail.com", password: "123456789",)
+                .then((value) async {
+              value.user;
+              await value.user!.linkWithCredential(credential);
+              print("!****************${value.user}");
+            });
+          
+            final existingUser = await auth.currentUser!;
+            UserCredential linkauthresult =
+                await existingUser.linkWithCredential(credential);
+            print("#####################${linkauthresult.additionalUserInfo}");
+            //close
+
           }
-          print("qwqwqwqwqwwqqwwq${credential}");
         } catch (e) {
-          print("sssssssssssssssssssss");
+          print("sssssssssssssssssssss${e.toString()}");
         }
       }
     });
@@ -92,7 +111,7 @@ class SignInUpBloc extends Bloc<SignInUpEvent, SignInUpState> {
         final HttpsCallableResult result =
             await callable.call(<String, dynamic>{
           'email': "kevinshingala73462@gmail.com",
-          'otpCode': "https://grocery11.page.link/users"
+          'otpCode': "https://grocery11.page.link/users/?user=123"
         });
         print("?????????????????????????${result.data}");
       } catch (e) {

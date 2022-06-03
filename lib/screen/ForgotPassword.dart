@@ -73,7 +73,6 @@ class _ForgotPasswordState extends State<ForgotPassword>
                   Helpper().showOtpDilog(
                     size.height,
                     context,
-                    otp,
                   );
                 },
                 child: Container(
