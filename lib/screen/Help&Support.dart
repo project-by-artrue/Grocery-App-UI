@@ -17,10 +17,10 @@ class HelpSupport extends StatefulWidget {
 class _HelpSupportState extends State<HelpSupport> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-         leading: IconButton(
+          leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },

@@ -23,7 +23,7 @@ class PopularStores extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height / 9.9,
+                  height: MediaQuery.of(context).size.height / 10,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(

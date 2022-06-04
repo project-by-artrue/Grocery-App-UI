@@ -11,8 +11,13 @@ class ShowSignUp extends SignInUpState {
   ButtonState stateText;
   ButtonState buttonState2;
   bool temConditionSignup;
-  ShowSignUp(this.pass1, this.pass2, this.temConditionSignup, this.stateText,
-      this.buttonState2);
+  ShowSignUp(
+    this.pass1,
+    this.pass2,
+    this.temConditionSignup,
+    this.stateText,
+    this.buttonState2,
+  );
 }
 
 class ShowSignIn extends SignInUpState {
@@ -20,5 +25,9 @@ class ShowSignIn extends SignInUpState {
   bool remember;
 
   bool tarnCondition;
-  ShowSignIn(this.pass, this.remember, this.tarnCondition);
+  ShowSignIn(
+    this.pass,
+    this.remember,
+    this.tarnCondition,
+  );
 }
