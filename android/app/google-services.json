@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "573214925541-gnab8o4ulr4u335igk8ptoofcvccre8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grocery",
+            "certificate_hash": "a59d797e7400f632ffd4ab862f0c7601fa7bbe95"
+          }
+        },
+        {
           "client_id": "573214925541-frnnefrmi6vrfo3s98ta8k2a6q1bg4f9.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "573214925541-frnnefrmi6vrfo3s98ta8k2a6q1bg4f9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "573214925541-vnuvpqfprgh2bdpqvlg203o7c1oe2as4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.grocery"
+              }
             }
           ]
         }

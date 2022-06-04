@@ -6,7 +6,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 class Phone_TextFilld extends StatelessWidget {
   TextEditingController mobilno;
   Widget? suflix;
-  Phone_TextFilld( this.mobilno,{this.suflix});
+  bool? isRead;
+  Phone_TextFilld(this.mobilno, {this.suflix, this.isRead});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class Phone_TextFilld extends StatelessWidget {
       // height: 20,
       // color: Colors.blue,
       child: IntlPhoneField(
+        readOnly: isRead ?? false,
         disableLengthCheck: true,
         dropdownIconPosition: IconPosition.trailing,
         // dropdownTextStyle: TextStyle(color: Colors.green),
@@ -35,7 +37,7 @@ class Phone_TextFilld extends StatelessWidget {
             hintText: "Phone",
             suffixIcon: suflix,
             border: InputBorder.none),
-        initialCountryCode: 'India',
+        initialCountryCode: 'IN',
         //default contry code, NP for Nepal
         onChanged: (phone) {
           //when phone number country code is changed

@@ -12,9 +12,3 @@ class ShowCategory extends CategoryState {
 }
 
 class FectchCategory extends CategoryState {}
-
-class ExploarCategory extends CategoryState {
-  Map<String, Map<String, List<Product>>> subCategoryMap;
-  String catedgoryName;
-  ExploarCategory(this.catedgoryName, this.subCategoryMap);
-}

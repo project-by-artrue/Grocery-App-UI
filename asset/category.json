@@ -1,7 +1,7 @@
 {
     "category": [
         {
-            
+            "categoryId": "",
             "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%201.jpg?alt=media&token=23051a21-08d8-4a24-a217-b60a6e181e8a",
             "categoryName": "Office Stationery",
             "subCategory": [
@@ -34,18 +34,7 @@
             ]
         },
         {
-            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%202.jpg?alt=media&token=6fb38781-4ae4-46cd-aa09-315f1b916dda",
-            "categoryName": "Skin Care",
-            "subCategory": [
-                {
-                    "subCategoryName": "All",
-                    "subCategoryProductId": [
-                        "Ke4bcQH7EQEXWfM6pRvd"
-                    ]
-                }
-            ]
-        },
-        {
+            "categoryId": "",
             "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Ffish.jpg?alt=media&token=cb386990-e681-4d03-9008-a0037ac40017",
             "categoryName": "Fish Meat",
             "subCategory": [
@@ -78,18 +67,7 @@
             ]
         },
         {
-            "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%203.jpg?alt=media&token=529568d6-039c-4afb-b932-691249e543d4",
-            "categoryName": "Presonal Care",
-            "subCategory": [
-                {
-                    "subCategoryName": "All",
-                    "subCategoryProductId": [
-                        "mUCSxUaH5O2DbnnfvduE"
-                    ]
-                }
-            ]
-        },
-        {
+            "categoryId": "",
             "image": "https://firebasestorage.googleapis.com/v0/b/grocery-fb62a.appspot.com/o/Category%2Fcategory%20-%204.jpg?alt=media&token=c0f15c64-5f9a-4ac9-93b6-f7fa3246f508",
             "categoryName": "Cokking Essentials",
             "subCategory": [

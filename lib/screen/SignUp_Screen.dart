@@ -1,4 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:grocery/helper/hellper.dart';
+import 'package:grocery/screen/BottomBar.dart';
 import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +37,17 @@ class _SignUPState extends State<SignUP> {
 
   bool chack = true;
   final _key = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.initDynamicLinks(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    double theight = MediaQuery.of(context).size.height;
     print(",,,,,,,,,,,,,,,,,${globals.manufacturer}");
     AuthonticationBloc a = BlocProvider.of<AuthonticationBloc>(context);
     SignInUpBloc u = BlocProvider.of<SignInUpBloc>(context);
@@ -119,8 +133,14 @@ class _SignUPState extends State<SignUP> {
                                     ),
                                     Phone_TextFilld(
                                       mobilno,
+                                      isRead: state.isMobileVerify,
                                       suflix: buildTextWithIcon(
-                                          u, state.stateText, "phone"),
+                                        u,
+                                        "phone",
+                                        mobilno,
+                                        theight,
+                                        state,
+                                      ),
                                     ),
                                     Divider(),
                                     TextFildCard(
@@ -130,8 +150,14 @@ class _SignUPState extends State<SignUP> {
                                       ),
                                       "E-mail",
                                       email,
+                                      isRead: state.isVerify,
                                       sufix: buildTextWithIcon(
-                                          u, state.buttonState2, "email"),
+                                        u,
+                                        "email",
+                                        email,
+                                        theight,
+                                        state,
+                                      ),
                                       callback: emailValidator,
                                     ),
                                     Divider(),
@@ -217,8 +243,9 @@ class _SignUPState extends State<SignUP> {
                                     flex: 1,
                                     child: InkWell(
                                       onTap: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, 'Sign_In');
+                                        // Navigator.pushReplacementNamed(
+                                        //     context, 'Sign_In');
+                                        FirebaseAuth.instance.signOut();
                                       },
                                       child: Container(
                                         height: 50,
@@ -247,6 +274,29 @@ class _SignUPState extends State<SignUP> {
                                             // a.add(
 
                                             // );
+                                            // print(
+                                            //     "${state.isVerify}__________________________");
+                                            if (state.isMobileVerify) {
+                                              if (state.isVerify) {
+                                                u.add(
+                                                  CreateAccount(
+                                                    email.text,
+                                                    password.text,
+                                                    firstname.text,
+                                                    lastname.text,
+                                                    mobilno.text,
+                                                    globals.manufacturer,
+                                                    globals.deviceName,
+                                                    globals.hardware,
+                                                    globals.imeiNo,
+                                                    globals.modelName,
+                                                    globals.platformVersion,
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          } else {
+                                            print("verify user");
                                           }
                                         }
                                       },
@@ -316,7 +366,8 @@ class _SignUPState extends State<SignUP> {
     );
   }
 
-  Widget buildTextWithIcon(SignInUpBloc u, ButtonState stateText, String name) {
+  Widget buildTextWithIcon(SignInUpBloc u, String name,
+      TextEditingController controller, double theight, ShowSignUp state) {
     // print("//////////////////////${stateText}");
     // u.add(Get_SignUp(stateText: ButtonState.loading));
     return ProgressButton(
@@ -341,7 +392,10 @@ class _SignUPState extends State<SignUP> {
           style: TextStyle(color: Colors.green),
         ),
         ButtonState.loading: SizedBox.shrink(),
-        ButtonState.fail: Icon(Icons.error_outline_outlined),
+        ButtonState.fail: Icon(
+          Icons.error_outline_outlined,
+          color: Colors.yellow,
+        ),
         ButtonState.success: Icon(
           Icons.check_circle,
           color: Colors.green,
@@ -349,10 +403,29 @@ class _SignUPState extends State<SignUP> {
       },
       onPressed: () {
         print("/111111111111111111111111111111111111");
-        if (name == "phone") u.add(Get_SignUp(stateText1: ButtonState.loading));
-
+        if (name == "phone") {
+          if (state.stateMobile != ButtonState.success) {
+            if (controller.text.isNotEmpty) {
+              String otp = "";
+              Helpper().showOtpDilog(
+                theight,
+                context,
+              );
+              u.add(Get_SignUp(stateText1: ButtonState.loading));
+              u.add(PhoneAuth(phone: controller.text, name: name));
+            } else {
+              showToastMessage("Enter Your Mobile Number");
+            }
+          }
+        }
         if (name == "email") {
-          u.add(Get_SignUp(stateText2: ButtonState.loading));
+          if (state.stateEmail != ButtonState.success) {
+            if (controller.text.isNotEmpty) {
+              u.add(EmailAuth(controller.text));
+            } else {
+              showToastMessage("Enter Your Mail Address");
+            }
+          }
         }
 
         // stateText = state.stateText;
@@ -371,7 +444,7 @@ class _SignUPState extends State<SignUP> {
         //   ),
         // );
       },
-      state: stateText,
+      state: name == "phone" ? state.stateMobile : state.stateEmail,
     );
   }
 
@@ -436,5 +509,39 @@ class _SignUPState extends State<SignUP> {
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  initDynamicLinks(BuildContext context) async {
+    SignInUpBloc u = BlocProvider.of<SignInUpBloc>(context);
+    await Future.delayed(Duration(seconds: 3));
+    var data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final deepLink = data?.link;
+    final queryParams = deepLink?.queryParameters ?? {};
+
+    FirebaseDynamicLinks.instance.onLink.listen((event) {
+      print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${event.utmParameters}");
+      showToastMessage("Verification Successfully Completed");
+      u.add(EmailVerify(true));
+    });
+
+    // (onSuccess: (dynamicLink)
+    // async {
+    //   var deepLink = dynamicLink?.link;
+    //   debugPrint('DynamicLinks onLink $deepLink');
+    // }, onError: (e) async {
+    //   debugPrint('DynamicLinks onError $e');
+    // });
+  }
+
+  showToastMessage(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.grey,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
   }
 }

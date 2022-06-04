@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class Helpper {
+  String otp = "";
   Widget displayProgressDialogue(double theight) {
     return SizedBox(
       height: theight * 0.15,
@@ -35,7 +38,13 @@ class Helpper {
       ),
     );
   }
-   Future<void> showOtpDilog(double theight, BuildContext context, String otp, AnimationController buttonController) {
+
+  Future<void> showOtpDilog(
+    double theight,
+    BuildContext context,
+  ) {
+    SignInUpBloc s = BlocProvider.of(context);
+
     return showDialog(
       context: context,
       builder: (context) {
@@ -52,7 +61,7 @@ class Helpper {
               ),
             ),
           ),
-          content: otpLayout(otp),
+          content: otpLayout(),
           contentPadding: EdgeInsets.only(top: 50, left: 10, right: 10),
           actions: [
             Padding(
@@ -71,11 +80,7 @@ class Helpper {
                         color: Colors.black87, fontWeight: FontWeight.normal),
                   ),
                   InkWell(
-                    onTap: () async {
-                      await buttonController.reverse();
-                      // checkNetworkOtp();
-                      // a.add(Getlogin(mobile.text, false));
-                    },
+                    onTap: () async {},
                     child: Text(
                       "ResendOTP",
                       style: TextStyle(
@@ -93,12 +98,9 @@ class Helpper {
               margin: EdgeInsets.all(10),
               child: GestureDetector(
                 onTap: () {
-                  // if (otp == state.otp) {
-                  otp = "";
-                  Navigator.pop(context);
-                  // } else {
-                  //   showSnackBar(context, "Enter Valid OTP");
-                  // }
+                  print(
+                      "......................${otp.toString()}null ooooooootp");
+                  s.add(PhoneAuth(otp: otp, name: "otp"));
                 },
                 child: Container(
                   height: 40,
@@ -123,7 +125,8 @@ class Helpper {
       },
     );
   }
-otpLayout(String otp) {
+
+  otpLayout() {
     return Padding(
       padding: EdgeInsets.only(
           // left: 50.0,
@@ -143,6 +146,7 @@ otpLayout(String otp) {
           codeLength: 6,
           onCodeChanged: (String? code) {
             otp = code!;
+            print("---------${otp}");
           },
           onCodeSubmitted: (String code) {
             otp = code;
@@ -151,5 +155,4 @@ otpLayout(String otp) {
       ),
     );
   }
-
 }

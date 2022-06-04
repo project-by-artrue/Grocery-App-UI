@@ -37,8 +37,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   getwidget: 
-  firebase_core:
-  cloud_firestore: ^3.1.14
   cached_network_image:
   badges:
   geocoding:
@@ -53,12 +51,18 @@ dependencies:
   flutter_bloc:
   sms_autofill:
   flutter_spinkit: 
-  firebase_auth:
   provider:
   device_info_plus:
   progress_state_button:
-  loading_gifs: ^0.3.0
+  loading_gifs:
   shimmer: 
+  cloud_firestore: ^3.1.15
+  firebase_auth: ^3.3.18
+  firebase_core: ^1.17.0
+  cloud_functions:
+  firebase_dynamic_links:
+  fluttertoast:
+  no_context_navigation :
   
 dev_dependencies:
   flutter_test:

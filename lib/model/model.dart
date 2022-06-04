@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery/model/product.dart';
 import 'package:grocery/widget/ShowButtomSheet.dart';
 
 class model {
@@ -90,8 +91,6 @@ class model {
     "Fish meat"
   ];
 
- 
-
   // static void bottomsheetbar(BuildContext context) {
   //   showModalBottomSheet(
   //       context: context,
@@ -143,8 +142,11 @@ class model {
     "asset/Lemon.jpg",
   ];
 
-
-   static void bottomsheet(BuildContext context) {
+  static void bottomsheet(
+    BuildContext context,
+    Product? product,
+    ShowButtomSheet showButtomSheet,
+  ) {
     showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
@@ -155,11 +157,9 @@ class model {
         builder: (context) {
           return Container(
               height: MediaQuery.of(context).size.height / 2.3,
-              child: ShowButtomSheet());
+              child: showButtomSheet);
         });
   }
-
-  
 }
 
 class StoreDetails {

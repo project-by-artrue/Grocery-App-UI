@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final categoris = categorisFromJson(jsonString);
+//     final mainCategories = mainCategoriesFromJson(jsonString);
 
 import 'dart:convert';
 
-MainCategories categorisFromJson(String str) =>
+MainCategories mainCategoriesFromJson(String str) =>
     MainCategories.fromJson(json.decode(str));
 
-String categorisToJson(MainCategories data) => json.encode(data.toJson());
+String mainCategoriesToJson(MainCategories data) => json.encode(data.toJson());
 
 class MainCategories {
   MainCategories({
@@ -22,13 +22,17 @@ class MainCategories {
   String categoryId;
   List<SubCategory> subCategory;
 
-  factory MainCategories.fromJson(Map<String, dynamic> json) => MainCategories(
-        image: json["image"],
-        categoryName: json["categoryName"],
-        categoryId: json['categoryId'],
-        subCategory: List<SubCategory>.from(
-            json["subCategory"].map((x) => SubCategory.fromJson(x))),
-      );
+  factory MainCategories.fromJson(Map<String, dynamic> json) {
+    print(json["subCategory"].toString() +
+        "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+    return MainCategories(
+      image: json["image"],
+      categoryName: json["categoryName"],
+      categoryId: json["categoryId"],
+      subCategory: List<SubCategory>.from(
+          json["subCategory"]!.map((x) => SubCategory.fromJson(x))),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "image": image,

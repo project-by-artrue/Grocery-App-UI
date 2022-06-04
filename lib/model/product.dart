@@ -16,9 +16,10 @@ class Product {
       required this.review,
       required this.price,
       required this.marketValue,
-      required this.storeId,
+      required this.storeName,
       required this.categoryId,
       required this.productId,
+      required this.isPopular,
       required this.discription});
 
   String displayImage;
@@ -27,24 +28,24 @@ class Product {
   List<Review> review;
   String price;
   String marketValue;
-  String storeId;
+  String storeName;
   String categoryId;
   String productId;
   String discription;
+  bool isPopular;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-        displayImage: json["displayImage"],
-        image: List<String>.from(json["image"].map((x) => x)),
-        title: json["title"],
-        review:
-            List<Review>.from(json["review"].map((x) => Review.fromJson(x))),
-        price: json["price"],
-        marketValue: json["marketValue"],
-        storeId: json["storeId"],
-        categoryId: json["categoryId"],
-        productId: json["productId"],
-        discription: json["discription"],
-      );
+      displayImage: json["displayImage"],
+      image: List<String>.from(json["image"].map((x) => x)),
+      title: json["title"],
+      review: List<Review>.from(json["review"].map((x) => Review.fromJson(x))),
+      price: json["price"],
+      marketValue: json["marketValue"],
+      storeName: json["storeName"],
+      categoryId: json["categoryId"],
+      productId: json["productId"],
+      discription: json["discription"],
+      isPopular: json["isPopular"]);
 
   Map<String, dynamic> toJson() => {
         "displayImage": displayImage,
@@ -53,10 +54,11 @@ class Product {
         "review": List<dynamic>.from(review.map((x) => x.toJson())),
         "price": price,
         "marketValue": marketValue,
-        "storeId": storeId,
+        "storeName": storeName,
         "categoryId": categoryId,
         "productId": productId,
         "discription": discription,
+        "isPopular": isPopular
       };
 }
 

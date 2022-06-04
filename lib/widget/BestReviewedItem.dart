@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:grocery/model/product.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BestRevieweditem extends StatelessWidget {
-  String bestRevieweditemImg;
-  BestRevieweditem(this.bestRevieweditemImg, {Key? key}) : super(key: key);
+  Product? product;
+  BestRevieweditem(this.product, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +20,13 @@ class BestRevieweditem extends StatelessWidget {
           width: 60,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(bestRevieweditemImg),
+              image: NetworkImage(product!.displayImage),
               fit: BoxFit.cover,
             ),
           ),
         ),
         title: Text(
-          "Avocado",
+          product!.title,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -37,7 +38,7 @@ class BestRevieweditem extends StatelessWidget {
               margin: EdgeInsets.only(left: 5),
               alignment: Alignment.topLeft,
               child: Text(
-                "Fresh SupreMarket",
+                product!.storeName,
                 style: TextStyle(color: Colors.black26, fontSize: 12),
               ),
             ),
@@ -52,7 +53,7 @@ class BestRevieweditem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "\$240.00",
+                  product!.price,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
