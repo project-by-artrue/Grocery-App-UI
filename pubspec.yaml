@@ -61,6 +61,8 @@ dependencies:
   firebase_core: ^1.17.0
   cloud_functions:
   firebase_dynamic_links:
+  fluttertoast:
+  no_context_navigation :
   
 dev_dependencies:
   flutter_test:

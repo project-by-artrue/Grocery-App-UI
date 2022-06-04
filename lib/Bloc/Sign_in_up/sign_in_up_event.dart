@@ -39,3 +39,35 @@ class EmailAuth extends SignInUpEvent {
   String email;
   EmailAuth(this.email);
 }
+
+class EmailVerify extends SignInUpEvent {
+  bool isVerify;
+  EmailVerify(this.isVerify);
+}
+
+class CreateAccount extends SignInUpEvent {
+  String email;
+  String password;
+  String firstName;
+  String lastName;
+  String manufacturer;
+  String deviceName;
+  String hardware;
+  String imeiNo;
+  String modelName;
+  String mobile;
+  String platformVersion;
+  CreateAccount(
+    this.email,
+    this.password,
+    this.firstName,
+    this.lastName,
+    this.mobile,
+    this.manufacturer,
+    this.deviceName,
+    this.hardware,
+    this.imeiNo,
+    this.modelName,
+    this.platformVersion,
+  );
+}

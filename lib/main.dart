@@ -50,6 +50,7 @@ import 'package:provider/provider.dart';
 import 'package:grocery/globals.dart' as globals;
 import 'Bloc/Slider/slider_bloc.dart';
 import 'helper/deviceHelpper.dart';
+import 'package:no_context_navigation/no_context_navigation.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp();
@@ -132,6 +133,7 @@ Future<void> main() async {
         onGenerateRoute: (settings) => routHellper.hellper(
           settings,
         ),
+        navigatorKey: NavigationService.navigationKey,
         home: SignUP(),
       ),
     ),

@@ -8,19 +8,21 @@ class SignInUpInitial extends SignInUpState {}
 class ShowSignUp extends SignInUpState {
   bool pass1;
   bool pass2;
-  ButtonState? stateText;
-  ButtonState? buttonState2;
+
   bool temConditionSignup;
-  PhoneAuthCredential? credential;
+  bool isVerify;
+  bool isMobileVerify;
+  ButtonState stateMobile;
+  ButtonState stateEmail;
   ShowSignUp(
     this.pass1,
     this.pass2,
     this.temConditionSignup,
-    {
-    this.stateText,
-    this.buttonState2,
-     this.credential,
-  });
+    this.isVerify,
+    this.isMobileVerify,
+    this.stateMobile,
+    this.stateEmail,
+  );
 }
 
 class ShowSignIn extends SignInUpState {

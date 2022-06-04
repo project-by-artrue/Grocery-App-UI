@@ -9,13 +9,15 @@ class TextFildCard extends StatelessWidget {
   bool? isPassword;
   CallbackValidator? callback;
   Widget? sufix;
+  bool? isRead;
 
   TextFildCard(this.icons, this.hint, this.controll,
-      {this.isPassword, this.sufix, this.callback});
+      {this.isPassword, this.sufix, this.callback, this.isRead});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: isRead ?? false,
       cursorColor: Colors.green,
       obscureText: isPassword ?? false,
       cursorHeight: 22,
