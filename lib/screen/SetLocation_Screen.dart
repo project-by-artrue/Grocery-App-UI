@@ -68,7 +68,7 @@ class _SetLocationState extends State<SetLocation> {
     LocationBloc l = BlocProvider.of<LocationBloc>(context);
     return Scaffold(
       appBar: AppBar(
-       leading: IconButton(
+        leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
@@ -139,8 +139,9 @@ class _SetLocationState extends State<SetLocation> {
                 Position position = await _getGeoLocationPosition();
                 location =
                     'Lat: ${position.latitude} , Long: ${position.longitude}';
-                GetAddressFromLatLong(position);
+                await GetAddressFromLatLong(position);
                 if (Address != "") {
+                  print("909090909090909090900${Address.toString()}");
                   l.add(GetLocation(Address));
                   Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (context) {

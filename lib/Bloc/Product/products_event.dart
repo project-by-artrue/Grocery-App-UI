@@ -15,6 +15,10 @@ class GetProductId extends ProductsEvent {
   String productId;
   GetProductId(this.productId);
 }
-class GetProductToId extends ProductsEvent{
-  
+
+class GetProductToId extends ProductsEvent {}
+
+class FavProduct extends ProductsEvent {
+  Product p;
+  FavProduct(this.p);
 }

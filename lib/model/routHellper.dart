@@ -1,11 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery/screen/OtpVerification.dart';
 import 'package:grocery/screen/ProductsScreen.dart';
 import 'package:grocery/screen/ShowCategoriesItem.dart';
 import 'package:grocery/screen/StoreDetailScreen.dart';
 
 class routHellper {
   static MaterialPageRoute? hellper(RouteSettings settings) {
-    if (settings.name == "ShwoStoreDetails") {
+    if (settings.name == "OtpVerification") {
+      final credentianal = settings.arguments as AuthCredential;
+      return MaterialPageRoute(
+        builder: (context) => OtpVerification(credentianal),
+      );
+    } else if (settings.name == "ShwoStoreDetails") {
       final storeName = settings.arguments as String;
       return MaterialPageRoute(
         builder: (_) => StoreDetailsScreen(storeName),

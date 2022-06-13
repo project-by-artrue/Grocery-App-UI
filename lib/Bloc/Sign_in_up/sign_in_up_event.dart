@@ -28,12 +28,11 @@ class PhoneAuth extends SignInUpEvent {
   String? phone;
   String? name;
   String? otp;
-  PhoneAuth({
-    this.otp,
-    this.phone,
-    this.name,
-  });
+  AuthCredential? credential;
+  PhoneAuth({this.otp, this.phone, this.name, this.credential});
 }
+
+class VerifyOtp extends SignInUpEvent {}
 
 class EmailAuth extends SignInUpEvent {
   String email;
@@ -43,6 +42,17 @@ class EmailAuth extends SignInUpEvent {
 class EmailVerify extends SignInUpEvent {
   bool isVerify;
   EmailVerify(this.isVerify);
+}
+
+class Signin extends SignInUpEvent {
+  String email;
+  String password;
+  Signin(this.email, this.password);
+}
+
+class ConutryCodes extends SignInUpEvent {
+  String countrycode;
+  ConutryCodes(this.countrycode);
 }
 
 class CreateAccount extends SignInUpEvent {
@@ -56,6 +66,8 @@ class CreateAccount extends SignInUpEvent {
   String imeiNo;
   String modelName;
   String mobile;
+
+  String confirmPasword;
   String platformVersion;
   CreateAccount(
     this.email,
@@ -63,6 +75,7 @@ class CreateAccount extends SignInUpEvent {
     this.firstName,
     this.lastName,
     this.mobile,
+    this.confirmPasword,
     this.manufacturer,
     this.deviceName,
     this.hardware,
@@ -71,3 +84,14 @@ class CreateAccount extends SignInUpEvent {
     this.platformVersion,
   );
 }
+
+// class UpdateTextFilld extends SignInUpEvent {
+//   String email;
+//   String password;
+//   String firstname;
+//   String lastname;
+//   String mobilno;
+//   String conformpassword;
+//   UpdateTextFilld(this.email, this.password, this.firstname, this.lastname,
+//       this.mobilno, this.conformpassword);
+// }

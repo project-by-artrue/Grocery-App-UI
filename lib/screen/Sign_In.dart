@@ -16,8 +16,9 @@ class Sign_In extends StatefulWidget {
 }
 
 class _Sign_InState extends State<Sign_In> {
-  TextEditingController mobilno = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  String countryCode = "";
   @override
   Widget build(BuildContext context) {
     SignInUpBloc s = BlocProvider.of<SignInUpBloc>(context);
@@ -45,7 +46,7 @@ class _Sign_InState extends State<Sign_In> {
               Container(
                 // height:,
                 child: Text(
-                  "SIGN UP",
+                  "SIGN IN",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 30,
@@ -71,7 +72,9 @@ class _Sign_InState extends State<Sign_In> {
                                 borderRadius: BorderRadius.circular(5)),
                             child: Column(
                               children: [
-                                Phone_TextFilld(mobilno),
+                                // Phone_TextFilld(mobilno,),
+                                TextFildCard(
+                                    Icon(Icons.email_outlined), "Email", email),
                                 TextFildCard(
                                   Icon(Icons.lock_outline),
                                   "Password",
@@ -180,7 +183,9 @@ class _Sign_InState extends State<Sign_In> {
                               Expanded(
                                 flex: 1,
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    s.add(Signin(email.text, password.text));
+                                  },
                                   child: Container(
                                     height: 50,
                                     decoration: BoxDecoration(

@@ -10,10 +10,12 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     on<GetLocation>((event, emit) {
       // TODO: implement event handler
       address = event.address;
+      print("tytytytytytytyty${address}");
       ShowLocation(address);
     });
-    on<Update>((event, emit) {
-      ShowLocation(address);
+    on<GetUpdateLocation>((event, emit) {
+      print("klklklklklklklk${address}");
+      emit(ShowLocation(address));
     });
   }
 }

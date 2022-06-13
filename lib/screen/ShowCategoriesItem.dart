@@ -159,7 +159,9 @@ class _ShowCategoriesItemState extends State<ShowCategoriesItem>
                                 );
                               },
                               child: ProductCard(state.subCategoryMap[
-                                  widget.id]![tabValue]![index]),
+                                  widget.id]![tabValue]![index],onTap: () {
+                                    
+                                  },),
                             );
                           },
                         ),

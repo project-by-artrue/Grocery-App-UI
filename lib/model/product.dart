@@ -10,7 +10,8 @@ String productToJson(Product data) => json.encode(data.toJson());
 
 class Product {
   Product(
-      {required this.displayImage,
+      {required this.ifFavrite,
+      required this.displayImage,
       required this.image,
       required this.title,
       required this.review,
@@ -21,7 +22,7 @@ class Product {
       required this.productId,
       required this.isPopular,
       required this.discription});
-
+  bool ifFavrite;
   String displayImage;
   List<String> image;
   String title;
@@ -35,6 +36,7 @@ class Product {
   bool isPopular;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
+      ifFavrite: false,
       displayImage: json["displayImage"],
       image: List<String>.from(json["image"].map((x) => x)),
       title: json["title"],

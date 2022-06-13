@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
 typedef String? CallbackValidator(String? a);
-
+typedef void OnchangeUpdater(BuildContext context);
 class TextFildCard extends StatelessWidget {
   TextEditingController controll;
   String hint;
   Icon icons;
   bool? isPassword;
   CallbackValidator? callback;
+  OnchangeUpdater? onchange;
   Widget? sufix;
   bool? isRead;
 
   TextFildCard(this.icons, this.hint, this.controll,
-      {this.isPassword, this.sufix, this.callback, this.isRead});
+      {this.isPassword, this.sufix, this.callback, this.isRead,this.onchange});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,11 @@ class TextFildCard extends StatelessWidget {
           return null;
         }
         // return null;
+      },
+      onChanged: (value) {
+        if (onchange != null) {
+          onchange!(context);
+        }
       },
       decoration: InputDecoration(
         border: InputBorder.none,

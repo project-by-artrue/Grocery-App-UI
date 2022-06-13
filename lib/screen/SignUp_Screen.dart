@@ -104,6 +104,12 @@ class _SignUPState extends State<SignUP> {
                       builder: (context, state) {
                         print("...........................${state}");
                         if (state is ShowSignUp) {
+                          // firstname.text = state.firstName;
+                          // lastname.text = state.lastName;
+                          // email.text = state.email;
+                          // mobilno.text = state.mobileNo;
+                          // password.text = state.password;
+                          // conformpassword.text = state.confirmpassword;
                           return Column(
                             children: [
                               Container(
@@ -120,6 +126,7 @@ class _SignUPState extends State<SignUP> {
                                       "First Name",
                                       firstname,
                                       callback: firstName,
+                                      // onchange: updatestate,
                                     ),
                                     Divider(),
                                     TextFildCard(
@@ -130,17 +137,13 @@ class _SignUPState extends State<SignUP> {
                                       "Last Name",
                                       lastname,
                                       callback: lastName,
+                                      // onchange: updatestate,
                                     ),
                                     Phone_TextFilld(
                                       mobilno,
                                       isRead: state.isMobileVerify,
                                       suflix: buildTextWithIcon(
-                                        u,
-                                        "phone",
-                                        mobilno,
-                                        theight,
-                                        state,
-                                      ),
+                                          u, "phone", mobilno, theight, state),
                                     ),
                                     Divider(),
                                     TextFildCard(
@@ -151,6 +154,7 @@ class _SignUPState extends State<SignUP> {
                                       "E-mail",
                                       email,
                                       isRead: state.isVerify,
+                                      // onchange: updatestate,
                                       sufix: buildTextWithIcon(
                                         u,
                                         "email",
@@ -166,6 +170,7 @@ class _SignUPState extends State<SignUP> {
                                       "Password",
                                       password,
                                       isPassword: state.pass1,
+                                      // onchange: updatestate,
                                       callback: passwordValidator,
                                       sufix: state.pass1
                                           ? InkWell(
@@ -189,6 +194,7 @@ class _SignUPState extends State<SignUP> {
                                       "Confirm Password",
                                       conformpassword,
                                       isPassword: state.pass2,
+                                      // onchange: updatestate,
                                       callback: confirmPasswordValidator,
                                       sufix: state.pass2
                                           ? InkWell(
@@ -218,10 +224,8 @@ class _SignUPState extends State<SignUP> {
                                   Checkbox(
                                     activeColor: Colors.green,
                                     onChanged: (value) {
-                                      setState(() {
-                                        u.add(Get_SignUp(
-                                            temConditionSignup: 'true'));
-                                      });
+                                      u.add(Get_SignUp(
+                                          temConditionSignup: 'true'));
                                     },
                                     value: state.temConditionSignup,
                                   ),
@@ -243,9 +247,9 @@ class _SignUPState extends State<SignUP> {
                                     flex: 1,
                                     child: InkWell(
                                       onTap: () {
-                                        // Navigator.pushReplacementNamed(
-                                        //     context, 'Sign_In');
-                                        FirebaseAuth.instance.signOut();
+                                        Navigator.pushReplacementNamed(
+                                            context, 'Sign_In');
+                                        // FirebaseAuth.instance.signOut();
                                       },
                                       child: Container(
                                         height: 50,
@@ -276,25 +280,33 @@ class _SignUPState extends State<SignUP> {
                                             // );
                                             // print(
                                             //     "${state.isVerify}__________________________");
-                                            if (state.isMobileVerify) {
-                                              if (state.isVerify) {
-                                                u.add(
-                                                  CreateAccount(
-                                                    email.text,
-                                                    password.text,
-                                                    firstname.text,
-                                                    lastname.text,
-                                                    mobilno.text,
-                                                    globals.manufacturer,
-                                                    globals.deviceName,
-                                                    globals.hardware,
-                                                    globals.imeiNo,
-                                                    globals.modelName,
-                                                    globals.platformVersion,
-                                                  ),
-                                                );
-                                              }
-                                            }
+
+                                            // if (state.isVerify) {
+                                            // u.add(PhoneAuth(
+                                            //     phone: mobilno.text,
+                                            //     name: "phone"));
+                                            print(
+                                                "qqqqqqqqqqqqqqqq${password.text}");
+                                            u.add(
+                                              CreateAccount(
+                                                email.text,
+                                                password.text,
+                                                firstname.text,
+                                                lastname.text,
+                                                mobilno.text,
+                                                conformpassword.text,
+                                                globals.manufacturer,
+                                                globals.deviceName,
+                                                globals.hardware,
+                                                globals.imeiNo,
+                                                globals.modelName,
+                                                globals.platformVersion,
+                                              ),
+                                            );
+                                            // } else {
+                                            //   showToastMessage(
+                                            //       "Please Verify Email");
+                                            // }
                                           } else {
                                             print("verify user");
                                           }
@@ -366,6 +378,18 @@ class _SignUPState extends State<SignUP> {
     );
   }
 
+  // void updatestate(BuildContext context) {
+  //   SignInUpBloc s = BlocProvider.of<SignInUpBloc>(context);
+  //   s.add(UpdateTextFilld(
+  //     email.text,
+  //     password.text,
+  //     firstname.text,
+  //     lastname.text,
+  //     mobilno.text,
+  //     conformpassword.text,
+  //   ));
+  // }
+
   Widget buildTextWithIcon(SignInUpBloc u, String name,
       TextEditingController controller, double theight, ShowSignUp state) {
     // print("//////////////////////${stateText}");
@@ -404,14 +428,14 @@ class _SignUPState extends State<SignUP> {
       onPressed: () {
         print("/111111111111111111111111111111111111");
         if (name == "phone") {
-          if (state.stateMobile != ButtonState.success) {
+          if (state.statePhone != ButtonState.success) {
             if (controller.text.isNotEmpty) {
               String otp = "";
               Helpper().showOtpDilog(
                 theight,
                 context,
               );
-              u.add(Get_SignUp(stateText1: ButtonState.loading));
+              // u.add(Get_SignUp(stateText1: ButtonState.loading));
               u.add(PhoneAuth(phone: controller.text, name: name));
             } else {
               showToastMessage("Enter Your Mobile Number");
@@ -444,7 +468,7 @@ class _SignUPState extends State<SignUP> {
         //   ),
         // );
       },
-      state: name == "phone" ? state.stateMobile : state.stateEmail,
+      state: name == "email" ? state.stateEmail : state.statePhone,
     );
   }
 
@@ -539,7 +563,7 @@ class _SignUPState extends State<SignUP> {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.green,
       textColor: Colors.white,
       fontSize: 16.0,
     );

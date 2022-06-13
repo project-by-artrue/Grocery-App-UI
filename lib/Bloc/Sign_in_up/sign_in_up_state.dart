@@ -11,17 +11,39 @@ class ShowSignUp extends SignInUpState {
 
   bool temConditionSignup;
   bool isVerify;
-  bool isMobileVerify;
-  ButtonState stateMobile;
+  String firstName;
+  String lastName;
+  String mobileNo;
+  String modelName;
+  String deviceManufacturer;
+  String deviceName;
+  String deviceImei;
+  String deviceHardwere;
+  String email;
   ButtonState stateEmail;
+  ButtonState statePhone;
+  String password;
+  String confirmpassword;
+  bool isMobileVerify;
   ShowSignUp(
     this.pass1,
     this.pass2,
     this.temConditionSignup,
     this.isVerify,
-    this.isMobileVerify,
-    this.stateMobile,
     this.stateEmail,
+    this.statePhone,
+    this.firstName,
+    this.lastName,
+    this.mobileNo,
+    this.modelName,
+    this.deviceManufacturer,
+    this.deviceName,
+    this.deviceImei,
+    this.deviceHardwere,
+    this.email,
+    this.password,
+    this.confirmpassword,
+    this.isMobileVerify,
   );
 }
 

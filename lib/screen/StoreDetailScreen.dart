@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/Store/store_bloc.dart';
 import 'package:grocery/model/model.dart';
 import 'package:grocery/widget/ProductCard.dart';
@@ -23,6 +24,7 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     StoreBloc s = BlocProvider.of<StoreBloc>(context);
+    ProductsBloc p = BlocProvider.of<ProductsBloc>(context);
     s.add(GetStore());
     Size size = MediaQuery.of(context).size;
     return BlocConsumer<StoreBloc, StoreState>(
@@ -207,6 +209,8 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
+                        print(
+                            "llllllllllllllllll${state.storeProduct[widget.storeName]![tabvalue]![index].ifFavrite}");
                         return InkWell(
                           onTap: () {
                             model.bottomsheet(
@@ -218,8 +222,23 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                                       tabvalue]![index],
                                 ));
                           },
-                          child: ProductCard(state.storeProduct[
-                              widget.storeName]![tabvalue]![index]),
+                          child: ProductCard(
+                              state.storeProduct[widget.storeName]![tabvalue]![
+                                  index],
+                              onTap: state
+                                      .storeProduct[widget.storeName]![
+                                          tabvalue]![index]
+                                      .ifFavrite
+                                  ? () {
+                                      p.add(FavProduct(state.storeProduct[widget
+                                          .storeName]![tabvalue]![index]));
+                                      s.add(GetStore());
+                                    }
+                                  : () {
+                                      p.add(FavProduct(state.storeProduct[widget
+                                          .storeName]![tabvalue]![index]));
+                                      s.add(GetStore());
+                                    }),
                         );
                       },
                           childCount: state

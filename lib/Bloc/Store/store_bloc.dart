@@ -38,7 +38,6 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
               for (int k = 0; k < list.length; k++) {
                 storeProduct[showStore[key]!.storeName]![list[k].subName] = [];
 
-                print("**********************${storeProduct}");
                 for (int t = 0; t < list[k].subId.length; t++) {
                   if (!productBloc.isProductAvailable(list[k].subId[t])) {
                     await productBloc.fetchProduct(list[k].subId[t]);

@@ -7,4 +7,4 @@ class GetLocation extends LocationEvent {
   String address;
   GetLocation(this.address);
 }
-class Update extends LocationEvent{}
+class GetUpdateLocation extends LocationEvent{}

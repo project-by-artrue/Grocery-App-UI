@@ -12,6 +12,7 @@ import 'package:grocery/Bloc/Product/products_bloc.dart';
 import 'package:grocery/Bloc/Sign_in_up/sign_in_up_bloc.dart';
 import 'package:grocery/Bloc/Store/store_bloc.dart';
 import 'package:grocery/Bloc/SubCategory/subcategory_bloc.dart';
+import 'package:grocery/Bloc/User/user_bloc.dart';
 import 'package:grocery/Bloc/location/location_bloc.dart';
 import 'package:grocery/model/product.dart';
 import 'package:grocery/model/routHellper.dart';
@@ -29,6 +30,7 @@ import 'package:grocery/screen/Intro_Screen.dart';
 import 'package:grocery/screen/Language.dart';
 import 'package:grocery/screen/MyCart_Screen.dart';
 import 'package:grocery/screen/MyOrder_Screen.dart';
+import 'package:grocery/screen/OtpVerification.dart';
 import 'package:grocery/screen/ProductsScreen.dart';
 import 'package:grocery/screen/Profile.dart';
 import 'package:grocery/screen/SetLocation_Screen.dart';
@@ -72,7 +74,14 @@ Future<void> main() async {
   //     collection.doc(value.id).update({'store': value.id});
   //   });
   // }
+  // FirebaseAuth.instance.signOut();
   final user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    globals.isLoggedIn = true;
+  } else {
+    globals.isLoggedIn = false;
+  }
+
   print("object--------------------------${user}");
   runApp(
     MultiBlocProvider(
@@ -90,7 +99,13 @@ Future<void> main() async {
           create: (context) => SliderBloc(),
         ),
         BlocProvider(
-          create: (context) => ProductsBloc(),
+          create: (context) => UserBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ProductsBloc(
+              userBloc: globals.isLoggedIn
+                  ? BlocProvider.of<UserBloc>(context)
+                  : null),
         ),
         BlocProvider(
           create: (context) =>
@@ -104,7 +119,7 @@ Future<void> main() async {
           create: (context) => StoreBloc(
             BlocProvider.of<ProductsBloc>(context),
           ),
-        )
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -134,7 +149,7 @@ Future<void> main() async {
           settings,
         ),
         navigatorKey: NavigationService.navigationKey,
-        home: SignUP(),
+        home: globals.isLoggedIn ? BottomBar() : SignUP(),
       ),
     ),
   );

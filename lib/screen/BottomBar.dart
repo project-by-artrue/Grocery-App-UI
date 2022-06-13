@@ -2,13 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery/Bloc/User/user_bloc.dart';
 import 'package:grocery/model/model.dart';
 import 'package:grocery/screen/Favourite_Screen.dart';
 import 'package:grocery/screen/Home_Screen.dart';
 import 'package:grocery/screen/MyCart_Screen.dart';
 import 'package:grocery/screen/MyOrder_Screen.dart';
 import 'package:grocery/widget/ShowButtomSheet.dart';
-
+import 'package:grocery/globals.dart' as globals;
 import 'ShowBottomSheetBar.dart';
 
 class BottomBar extends StatefulWidget {
@@ -40,6 +42,10 @@ class _BottomBarState extends State<BottomBar> {
     //     return Home();
     //   },
     // ));
+    UserBloc u = BlocProvider.of<UserBloc>(context);
+    if (globals.isLoggedIn) {
+      u.add(GetUserDetails());
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,

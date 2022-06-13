@@ -21,6 +21,7 @@ class _ForgotPasswordState extends State<ForgotPassword>
   Animation? buttonSqueezeanimation;
   AnimationController? buttonController;
   String otp = "";
+  String countryCode = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -51,20 +52,23 @@ class _ForgotPasswordState extends State<ForgotPassword>
                 height: 20,
               ),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(2, 2),
-                          blurRadius: 12,
-                          color: Color.fromRGBO(0, 0, 0, 0.16),
-                        )
-                      ],
-                      color: Colors.white),
-                  child: Phone_TextFilld(mobilno)),
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(2, 2),
+                        blurRadius: 12,
+                        color: Color.fromRGBO(0, 0, 0, 0.16),
+                      )
+                    ],
+                    color: Colors.white),
+                child: Phone_TextFilld(
+                  mobilno,
+                ),
+              ),
               SizedBox(
                 height: 30,
               ),

@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:grocery/Bloc/User/user_bloc.dart';
 import 'package:grocery/model/product.dart';
 import 'package:meta/meta.dart';
 
@@ -12,8 +14,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final dbReferance = FirebaseFirestore.instance.collection("product");
   Map<String, Product> product = {};
   List<Product> PopularProduct = [];
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   Map<String, int> count = {};
-  ProductsBloc() : super(ProductsInitial()) {
+  UserBloc? userBloc;
+  ProductsBloc({this.userBloc}) : super(ProductsInitial()) {
     on<FectchProduct>((event, emit) async {
       // TODO: implement event handler
       emit(FectchPopularProduct());
@@ -26,7 +30,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
             element.data(),
           );
           product[p.productId] = p;
-          print("0000000000000000000000000${p.productId}");
+          product[p.productId]!.ifFavrite =
+              userBloc?.isfav(p.productId) ?? false;
+          print("0000000000000000000000000${element.data()}");
         });
         product.forEach((key, value) {
           if (value.isPopular) {
@@ -65,6 +71,23 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         emit(ShowProduct(product, count, PopularProduct));
       },
     );
+    on<FavProduct>((event, emit) async {
+      List fav = userBloc!.getfav();
+      if (event.p.ifFavrite) {
+        fav.remove(event.p.productId);
+        event.p.ifFavrite = false;
+      } else {
+        fav.add(event.p.productId);
+        event.p.ifFavrite = true;
+        print("kkkkkk");
+      }
+
+      await firestore
+          .collection('user')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({"Favorite product": fav}).then((value) {});
+      print("99999999999999999999999${fav}");
+    });
   }
 
   bool isProductAvailable(String id) {
@@ -80,5 +103,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     Product p = Product.fromJson(snapshot.data()!);
     product[p.productId] = p;
     return p;
+  }
+
+  void favproducts(String id) {
+    print("<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>${id}");
+    product[id]?.ifFavrite = true;
+    print("ooooooooooooooooooo${product[id]?.title}");
+    print("++++++++++++++++++${product[id]?.ifFavrite}");
   }
 }

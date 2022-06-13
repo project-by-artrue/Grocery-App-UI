@@ -42,7 +42,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     SubcategoryBloc b = BlocProvider.of<SubcategoryBloc>(context);
     StoreBloc store = BlocProvider.of<StoreBloc>(context);
     s.add(ShowSider());
-    l.add(Update());
+    l.add(GetUpdateLocation());
     g.add(GetCategory());
     p.add(FectchProduct());
     store.add(GetStore());
@@ -71,9 +71,16 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               BlocConsumer<LocationBloc, LocationState>(
                   builder: (context, state) {
                     if (state is ShowLocation) {
-                      return Text(
-                        "Choos Location",
-                        style: TextStyle(color: Colors.black),
+                      print("asassasasasassassas${state.address}");
+                      print(
+                          "########################${state.address.toString()}");
+                      return Flexible(
+                        child: Text(
+                          state.address,
+                          maxLines: 2,
+                          // overflow: TextOverflow.,
+                          style: TextStyle(color: Colors.black, fontSize: 15),
+                        ),
                       );
                     } else {
                       return Container(
@@ -83,10 +90,17 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     }
                   },
                   listener: (context, state) {}),
+              SizedBox(
+                width: 5,
+              ),
               Spacer(),
-              Icon(
-                Icons.arrow_drop_down_sharp,
-                color: Colors.black,
+              Container(
+                height: 30,
+                width: 30,
+                child: Icon(
+                  Icons.arrow_drop_down_sharp,
+                  color: Colors.black,
+                ),
               ),
               SizedBox(
                 width: 5,
